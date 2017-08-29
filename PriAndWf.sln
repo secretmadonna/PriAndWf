@@ -11,8 +11,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.Domain Layer（领域层�
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.Infrastructure Layer（基础设施层）", "4.Infrastructure Layer（基础设施层）", "{ADC84449-0A54-49F7-AD39-90DDD403F05A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PriAndWfInfrastructure", "PriAndWfInfrastructure\PriAndWfInfrastructure.csproj", "{FF5DF9D3-ED02-4621-BC2C-505B86F0126F}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PriAndWf.Web", "PriAndWf.Web\PriAndWf.Web.csproj", "{1EEED2B6-B404-4CC9-8C56-76E000049F25}"
 EndProject
 Global
@@ -21,10 +19,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{FF5DF9D3-ED02-4621-BC2C-505B86F0126F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FF5DF9D3-ED02-4621-BC2C-505B86F0126F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FF5DF9D3-ED02-4621-BC2C-505B86F0126F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FF5DF9D3-ED02-4621-BC2C-505B86F0126F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1EEED2B6-B404-4CC9-8C56-76E000049F25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1EEED2B6-B404-4CC9-8C56-76E000049F25}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1EEED2B6-B404-4CC9-8C56-76E000049F25}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -34,7 +28,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{FF5DF9D3-ED02-4621-BC2C-505B86F0126F} = {ADC84449-0A54-49F7-AD39-90DDD403F05A}
 		{1EEED2B6-B404-4CC9-8C56-76E000049F25} = {65E80036-1E98-486A-82BE-663F3B31B95F}
 	EndGlobalSection
 EndGlobal
