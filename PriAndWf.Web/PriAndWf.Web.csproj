@@ -111,6 +111,8 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\plugins\layui\css\layui.css" />
     <Content Include="Content\plugins\layui\css\layui.mobile.css" />
     <Content Include="Content\plugins\layui\css\modules\code.css" />
@@ -212,6 +214,7 @@
     <Content Include="Content\plugins\layui\lay\modules\tree.js" />
     <Content Include="Content\plugins\layui\lay\modules\upload.js" />
     <Content Include="Content\plugins\layui\lay\modules\util.js" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -223,6 +226,11 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap-fileinput\sass\fileinput.scss" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
