@@ -6,16 +6,16 @@ using System.Linq;
 namespace PriAndWf.Infrastructure.Extension
 {
     /// <summary>
-    /// Extension methods for all objects.
+    /// Object扩展方法
     /// </summary>
     public static class ObjectExtension
     {
         /// <summary>
-        /// Used to simplify and beautify casting an object to a type. 
+        /// object转T（强转）
         /// </summary>
-        /// <typeparam name="T">Type to be casted</typeparam>
-        /// <param name="obj">Object to cast</param>
-        /// <returns>Casted object</returns>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public static T As<T>(this object obj)
             where T : class
         {
@@ -23,11 +23,11 @@ namespace PriAndWf.Infrastructure.Extension
         }
 
         /// <summary>
-        /// Converts given object to a value type using <see cref="Convert.ChangeType(object,System.TypeCode)"/> method.
+        /// object转T
         /// </summary>
-        /// <param name="obj">Object to be converted</param>
-        /// <typeparam name="T">Type of the target object</typeparam>
-        /// <returns>Converted object</returns>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public static T To<T>(this object obj)
             where T : struct
         {
@@ -40,11 +40,12 @@ namespace PriAndWf.Infrastructure.Extension
         }
 
         /// <summary>
-        /// Check if an item is in a list.
+        /// item是否在list中
         /// </summary>
-        /// <param name="item">Item to check</param>
-        /// <param name="list">List of items</param>
-        /// <typeparam name="T">Type of the items</typeparam>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="item"></param>
+        /// <param name="list"></param>
+        /// <returns></returns>
         public static bool IsIn<T>(this T item, params T[] list)
         {
             return list.Contains(item);
