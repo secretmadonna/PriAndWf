@@ -40,13 +40,33 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Aggregate\AggregateRoot.cs" />
+    <Compile Include="Aggregate\IAggregateRoot.cs" />
+    <Compile Include="DomainEvent\DomainEvent.cs" />
+    <Compile Include="DomainEvent\DomainEventAggregator\DomainEventAggregator.cs" />
+    <Compile Include="DomainEvent\DomainEventAggregator\IDomainEventAggregator.cs" />
+    <Compile Include="DomainEvent\DomainEventHandler\ActionDomainEventHandler\ActionDomainEventHandler.cs" />
+    <Compile Include="DomainEvent\DomainEventHandler\IDomainEventHandler.cs" />
+    <Compile Include="DomainEvent\IDomainEvent.cs" />
+    <Compile Include="DomainEvent\IEvent.cs" />
+    <Compile Include="DomainEvent\IEventHandler.cs" />
+    <Compile Include="DomainService\DomainService.cs" />
+    <Compile Include="DomainService\IDomainService.cs" />
+    <Compile Include="Entity\Entity.cs" />
+    <Compile Include="Entity\IEntity.cs" />
+    <Compile Include="Entity\IMayHaveTenant.cs" />
+    <Compile Include="Entity\IMustHaveTenant.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ValueObject\ValueObject.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PriAndWf.Infrastructure\PriAndWf.Infrastructure.csproj">
       <Project>{982335a1-f8cf-4d11-9e1f-78aa48b10d64}</Project>
       <Name>PriAndWf.Infrastructure</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DomainEvent\EventBus\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

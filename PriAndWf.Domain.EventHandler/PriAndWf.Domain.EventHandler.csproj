@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{982335A1-F8CF-4D11-9E1F-78AA48B10D64}</ProjectGuid>
+    <ProjectGuid>{A263BC2B-ADD6-4773-A9B7-3857838C299E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PriAndWf.Infrastructure</RootNamespace>
-    <AssemblyName>PriAndWf.Infrastructure</AssemblyName>
+    <RootNamespace>PriAndWf.Domain.EventHandler</RootNamespace>
+    <AssemblyName>PriAndWf.Domain.EventHandler</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,10 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
-      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -44,18 +40,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Base\ExceptionBase.cs" />
-    <Compile Include="Base\ServiceBase.cs" />
-    <Compile Include="Extension\LockExtension.cs" />
-    <Compile Include="Extension\ObjectExtension.cs" />
-    <Compile Include="IUnitOfWork.cs" />
-    <Compile Include="Log\ILogger.cs" />
-    <Compile Include="Log\NullLogger.cs" />
+    <Compile Include="Event\RegisterEmailEvent.cs" />
+    <Compile Include="Event\RegisterShortMessageEvent.cs" />
+    <Compile Include="Handler\SendEmailEventHandler.cs" />
+    <Compile Include="Handler\SendShortMessageEventHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <ProjectReference Include="..\PriAndWf.Domain\PriAndWf.Domain.csproj">
+      <Project>{7bfa9178-7326-44eb-8e8d-b7e4591954d3}</Project>
+      <Name>PriAndWf.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

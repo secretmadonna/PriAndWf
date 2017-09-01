@@ -329,6 +329,20 @@
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PriAndWf.Application\PriAndWf.Application.csproj">
+      <Project>{857f75ee-d2cd-4a36-904a-c4a6ba86ac7c}</Project>
+      <Name>PriAndWf.Application</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PriAndWf.Domain\PriAndWf.Domain.csproj">
+      <Project>{7bfa9178-7326-44eb-8e8d-b7e4591954d3}</Project>
+      <Name>PriAndWf.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PriAndWf.Infrastructure\PriAndWf.Infrastructure.csproj">
+      <Project>{982335a1-f8cf-4d11-9e1f-78aa48b10d64}</Project>
+      <Name>PriAndWf.Infrastructure</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
