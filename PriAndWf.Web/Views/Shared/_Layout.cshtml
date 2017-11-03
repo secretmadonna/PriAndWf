@@ -10,31 +10,28 @@
     <meta name="description" content="@ViewBag.PageDescription" />
 
     <!-- bootstrap & fontawesome -->
-    @Styles.Render("~/Content/assets/css/bootstrap.css", "~/Content/assets/css/font-awesome.css")
+    @Styles.Render("~/Content/bootstrap.min.css", "~/Content/font-awesome.min.css")
 
     <!-- page specific plugin styles -->
-    @RenderSection("pagepluginstyles", required: false)
-
-    <!-- text fonts -->
-    @Styles.Render("~/Content/assets/css/ace-fonts.css")
+    @RenderSection("PagePluginStyles", required: false)
 
     <!-- ace styles -->
-    @Styles.RenderFormat("<link href=\"{0}\" rel=\"stylesheet\" class=\"ace-main-stylesheet\" id=\"main-ace-style\"/>", "~/Content/assets/css/ace.css")
+    @Styles.RenderFormat("<link href=\"{0}\" rel=\"stylesheet\" class=\"ace-main-stylesheet\" id=\"main-ace-style\"/>", "~/Content/plugins/ace/css/ace.min.css")
 
     <!--[if lte IE 9]>
-        @Styles.RenderFormat("<link href=\"{0}\" rel=\"stylesheet\" class=\"ace-main-stylesheet\"/>", "~/Content/assets/css/ace-part2.css")
-        @Styles.Render("~/Content/assets/css/ace-ie.css")
+        @Styles.RenderFormat("<link href=\"{0}\" rel=\"stylesheet\" class=\"ace-main-stylesheet\"/>", "~/Content/plugins/ace/css/ace-part2.css")
+        @Styles.Render("~/Content/plugins/ace/css/ace-ie.css")
     <![endif]-->
 
     <!-- inline styles related to this page -->
-    @RenderSection("pagestyles", required: false)
+    @RenderSection("PageStyles", required: false)
 
     <!-- ace settings handler -->
-    @Scripts.Render("~/Content/assets/js/ace-extra.js")
+    @Scripts.Render("~/Content/plugins/ace/js/ace-extra.min.js")
 
     <!-- HTML5shiv and Respond.js for IE8 to support HTML5 elements and media queries -->
     <!--[if lte IE 8]>
-        @Scripts.Render("~/Content/assets/js/html5shiv.js", "~/Content/assets/js/respond.js")
+        @Scripts.Render("~/Scripts/html5shiv.min.js", "~/Scripts/respond.min.js")
     <![endif]-->
 </head>
 
@@ -100,43 +97,40 @@
         </a>
     </div><!-- /.main-container -->
     <!-- list of script files -->
-    <!--[if IE]>
+    <!--[if lt IE 9]>
         <script>
-            window.jQuery || document.write('<script src="@Url.Content("~/Content/assets/js/jquery1x.js")"><\/script>');
+            window.jQuery || document.write('<script src="@Url.Content("~/Scripts/jquery-1.12.4.min.js")"><\/script>');
+        </script>
+    <!--[else]>
+        <script>
+            window.jQuery || document.write('<script src="@Url.Content("~/Scripts/jquery-3.2.1.min.js")"><\/script>');
         </script>
     <![endif]-->
 
-    <!--[if !IE]><!-->
+    @*<!--[if lte IE 8]>
         <script>
-            window.jQuery || document.write('<script src="@Url.Content("~/Content/assets/js/jquery.js")"><\/script>');
+            window.jQuery || document.write('<script src="@Url.Content("~/Scripts/jquery-1.12.4.min.js")"><\/script>');
         </script>
-    <!--<![endif]-->
+    <![endif]-->
+    <!--[if (gte IE 9)|(!IE)]>
+        <script>
+            window.jQuery || document.write('<script src="@Url.Content("~/Scripts/jquery-3.2.1.min.js")"><\/script>');
+        </script>
+    <![endif]-->*@
+
     <script>
         if ('ontouchstart' in document.documentElement) {
-            document.write('<script src="@Url.Content("~/Content/assets/js/jquery.mobile.custom.js")"><\/script>');
+            document.write('<script src="@Url.Content("~/Scripts/jquery.mobile-1.4.5.min.js")"><\/script>');
         }
     </script>
-    @Scripts.Render("~/Content/assets/js/bootstrap.js")
+    @Scripts.Render("~/Scripts/bootstrap.min.js")
 
     <!-- page specific plugin scripts -->
-    @RenderSection("pagepluginscripts", required: false)
+    @RenderSection("PagePluginScripts", required: false)
 
-    <!-- ace scripts -->
-    @*@Scripts.Render("~/Content/assets/js/elements.scroller.js", "~/Content/assets/js/elements.colorpicker.js"
-    , "~/Content/assets/js/elements.fileinput.js", "~/Content/assets/js/elements.typeahead.js"
-    , "~/Content/assets/js/elements.wysiwyg.js", "~/Content/assets/js/elements.spinner.js"
-    , "~/Content/assets/js/elements.treeview.js", "~/Content/assets/js/elements.wizard.js"
-    , "~/Content/assets/js/elements.aside.js"
-    , "~/Content/assets/js/ace.js", "~/Content/assets/js/ace.ajax-content.js"
-    , "~/Content/assets/js/ace.touch-drag.js", "~/Content/assets/js/ace.sidebar.js"
-    , "~/Content/assets/js/ace.sidebar-scroll-1.js", "~/Content/assets/js/ace.submenu-hover.js"
-    , "~/Content/assets/js/ace.widget-box.js", "~/Content/assets/js/ace.settings.js"
-    , "~/Content/assets/js/ace.settings.js", "~/Content/assets/js/ace.settings-rtl.js"
-    , "~/Content/assets/js/ace.settings-skin.js", "~/Content/assets/js/ace.widget-on-reload.js"
-    , "~/Content/assets/js/ace.searchbox-autocomplete.js")*@
-    @Scripts.Render("~/Content/assets/js/ace-elements.js", "~/Content/assets/js/ace.js");
+    @Scripts.Render("~/Content/plugins/ace/js/ace-elements.min.js", "~/Content/plugins/ace/js/ace.min.js");
 
     <!-- inline scripts related to this page -->
-    @RenderSection("pagescripts", required: false)
+    @RenderSection("PageScripts", required: false)
 </body>
 </html>
