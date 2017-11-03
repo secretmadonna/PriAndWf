@@ -56,16 +56,15 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <!-- page content goes here -->
-                    @RenderBody()
-                    </div><!-- /.col -->
-                </div><!-- /.row -->
+                        @RenderBody()
+                    </div>
+                </div>
 
-            </div><!-- /.page-content -->
-        </div><!-- /.main-content -->
-        <!-- footer area -->
+            </div>
+        </div>
+
         <div class="footer">
             <div class="footer-inner">
-                <!-- #section:basics/footer -->
                 <div class="footer-content">
                     <span class="bigger-120">
                         <span class="blue bolder">Ace</span>
@@ -87,40 +86,27 @@
                         </a>
                     </span>
                 </div>
-
-                <!-- /section:basics/footer -->
             </div>
         </div>
 
         <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
             <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
         </a>
-    </div><!-- /.main-container -->
+    </div>
+
     <!-- list of script files -->
-    <!--[if lt IE 9]>
-        <script>
-            window.jQuery || document.write('<script src="@Url.Content("~/Scripts/jquery-1.12.4.min.js")"><\/script>');
-        </script>
-    <!--[else]>
-        <script>
-            window.jQuery || document.write('<script src="@Url.Content("~/Scripts/jquery-3.2.1.min.js")"><\/script>');
-        </script>
+    <!--[if !IE]><!-->
+        @Scripts.Render("~/Scripts/jquery-3.2.1.min.js")
+    <!--<![endif]-->
+    <!--[if IE 9]>
+        @Scripts.Render("~/Scripts/jquery-3.2.1.min.js")
     <![endif]-->
-
-    @*<!--[if lte IE 8]>
-        <script>
-            window.jQuery || document.write('<script src="@Url.Content("~/Scripts/jquery-1.12.4.min.js")"><\/script>');
-        </script>
+    <!--[if lte IE 8]>
+        @Scripts.Render("~/Scripts/jquery-1.12.4.min.js")
     <![endif]-->
-    <!--[if (gte IE 9)|(!IE)]>
-        <script>
-            window.jQuery || document.write('<script src="@Url.Content("~/Scripts/jquery-3.2.1.min.js")"><\/script>');
-        </script>
-    <![endif]-->*@
-
     <script>
         if ('ontouchstart' in document.documentElement) {
-            document.write('<script src="@Url.Content("~/Scripts/jquery.mobile-1.4.5.min.js")"><\/script>');
+            document.write('<script src="@Url.Content("~/Scripts/jquery.mobile-1.4.5.min.js")"><' + '/script>');
         }
     </script>
     @Scripts.Render("~/Scripts/bootstrap.min.js")
