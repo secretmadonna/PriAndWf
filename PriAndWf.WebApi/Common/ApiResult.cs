@@ -6,7 +6,11 @@ using System.Web.Mvc;
 
 namespace PriAndWf.WebApi.Common
 {
-    public class ApiResult:ActionResult
+    public class ApiResult : ActionResult
     {
+        public override void ExecuteResult(ControllerContext context)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
