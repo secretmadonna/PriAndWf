@@ -1,67 +1,75 @@
-﻿@model List<PriAndWf.Web.Models.TestModel1>
+﻿@model List<PriAndWf.Web.Models.Test1ViewModel>
 
 @{
-    ViewBag.PageTitle = "测试：测试javascript冒泡";
+    ViewBag.Title = "测试：测试javascript冒泡";
 }
-
+@section PagePluginStyles{
+}
 @section PageStyles{
+    <style>
+        .dd {
+            max-width: 100%;
+        }
+    </style>
+}
+@section PagePluginScripts{
+    @Scripts.Render("~/Content/plugins/nestable/jquery.nestable.min.js")
+}
+@section PageScripts{
+    <script>
+        $(function () {
+            $(".dd").nestable();
+            $(".dd").nestable("collapseAll");
+        });
+    </script>
 }
 
-<h2>测试javascript冒泡</h2>
+<h2>@ViewBag.Title</h2>
 
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        @if (Model != null)
-            {
-            <div class="list-group">
-                @foreach (var l1 in Model)
-                {
-                    <div class="list-group-item collapse" data-toggle="collapse" data-target="#collapse@(l1.Id)" role="button" id="collapse@(l1.Id)">
-                        <span>@(l1.Name)</span>
-                        <div class="btn-group" role="group">
-                            <span class="fa fa-cog" data-toggle="dropdown" role="button"></span>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">编辑</a></li>
-                                <li><a href="#">停用</a></li>
-                                <li><a href="#">上移</a></li>
-                                <li><a href="#">下移</a></li>
-                            </ul>
-                        </div>
-                        <div class="btn-group pull-right" role="group">
-                            <span class="fa fa-cog" role="button"></span>
-                            <span class="fa fa-cog" role="button"></span>
-                            <span class="fa fa-cog" role="button"></span>
-                            <span class="fa fa-cog" role="button"></span>
-                            <span class="fa fa-cog" role="button"></span>
-                        </div>
-                        @if (l1.Children != null && l1.Children.Count > 0)
-                        {
-                            foreach (var l2 in l1.Children)
+        @if (Model != null && Model.Count > 0)
+        {
+            <div class="dd dd-draghandle">
+                <ol class="dd-list">
+                    @foreach (var l1 in Model)
+                    {
+                        <li class="dd-item dd2-item" data-id="@(l1.Id)">
+                            <div class="dd-handle dd2-handle">
+                                <i class="normal-icon ace-icon fa fa-comments blue bigger-130"></i>
+                                <i class="drag-icon ace-icon fa fa-arrows bigger-125"></i>
+                            </div>
+                            <div class="dd2-content">
+                                <span>@(l1.Name)</span>
+                                <div class="btn-group" role="group">
+                                    <span class="fa fa-cog" data-toggle="dropdown" role="button"></span>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#">编辑</a></li>
+                                        <li><a href="#">停用</a></li>
+                                        <li><a href="#">上移</a></li>
+                                        <li><a href="#">下移</a></li>
+                                    </ul>
+                                </div>
+                                <div class="btn-group pull-right" role="group">
+                                    <span class="fa fa-address-book" role="button"></span>
+                                    <span class="fa fa-edit" role="button"></span>
+                                    <span class="fa fa-cab" role="button"></span>
+                                    <span class="fa fa-dashboard" role="button"></span>
+                                    <span class="fa fa-android" role="button"></span>
+                                </div>
+                            </div>
+                            @if (l1.Children != null && l1.Children.Count > 0)
                             {
-                                <div class="list-group-item collapse" data-toggle="collapse" data-target="#collapse@(l2.Id)" role="button" id="collapse@(l2.Id)">
-                                    <span>@(l2.Name)</span>
-                                    <div class="btn-group" role="group">
-                                        <span class="fa fa-cog" data-toggle="dropdown" role="button"></span>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="#">编辑</a></li>
-                                            <li><a href="#">停用</a></li>
-                                            <li><a href="#">上移</a></li>
-                                            <li><a href="#">下移</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="btn-group pull-right" role="group">
-                                        <span class="fa fa-cog" role="button"></span>
-                                        <span class="fa fa-cog" role="button"></span>
-                                        <span class="fa fa-cog" role="button"></span>
-                                        <span class="fa fa-cog" role="button"></span>
-                                        <span class="fa fa-cog" role="button"></span>
-                                    </div>
-                                    @if (l2.Children != null && l2.Children.Count > 0)
+                                <ol class="dd-list">
+                                    @foreach (var l2 in l1.Children)
                                     {
-                                        foreach (var l3 in l2.Children)
-                                        {
-                                            <div class="list-group-item collapse" data-toggle="collapse" data-target="#collapse@(l3.Id)" role="button" id="collapse@(l3.Id)">
-                                                <span>@(l3.Name)</span>
+                                        <li class="dd-item dd2-item" data-id="@(l2.Id)">
+                                            <div class="dd-handle dd2-handle">
+                                                <i class="normal-icon ace-icon fa fa-comments blue bigger-130"></i>
+                                                <i class="drag-icon ace-icon fa fa-arrows bigger-125"></i>
+                                            </div>
+                                            <div class="dd2-content">
+                                                <span>@(l2.Name)</span>
                                                 <div class="btn-group" role="group">
                                                     <span class="fa fa-cog" data-toggle="dropdown" role="button"></span>
                                                     <ul class="dropdown-menu">
@@ -72,20 +80,53 @@
                                                     </ul>
                                                 </div>
                                                 <div class="btn-group pull-right" role="group">
-                                                    <span class="fa fa-cog" role="button"></span>
-                                                    <span class="fa fa-cog" role="button"></span>
-                                                    <span class="fa fa-cog" role="button"></span>
-                                                    <span class="fa fa-cog" role="button"></span>
-                                                    <span class="fa fa-cog" role="button"></span>
+                                                    <span class="fa fa-address-book" role="button"></span>
+                                                    <span class="fa fa-edit" role="button"></span>
+                                                    <span class="fa fa-cab" role="button"></span>
+                                                    <span class="fa fa-dashboard" role="button"></span>
+                                                    <span class="fa fa-android" role="button"></span>
                                                 </div>
                                             </div>
-                                        }
+                                            @if (l2.Children != null && l2.Children.Count > 0)
+                                            {
+                                                <ol class="dd-list">
+                                                    @foreach (var l3 in l2.Children)
+                                                    {
+                                                        <li class="dd-item dd2-item" data-id="@(l3.Id)">
+                                                            <div class="dd-handle dd2-handle">
+                                                                <i class="normal-icon ace-icon fa fa-comments blue bigger-130"></i>
+                                                                <i class="drag-icon ace-icon fa fa-arrows bigger-125"></i>
+                                                            </div>
+                                                            <div class="dd2-content">
+                                                                <span>@(l3.Name)</span>
+                                                                <div class="btn-group" role="group">
+                                                                    <span class="fa fa-cog" data-toggle="dropdown" role="button"></span>
+                                                                    <ul class="dropdown-menu">
+                                                                        <li><a href="#">编辑</a></li>
+                                                                        <li><a href="#">停用</a></li>
+                                                                        <li><a href="#">上移</a></li>
+                                                                        <li><a href="#">下移</a></li>
+                                                                    </ul>
+                                                                </div>
+                                                                <div class="btn-group pull-right" role="group">
+                                                                    <span class="fa fa-address-book" role="button"></span>
+                                                                    <span class="fa fa-edit" role="button"></span>
+                                                                    <span class="fa fa-cab" role="button"></span>
+                                                                    <span class="fa fa-dashboard" role="button"></span>
+                                                                    <span class="fa fa-android" role="button"></span>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    }
+                                                </ol>
+                                            }
+                                        </li>
                                     }
-                                </div>
+                                </ol>
                             }
-                        }
-                    </div>
-                }
+                        </li>
+                    }
+                </ol>
             </div>
         }
     </div>

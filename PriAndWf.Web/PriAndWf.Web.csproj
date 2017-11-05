@@ -454,6 +454,8 @@
     <Content Include="Content\plugins\layui\lay\modules\tree.js" />
     <Content Include="Content\plugins\layui\lay\modules\upload.js" />
     <Content Include="Content\plugins\layui\lay\modules\util.js" />
+    <Content Include="Content\plugins\nestable\jquery.nestable.js" />
+    <Content Include="Content\plugins\nestable\jquery.nestable.min.js" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -554,10 +556,13 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Models\ForgotViewModel.cs" />
+    <Compile Include="Models\SignUpViewModel.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\TestModel1.cs" />
+    <Compile Include="Models\LoginViewModel.cs" />
+    <Compile Include="Models\Test1ViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -568,10 +573,9 @@
     <Content Include="Content\plugins\layui\font\iconfont.eot" />
     <Content Include="Content\plugins\layui\font\iconfont.ttf" />
     <Content Include="Content\plugins\layui\font\iconfont.woff" />
-    <Content Include="Views\Shared\_LoginLayout.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Test1.cshtml" />
     <None Include="Web.Debug.config">

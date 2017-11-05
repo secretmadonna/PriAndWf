@@ -8,7 +8,28 @@ namespace PriAndWf.Web.Controllers
 {
     public class AccountController : Controller
     {
-        public ActionResult Login()
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(Models.LoginViewModel vm)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Forgot(Models.ForgotViewModel vm)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SignUp(Models.SignUpViewModel vm)
         {
             return View();
         }
