@@ -1,9 +1,11 @@
-﻿@{
+﻿@model PriAndWf.Web.Models.AccountViewModel
+
+@{
     Layout = null;
 
-    ViewBag.Title = "Login";
-    ViewBag.Keywords = "Login";
-    ViewBag.Description = "Login";
+    ViewBag.Title = "SignUp or Login or Forgot";
+    ViewBag.Keywords = "SignUp or Login or Forgot";
+    ViewBag.Description = "SignUp or Login or Forgot";
 }
 
 <!DOCTYPE html>
@@ -64,7 +66,7 @@
                                             <fieldset>
                                                 <label class="block clearfix">
                                                     <span class="block input-icon input-icon-right">
-                                                        @Html.TextBox("Username", null, new { @class = "form-control", placeholder = "Username" })
+                                                        @Html.TextBoxFor(m => m.Login.Username, new { @class = "form-control", placeholder = "Username", @name = "Username" })
                                                         <i class="ace-icon fa fa-user"></i>
                                                     </span>
                                                 </label>

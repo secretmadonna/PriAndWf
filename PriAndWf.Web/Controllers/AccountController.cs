@@ -10,7 +10,13 @@ namespace PriAndWf.Web.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            var vm = new Models.AccountViewModel()
+            {
+                SignUp = new Models.SignUpViewModel(),
+                Login = new Models.LoginViewModel(),
+                Forgot = new Models.ForgotViewModel()
+            };
+            return View(vm);
         }
 
         [HttpPost]
