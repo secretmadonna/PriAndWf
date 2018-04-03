@@ -12,18 +12,22 @@ namespace PriAndWf.Web.Controllers
         {
             var vm = new Models.AccountViewModel()
             {
-                SignUp = new Models.SignUpViewModel(),
-                Login = new Models.LoginViewModel(),
-                Forgot = new Models.ForgotViewModel()
+                SignUpViewModel = new Models.SignUpViewModel(),
+                LoginViewModel = new Models.LoginViewModel(),
+                ForgotViewModel = new Models.ForgotViewModel()
             };
             return View(vm);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(Models.LoginViewModel vm)
+        public ActionResult Login(Models.LoginViewModel vm, bool RememberMe = false, string ReturnUrl = null)
         {
-            return View();
+            if (!ModelState.IsValid)
+            {
+                return Json(ModelState);
+            }
+            return Json(null);
         }
 
         [HttpPost]

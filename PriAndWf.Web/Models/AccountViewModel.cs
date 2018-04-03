@@ -7,8 +7,8 @@ namespace PriAndWf.Web.Models
 {
     public class AccountViewModel
     {
-        public SignUpViewModel SignUp { get; set; }
-        public LoginViewModel Login { get; set; }
-        public ForgotViewModel Forgot { get; set; }
+        public LoginViewModel LoginViewModel { get; set; }
+        public SignUpViewModel SignUpViewModel { get; set; }
+        public ForgotViewModel ForgotViewModel { get; set; }
     }
 }

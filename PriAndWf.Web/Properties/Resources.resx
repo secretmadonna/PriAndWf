@@ -117,7 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="SignUp_Email" xml:space="preserve">
-    <value />
+  <data name="DataType_Default" xml:space="preserve">
+    <value>字段 {0} 必须是 {1} 类型</value>
+  </data>
+  <data name="MaxLength_Default" xml:space="preserve">
+    <value>字段 {0} 不得超过 {1} 个字符</value>
+  </data>
+  <data name="Required_Default" xml:space="preserve">
+    <value>字段 {0} 是必须的</value>
   </data>
 </root>

@@ -61,11 +61,29 @@ namespace PriAndWf.Web.Properties {
         }
         
         /// <summary>
-        ///   查找类似  的本地化字符串。
+        ///   查找类似 字段 {0} 必须是 {1} 类型 的本地化字符串。
         /// </summary>
-        internal static string SignUp_Email {
+        internal static string DataType_Default {
             get {
-                return ResourceManager.GetString("SignUp_Email", resourceCulture);
+                return ResourceManager.GetString("DataType_Default", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 字段 {0} 不得超过 {1} 个字符 的本地化字符串。
+        /// </summary>
+        internal static string MaxLength_Default {
+            get {
+                return ResourceManager.GetString("MaxLength_Default", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 字段 {0} 是必须的 的本地化字符串。
+        /// </summary>
+        internal static string Required_Default {
+            get {
+                return ResourceManager.GetString("Required_Default", resourceCulture);
             }
         }
     }

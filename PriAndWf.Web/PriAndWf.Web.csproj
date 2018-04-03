@@ -972,8 +972,11 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Filters\UnifyHandleExceptionAttribute.cs" />
+    <Compile Include="Filters\UnifyResponseResultAttribute.cs" />
     <Compile Include="Models\AccountViewModel.cs" />
     <Compile Include="Models\ForgotViewModel.cs" />
+    <Compile Include="Models\ResponseResult.cs" />
     <Compile Include="Models\SignUpViewModel.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -1003,6 +1006,10 @@
     <Content Include="Views\Home\Test1.cshtml" />
     <Content Include="Views\Shared\_LoginLayout.cshtml" />
     <Content Include="Views\Shared\_PartialFooter.cshtml" />
+    <Content Include="Views\Shared\_PartialNavbar.cshtml" />
+    <Content Include="Views\Shared\_PartialSidebar.cshtml" />
+    <Content Include="Views\Shared\_PartialBreadcrumbs.cshtml" />
+    <Content Include="Views\Shared\_PartialSetting.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
