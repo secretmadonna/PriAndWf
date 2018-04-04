@@ -973,7 +973,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Filters\UnifyHandleExceptionAttribute.cs" />
-    <Compile Include="Filters\UnifyResponseResultAttribute.cs" />
+    <Compile Include="Filters\ApiResultAttribute.cs" />
     <Compile Include="Models\AccountViewModel.cs" />
     <Compile Include="Models\ForgotViewModel.cs" />
     <Compile Include="Models\ResponseResult.cs" />

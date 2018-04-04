@@ -9,7 +9,7 @@ namespace PriAndWf.Web.Controllers
     public class HomeController : Controller
     {
         private List<Models.Test1ViewModel> list = new List<Models.Test1ViewModel>();
-        
+
         public ActionResult Index()
         {
             return View();

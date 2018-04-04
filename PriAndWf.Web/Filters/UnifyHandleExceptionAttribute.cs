@@ -10,7 +10,13 @@ namespace PriAndWf.Web.Filters
     {
         public void OnException(ExceptionContext filterContext)
         {
-            throw new NotImplementedException();
+            var isAjaxRequest=filterContext.RequestContext.HttpContext.Request.IsAjaxRequest();
+            if (isAjaxRequest)
+            {
+
+            }
+            filterContext.ExceptionHandled = true;
+            filterContext.
         }
     }
 }

@@ -3,11 +3,13 @@ using System.Web.Mvc;
 
 namespace PriAndWf.Web.Filters
 {
-    public class UnifyResponseResultAttribute : ActionFilterAttribute
+    public class ApiResultAttribute : ActionFilterAttribute
     {
         public override void OnActionExecuted(ActionExecutedContext filterContext)
         {
             base.OnActionExecuted(filterContext);
+
+            filterContext.ActionDescriptor
 
             //ResponseResult result = new ResponseResult();
 
