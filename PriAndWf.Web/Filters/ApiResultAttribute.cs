@@ -9,7 +9,7 @@ namespace PriAndWf.Web.Filters
         {
             base.OnActionExecuted(filterContext);
 
-            filterContext.ActionDescriptor
+            //filterContext.ActionDescriptor
 
             //ResponseResult result = new ResponseResult();
 
