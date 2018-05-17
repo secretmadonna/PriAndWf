@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PriAndWf.Domain.EventHandle
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PriAndWf.TestConApp", "1.UserInterfaceLayer\PriAndWf.TestConApp\PriAndWf.TestConApp.csproj", "{C44D9DDE-1789-47D2-95FC-C0557B98CB16}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PriAndWf.TestWebApi", "1.UserInterfaceLayer\PriAndWf.TestWebApi\PriAndWf.TestWebApi.csproj", "{88D9017B-CB17-4081-A873-EC27833B7E71}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +55,10 @@ Global
 		{C44D9DDE-1789-47D2-95FC-C0557B98CB16}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C44D9DDE-1789-47D2-95FC-C0557B98CB16}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C44D9DDE-1789-47D2-95FC-C0557B98CB16}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88D9017B-CB17-4081-A873-EC27833B7E71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88D9017B-CB17-4081-A873-EC27833B7E71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88D9017B-CB17-4081-A873-EC27833B7E71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88D9017B-CB17-4081-A873-EC27833B7E71}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -64,5 +70,6 @@ Global
 		{7BFA9178-7326-44EB-8E8D-B7E4591954D3} = {6905D972-9D64-4F62-813A-105DC102C0CD}
 		{A263BC2B-ADD6-4773-A9B7-3857838C299E} = {6905D972-9D64-4F62-813A-105DC102C0CD}
 		{C44D9DDE-1789-47D2-95FC-C0557B98CB16} = {65E80036-1E98-486A-82BE-663F3B31B95F}
+		{88D9017B-CB17-4081-A873-EC27833B7E71} = {65E80036-1E98-486A-82BE-663F3B31B95F}
 	EndGlobalSection
 EndGlobal
