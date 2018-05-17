@@ -1,0 +1,68 @@
+﻿
+@{
+    ViewBag.Title = "TestSignIn";
+}
+
+@section PagePluginStyles{
+}
+@section PageInlineStyles{
+}
+
+
+<div>
+    <button id="btnTest">测试（console）</button>
+
+    <OBJECT classid="clsid:10946843-7507-44FE-ACE8-2B3483D179B7"
+            id="CVR_IDCard" name="CVR_IDCard" width="0" height="0"></OBJECT>
+</div>
+
+
+@section PagePluginScripts{
+}
+@section PageInlineScripts{
+    <script type="text/javascript">
+        $(function () {
+            function TestCvrIdCard() {
+                console.log("获取读卡器连接状态(返回（int）：1、读卡器连接状态正常；0、无读卡器连接；-1、异常)");
+                console.time("ListReaderCard");
+                var listReaderCard = CVR_IDCard.ListReaderCard();
+                console.timeEnd("ListReaderCard");
+                console.log(listReaderCard);
+
+                console.log("CheckDeviceStatus");
+                console.time("CheckDeviceStatus");
+                var checkDeviceStatus = CVR_IDCard.CheckDeviceStatus();
+                console.timeEnd("CheckDeviceStatus");
+                console.log(checkDeviceStatus);
+
+                console.log("GetVersion");
+                console.time("GetVersion");
+                var getVersion = CVR_IDCard.GetVersion();
+                console.timeEnd("GetVersion");
+                console.log(getVersion);
+
+                console.log("（710专用）获取710的出厂编号(返回（bstr）：):");
+                console.time("GetDeviceSN");
+                var getDeviceSN = CVR_IDCard.GetDeviceSN();
+                console.timeEnd("GetDeviceSN");
+                console.log(getDeviceSN);
+
+                console.log("（710专用）检测是否放卡(返回（int）：1、有卡；0、无卡):");
+                console.time("FindCard");
+                var findCard = CVR_IDCard.FindCard();
+                console.timeEnd("FindCard");
+                console.log(findCard);
+
+                console.log("读卡(返回（bstr）：0、读卡成功；其他、读卡失败（返回：具体失败原因）)");
+                console.time("ReadCard");
+                var readCard = CVR_IDCard.ReadCard();
+                console.timeEnd("ReadCard");
+                console.log(readCard);
+            }
+
+            $("#btnTest").on("click", function () {
+                TestCvrIdCard();
+            });
+        });
+    </script>
+}

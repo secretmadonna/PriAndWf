@@ -1,0 +1,20 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Web;
+
+namespace MyTestWebApi.Models.ApiInModels
+{
+    public class SignInModel
+    {
+        /// <summary>
+        /// 考试场次编号
+        ///   传入
+        /// </summary>
+        [Display(Name = "考试场次编号", Description = @"考试场次编号")]
+        //[Required(ErrorMessage = "{0} 不能为空")]
+        //[RegularExpression(@"^([+-]?)\d*$", ErrorMessage = "{0}输入格式错误。")]
+        public int ExamBatchSessionId { get; set; }
+    }
+}

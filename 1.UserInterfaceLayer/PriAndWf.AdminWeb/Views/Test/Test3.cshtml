@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewBag.Title = "测试：JavaScript框架";
+}
+
+@section PagePluginStyles{
+}
+@section PageInlineStyles{
+}
+
+
+<div class="row">
+    <input type="text" id="txtVar" />
+    <input type="button" id="btnDo" value="Do it!" />
+    <span id="spanMsg"></span>
+</div>
+
+
+@section PagePluginScripts{
+    @Scripts.Render("~/Content/scripts/JsHelper.js")
+}
+@section PageInlineScripts{
+    <script>
+        $(function () {
+            $("#btnDo").on("click", function (e) {
+                var $txtVar = $("#txtVar");
+                var $spanMsg = $("#spanMsg");
+                var v = $txtVar.val();
+                var numV = Number(v);
+                if (JsHelper.IsNumber(numV)) {
+                    $spanMsg.html("'" + v + "' is a number.");
+                } else {
+                    $spanMsg.html("'" + v + "' is not a number.");
+                }
+            });
+        });
+    </script>
+}

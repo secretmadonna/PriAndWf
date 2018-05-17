@@ -436,14 +436,27 @@
     <Content Include="Content\plugins\layui\lay\modules\tree.js" />
     <Content Include="Content\plugins\layui\lay\modules\upload.js" />
     <Content Include="Content\plugins\layui\lay\modules\util.js" />
+    <Content Include="Content\scripts\JsHelper.js" />
+    <Content Include="Content\scripts\workers\asyncSum.js" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SignInController.cs" />
+    <Compile Include="Controllers\TestController.cs" />
+    <Compile Include="Extension\ModelStateExtension.cs" />
+    <Compile Include="Filters\ApiResultAttribute.cs" />
+    <Compile Include="Filters\UnifyHandleExceptionAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\DataApiResult.cs" />
+    <Compile Include="Models\SignInModels.cs" />
+    <Compile Include="Models\TestModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -641,6 +654,20 @@
     <Content Include="Views\Shared\_PartialSidebar.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_LoginLayout.AceRelease.cshtml" />
+    <Content Include="log4net.config" />
+    <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\SignIn\AutoSignIn.cshtml" />
+    <Content Include="Views\SignIn\Index.cshtml" />
+    <Content Include="Views\SignIn\SignIn.cshtml" />
+    <Content Include="Views\SignIn\TestSignIn.cshtml" />
+    <Content Include="Views\Test\Index.cshtml" />
+    <Content Include="Views\Test\Test1.cshtml" />
+    <Content Include="Views\Test\Test2.cshtml" />
+    <Content Include="Views\Test\Test3.cshtml" />
+    <Content Include="Views\Test\Test4.cshtml" />
+    <Content Include="Views\Test\Test5.cshtml" />
+    <Content Include="Views\Test\Test6.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -650,8 +677,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\" />
-    <Folder Include="Models\" />
+    <Folder Include="Services\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\4.InfrastructureLayer\PriAndWf.Infrastructure\PriAndWf.Infrastructure.csproj">

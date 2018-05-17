@@ -1,0 +1,59 @@
+﻿
+@{
+    ViewBag.Title = "测试：条件注释";
+}
+
+@section PagePluginStyles{
+}
+@section PageInlineStyles{
+}
+
+
+<div class="row">
+    <p><strong>说明：仅Internet Explorer 5-9 支持条件注释</strong></p>
+
+    <p><strong>1</strong></p>
+    <!--[if IE]><p>You are using Internet Explorer (any version).</p><![endif]-->
+    <!--[if IE 5]><p>You are using Internet Explorer 5 (any version).</p><![endif]-->
+    <!--[if IE 6]><p>You are using Internet Explorer 6 (any version).</p><![endif]-->
+    <!--[if IE 7]><p>You are using Internet Explorer 7 (any version).</p><![endif]-->
+    <!--[if IE 8]><p>You are using Internet Explorer 8 (any version).</p><![endif]-->
+    <!--[if IE 9]><p>You are using Internet Explorer 9 (any version).</p><![endif]-->
+
+    <p><strong>2</strong></p>
+    <![if !IE]><p>You are not using Internet Explorer.</p><![endif]>
+    <![if !(IE 5)]><p>You are not using Internet Explorer 5.</p><![endif]>
+    <![if !(IE 6)]><p>You are not using Internet Explorer 6.</p><![endif]>
+    <![if !(IE 7)]><p>You are not using Internet Explorer 7.</p><![endif]>
+    <![if !(IE 8)]><p>You are not using Internet Explorer 8.</p><![endif]>
+    <![if !(IE 9)]><p>You are not using Internet Explorer 9.</p><![endif]>
+
+    <p><strong>3</strong></p>
+    <!--[if gte IE 5]><p>You are using Internet Explorer 5 or greater.</p><![endif]-->
+    <!--[if gte IE 6]><p>You are using Internet Explorer 6 or greater.</p><![endif]-->
+    <!--[if gte IE 7]><p>You are using Internet Explorer 7 or greater.</p><![endif]-->
+    <!--[if gte IE 8]><p>You are using Internet Explorer 8 or greater.</p><![endif]-->
+    <!--[if gte IE 9]><p>You are using Internet Explorer 9 or greater.</p><![endif]-->
+
+    <p><strong>4</strong></p>
+    <!--[if lt IE 5]><p>You are using less than Internet Explorer 5.</p><![endif]-->
+    <!--[if lt IE 6]><p>You are using less than Internet Explorer 6.</p><![endif]-->
+    <!--[if lt IE 7]><p>You are using less than Internet Explorer 7.</p><![endif]-->
+    <!--[if lt IE 8]><p>You are using less than Internet Explorer 8.</p><![endif]-->
+    <!--[if lt IE 9]><p>You are using less than Internet Explorer 9.</p><![endif]-->
+
+    <p><strong>5</strong></p>
+    <!--[if true]>You are using an <strong>uplevel</strong> browser.<![endif]-->
+    <p><strong>6</strong></p>
+    <![if false]><p>You are using a <strong>downlevel</strong> browser.</p><![endif]>
+
+    <p><strong>7</strong></p>
+    <!--[if (gte IE 5.5)&(lt IE 8)]><p>You are using Internet Explorer 5.5 (equal) to Internet Explorer 8 (not equal).</p><![endif]-->
+    <!--[if true]><![if IE 7]><p>You are using Internet Explorer 7.</p><![endif]><![endif]-->
+</div>
+
+
+@section PagePluginScripts{
+}
+@section PageInlineScripts{
+}

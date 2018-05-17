@@ -1,0 +1,126 @@
+﻿
+@{
+    ViewBag.Title = "SignIn";
+}
+
+@section PagePluginStyles{
+}
+@section PageInlineStyles{
+}
+
+
+<div>
+    <button id="btnSignIn">签到</button>
+    <span id="spanMsg"></span>
+
+    <OBJECT classid="clsid:10946843-7507-44FE-ACE8-2B3483D179B7"
+            id="CVR_IDCard" name="CVR_IDCard" width="0" height="0"></OBJECT>
+</div>
+
+
+@section PagePluginScripts{
+}
+@section PageInlineScripts{
+    <script type="text/javascript">
+        $(function () {
+            function FindAndReadCard(dtd) {
+                var dfd = $.Deferred();
+                var task = function () {
+                    //说明：此处FindCard和ReadCard会导致浏览器假死
+                    //Sleep(2000);
+                    var findCard = CVR_IDCard.FindCard();
+                    if (findCard === 1) {//发现卡
+                        var readCard = CVR_IDCard.ReadCard();
+                        if (readCard === "0") {//读卡成功
+                            var data = {
+                                CardReaderId: CVR_IDCard.CardReaderId,
+
+                                Name: CVR_IDCard.Name,
+                                Sex: CVR_IDCard.Sex,
+                                Nation: CVR_IDCard.Nation,
+                                Born: CVR_IDCard.Born,
+                                Address: CVR_IDCard.Address,
+                                CardNo: CVR_IDCard.CardNo,
+                                Picture: CVR_IDCard.Picture,
+
+                                IssuedAt: CVR_IDCard.IssuedAt,
+                                EffectedDate: CVR_IDCard.EffectedDate,
+                                ExpiredDate: CVR_IDCard.ExpiredDate
+                            };
+                            dfd.resolve(data);
+                        } else {//读卡失败
+                            dfd.reject(-2, readCard);
+                        }
+                    } else {//未发现卡
+                        dfd.reject(-1);
+                    }
+                };
+                setTimeout(task, 100);//100毫秒之后开始执行任务
+                return dfd.promise();
+            }
+
+            var signInUrl = "@Url.Content("~/SignIn/SignIn")", examBatchSessionId = "@(Model)";
+
+            var $btnSignIn = $("#btnSignIn"), $spanMsg = $("#spanMsg");
+            $btnSignIn.attr("disabled", "disabled");
+            var checkDeviceStatus = CVR_IDCard.CheckDeviceStatus;
+            if (checkDeviceStatus === undefined) {
+                $spanMsg.html("请安装读卡器软件后，重新打开此页面");
+            } else {
+                checkDeviceStatus = CVR_IDCard.CheckDeviceStatus();
+                if (checkDeviceStatus == 0) {
+                    $spanMsg.html("读卡器已连接成功！");
+                    $btnSignIn.removeAttr("disabled");
+
+                    //var signInUrl = "";
+                    var equipmentId = CVR_IDCard.GetDeviceSN();
+                    //var examBatchSessionId = "";
+
+                    $("#btnSignIn").on("click", function (e) {
+                        $btnSignIn.attr("disabled", "disabled").html("读卡中...");
+                        $spanMsg.html("读卡中...");
+                        $.when(FindAndReadCard()).done(function (retData) {
+                            //console.log(retData);
+                            $.ajax({
+                                type: "post",
+                                url: signInUrl,
+                                async: true,//异步请求
+                                cache: false,
+                                data: { EquipmentId: equipmentId, ExamBatchSessionId: examBatchSessionId, IdCardNo: retData.CardNo },
+                                dataType: "json",
+                                beforeSend: function (jqXHR, settings) {
+                                    $spanMsg.html("签到中...");
+                                    $btnSignIn.html("签到中...");
+                                },
+                                success: function (data, textStatus, jqXHR) {
+                                    $spanMsg.html("签到结果：" + JSON.stringify(data));
+                                },
+                                error: function (jqXHR, textStatus, errorThrown) {
+                                    $spanMsg.html("签到错误：" + errorThrown);
+                                },
+                                complete: function (jqXHR, textStatus) {
+                                    $btnSignIn.html("签到").removeAttr("disabled");
+                                }
+                            });
+                        }).fail(function (retCode, readCardFailMessage) {
+                            if (retCode === -1) {
+                                $spanMsg.html("未发现身份证（1.请确认设备连接正常；2.请确认已将身份证置于读卡区；3.身份证可能已消磁）");
+                            } else if (retCode === -2) {
+                                $spanMsg.html(readCardFailMessage);
+                            } else {
+                                $spanMsg.html("");
+                            }
+                            $btnSignIn.html("签到").removeAttr("disabled");
+                        });
+                    });
+                } else if (checkDeviceStatus == 1) {
+                    $spanMsg.html("【驱动异常】请处理驱动问题后，重新打开此页面");
+                } else if (checkDeviceStatus == 2) {
+                    $spanMsg.html("【设备异常】请处理设备问题后，重新打开此页面");
+                } else {
+                    $spanMsg.html("【未知状态】请处理问题后，重新打开此页面");
+                }
+            }
+        });
+    </script>
+}

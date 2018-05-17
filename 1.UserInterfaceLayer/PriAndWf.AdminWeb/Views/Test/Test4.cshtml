@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewBag.Title = "测试：Web Worker";
+}
+
+@section PagePluginStyles{
+}
+@section PageInlineStyles{
+}
+
+
+<div class="row">
+    <span id="spanMsg"></span>
+    <span id="spanSum"></span>
+</div>
+
+
+@section PagePluginScripts{
+}
+@section PageInlineScripts{
+    <script>
+        $(function () {
+            var workerJsUrl = "@Url.Content("~/Content/scripts/workers/asyncSum.js")";
+            var $spanMsg = $("#spanMsg"), $spanSum = $("#spanSum");
+            var startTime, endTime;
+            if (typeof (Worker) === "undefined") {
+                $spanMsg.html("当前浏览器不支持 worker.");
+            } else {
+                var worker = new Worker(workerJsUrl);
+                worker.onmessage = function (e) {
+                    if (e.data === "start") {
+                        startTime = Date.now();
+                    } else if (e.data === "finish") {
+                        endTime = Date.now();
+                        $spanSum.html($spanSum.html() + " " + (endTime - startTime) + "ms");
+                        //worker.terminate();
+                    } else {
+                        $spanSum.html(e.data);
+                    }
+                };
+                worker.onerror = function (e) {
+                    console.log(e.filename, e.lineno, e.message);
+                    worker.terminate();
+                };
+                worker.postMessage({ min: 0, max: 100000 });
+            }
+        });
+    </script>
+}
