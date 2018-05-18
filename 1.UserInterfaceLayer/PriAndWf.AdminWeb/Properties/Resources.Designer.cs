@@ -39,7 +39,7 @@ namespace PriAndWf.AdminWeb.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("PriAndWf.AdminWeb.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("PriAndWf.Web.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -57,6 +57,33 @@ namespace PriAndWf.AdminWeb.Properties {
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 字段 {0} 必须是 {1} 类型 的本地化字符串。
+        /// </summary>
+        internal static string DataType_Default {
+            get {
+                return ResourceManager.GetString("DataType_Default", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 字段 {0} 不得超过 {1} 个字符 的本地化字符串。
+        /// </summary>
+        internal static string MaxLength_Default {
+            get {
+                return ResourceManager.GetString("MaxLength_Default", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 字段 {0} 是必须的 的本地化字符串。
+        /// </summary>
+        internal static string Required_Default {
+            get {
+                return ResourceManager.GetString("Required_Default", resourceCulture);
             }
         }
     }
