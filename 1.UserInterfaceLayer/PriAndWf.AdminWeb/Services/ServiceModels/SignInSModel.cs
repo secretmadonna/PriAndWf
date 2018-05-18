@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace MyTestMvc.Services.ServiceModels
+namespace PriAndWf.AdminWeb.Services.ServiceModels
 {
     public class SignInSModel
     {

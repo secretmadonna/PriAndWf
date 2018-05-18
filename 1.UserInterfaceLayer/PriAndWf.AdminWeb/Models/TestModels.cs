@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace MyTestMvc.Models
+namespace PriAndWf.AdminWeb.Models
 {
     public class Test1ViewModel
     {

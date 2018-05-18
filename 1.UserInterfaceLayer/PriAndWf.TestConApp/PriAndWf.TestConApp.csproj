@@ -48,6 +48,12 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\4.InfrastructureLayer\PriAndWf.Infrastructure\PriAndWf.Infrastructure.csproj">
+      <Project>{c1caf585-bcd5-4b7e-99c0-ff2f2b8a732f}</Project>
+      <Name>PriAndWf.Infrastructure</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

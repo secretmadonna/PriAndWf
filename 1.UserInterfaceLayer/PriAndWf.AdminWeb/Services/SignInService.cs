@@ -1,9 +1,9 @@
-﻿using MyTestMvc.Services.ServiceModels;
+﻿using PriAndWf.AdminWeb.Services.ServiceModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace MyTestMvc.Services
+namespace PriAndWf.AdminWeb.Services
 {
     public interface ISignInService : IDisposable
     {

@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Web.Mvc;
 
-namespace MyTestMvc.Extension
+namespace PriAndWf.AdminWeb.Extension
 {
     public static class ModelStateExtension
     {

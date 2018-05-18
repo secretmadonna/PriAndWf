@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace MyTestMvc.Models
+namespace PriAndWf.AdminWeb.Models
 {
     public class SignInModel
     {

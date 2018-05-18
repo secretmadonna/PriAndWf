@@ -1,13 +1,13 @@
-﻿using MyTestMvc.Extension;
-using MyTestMvc.Models;
-using MyTestMvc.Services;
-using MyTestMvc.Services.ServiceModels;
+﻿using PriAndWf.AdminWeb.Extension;
+using PriAndWf.AdminWeb.Models;
+using PriAndWf.AdminWeb.Services;
+using PriAndWf.AdminWeb.Services.ServiceModels;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Web.Mvc;
 
-namespace MyTestMvc.Controllers
+namespace PriAndWf.AdminWeb.Controllers
 {
     public class SignInController : Controller
     {

@@ -1,8 +1,8 @@
-﻿using PriAndWf.Web.Properties;
+﻿using PriAndWf.AdminWeb.Properties;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 
-namespace MyTestMvc.Models
+namespace PriAndWf.AdminWeb.Models
 {
     public class LoginViewModel
     {

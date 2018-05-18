@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using log4net;
+using log4net.Config;
+using System;
+using System.Reflection;
 using System.Web.Mvc;
 using System.Web.Routing;
 
-[assembly: XmlConfigurator(ConfigFile = "log4net.config", Watch = true)]
+[assembly: XmlConfigurator(ConfigFile = "log4net", ConfigFileExtension = "config", Watch = true)]
 namespace PriAndWf.AdminWeb
 {
     public class MvcApplication : System.Web.HttpApplication
@@ -25,8 +25,12 @@ namespace PriAndWf.AdminWeb
             staticLogger.InfoFormat("{0:D3}.{1}", ++numberIndex, MethodBase.GetCurrentMethod().Name);
             base.Init();
         }
-
-        protected void Application_OnStart(Object sender, EventArgs e)
+        /// <summary>
+        /// Application_OnStart
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void Application_Start(Object sender, EventArgs e)
         {
             numberIndex = 0;
             staticLogger.InfoFormat("{0:D3}.{1}", ++numberIndex, MethodBase.GetCurrentMethod().Name);
@@ -34,11 +38,21 @@ namespace PriAndWf.AdminWeb
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
         }
-        protected void Application_OnEnd(Object sender, EventArgs e)
+        /// <summary>
+        /// Application_OnEnd
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void Application_End(Object sender, EventArgs e)
         {
             staticLogger.InfoFormat("{0:D3}.{1}", ++numberIndex, MethodBase.GetCurrentMethod().Name);
         }
-        protected void Session_OnEnd(Object sender, EventArgs e)
+        /// <summary>
+        /// Session_OnEnd
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void Session_End(Object sender, EventArgs e)
         {
             staticLogger.InfoFormat("{0:D3}.{1} {2}", ++numberIndex, MethodBase.GetCurrentMethod().Name, Session.SessionID);
         }
@@ -48,7 +62,7 @@ namespace PriAndWf.AdminWeb
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        protected void Application_OnError(Object sender, EventArgs e)
+        protected void Application_Error(Object sender, EventArgs e)
         {
             staticLogger.InfoFormat("{0:D3}.{1:yyyy-MM-dd HH:mm:ss}  {2}", ++numberIndex, DateTime.Now, MethodBase.GetCurrentMethod().Name);
         }
@@ -57,7 +71,7 @@ namespace PriAndWf.AdminWeb
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        protected void Session_OnStart(Object sender, EventArgs e)
+        protected void Session_Start(Object sender, EventArgs e)
         {
             staticLogger.InfoFormat("{0:D3}.{1} {2}", ++numberIndex, MethodBase.GetCurrentMethod().Name, Session.SessionID);
         }

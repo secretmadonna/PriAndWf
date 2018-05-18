@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace MyTestMvc.Filters
+namespace PriAndWf.AdminWeb.Filters
 {
     public class ApiResultAttribute : ActionFilterAttribute
     {

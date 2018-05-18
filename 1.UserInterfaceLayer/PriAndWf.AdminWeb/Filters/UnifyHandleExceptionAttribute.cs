@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Web.Mvc;
 
-namespace MyTestMvc.Filters
+namespace PriAndWf.AdminWeb.Filters
 {
     public class UnifyHandleExceptionAttribute : FilterAttribute, IExceptionFilter//HandleErrorAttribute
     {

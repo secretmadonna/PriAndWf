@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace MyTestMvc.Controllers
+namespace PriAndWf.AdminWeb.Controllers
 {
     public class AccountController : Controller
     {

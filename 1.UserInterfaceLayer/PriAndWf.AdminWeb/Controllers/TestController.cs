@@ -1,9 +1,9 @@
-﻿using MyTestMvc.Models;
+﻿using PriAndWf.AdminWeb.Models;
 using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
 
-namespace MyTestMvc.Controllers
+namespace PriAndWf.AdminWeb.Controllers
 {
     public class TestController : Controller
     {
