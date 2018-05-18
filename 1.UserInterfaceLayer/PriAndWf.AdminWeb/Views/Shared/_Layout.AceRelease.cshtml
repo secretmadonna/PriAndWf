@@ -14,7 +14,7 @@
     <meta name="description" content="@ViewBag.Description" />
 
     <!-- bootstrap & fontawesome -->
-    @Styles.Render("~/Content/bootstrap.min.css", "~/Content/font-awesome.min.css")
+    @Styles.Render("~/Content/plugins/bootstrap/css/bootstrap.min.css", "~/Content/plugins/font-awesome/css/font-awesome.min.css")
 
     <!-- page specific plugin styles -->
     @RenderSection("PagePluginStyles", required: false)
@@ -35,7 +35,7 @@
 
     <!-- HTML5shiv and Respond.js for IE8 to support HTML5 elements and media queries -->
     <!--[if lte IE 8]>
-        @Scripts.Render("~/Scripts/html5shiv.min.js", "~/Scripts/respond.min.js")
+        @Scripts.Render("~/Content/plugins/html5shiv/html5shiv.min.js", "~/Content/plugins/response/response.min.js")
     <![endif]-->
 </head>
 
@@ -100,16 +100,16 @@
 
     <!-- list of script files -->
     <!--[if !IE]><!-->
-        @Scripts.Render("~/Scripts/jquery-3.2.1.min.js")
+        @Scripts.Render("~/Content/plugins/jquery/jquery.min.js")
     <!--<![endif]-->
     <!--[if IE 9]>
-        @Scripts.Render("~/Scripts/jquery-3.2.1.min.js")
+        @Scripts.Render("~/Content/plugins/jquery/jquery.min.js")
     <![endif]-->
     <!--[if lte IE 8]>
-        @Scripts.Render("~/Scripts/jquery-1.12.4.min.js")
+        @Scripts.Render("~/Content/plugins/jquery/jquery-1.12.4.min.js")
     <![endif]-->
 
-    @Scripts.Render("~/Scripts/bootstrap.min.js")
+    @Scripts.Render("~/Content/plugins/bootstrap/js/bootstrap.min.js")
 
     <!-- page specific plugin scripts -->
     @RenderSection("PagePluginScripts", required: false)

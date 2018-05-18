@@ -14,7 +14,7 @@
     <meta name="description" content="@ViewBag.Description" />
 
     <!-- bootstrap & fontawesome -->
-    @Styles.Render("~/Content/bootstrap.min.css", "~/Content/font-awesome.min.css")
+    @Styles.Render("~/Content/plugins/bootstrap/css/bootstrap.min.css", "~/Content/plugins/font-awesome/css/font-awesome.min.css")
 
     <!-- page specific plugin styles -->
     @RenderSection("PagePluginStyles", required: false)
@@ -34,7 +34,7 @@
 
     <!-- HTML5shiv and Respond.js for IE8 to support HTML5 elements and media queries -->
     <!--[if lte IE 8]>
-        @Scripts.Render("~/Scripts/html5shiv.min.js", "~/Scripts/respond.min.js")
+        @Scripts.Render("~/Content/plugins/html5shiv/html5shiv.min.js", "~/Content/plugins/response/response.min.js")
     <![endif]-->
 </head>
 
@@ -52,99 +52,19 @@
     <!-- list of script files -->
     <!-- 1.jquery.js & jquery1x.js -->
     <!--[if !IE]><!-->
-        @Scripts.Render("~/Scripts/jquery-3.2.1.min.js")
+        @Scripts.Render("~/Content/plugins/jquery/jquery.min.js")
     <!--<![endif]-->
     <!--[if IE 9]>
-        @Scripts.Render("~/Scripts/jquery-3.2.1.min.js")
+        @Scripts.Render("~/Content/plugins/jquery/jquery.min.js")
     <![endif]-->
     <!--[if lte IE 8]>
-        @Scripts.Render("~/Scripts/jquery-1.12.4.min.js")
+        @Scripts.Render("~/Content/plugins/jquery/jquery-1.12.4.min.js")
     <![endif]-->
     <!-- 2.bootstrap.js -->
-    @Scripts.Render("~/Scripts/bootstrap.min.js")
+    @Scripts.Render("~/Content/plugins/bootstrap/js/bootstrap.min.js")
     <!-- 3.third party js files -->
     @RenderSection("PagePluginScripts", required: false)
     <!-- 4.inline javascripts -->
-    @RenderSection("PageInlineScripts", required: false)
-</body>
-<body class="no-skin">
-    <div class="navbar" id="navbar">
-        <!-- navbar goes here -->
-    </div>
-
-    <div class="main-container" id="main-container">
-        <div class="sidebar responsive" id="sidebar">
-            <!-- sidebar goes here -->
-        </div>
-
-        <div class="main-content">
-            <div class="breadcrumbs">
-                <!-- breadcrumbs goes here -->
-            </div>
-
-            <div class="page-content">
-                <!-- setting box goes here if needed -->
-
-                <div class="row">
-                    <div class="col-xs-12">
-                        <!-- page content goes here -->
-                        @RenderBody()
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-        <div class="footer">
-            <div class="footer-inner">
-                <div class="footer-content">
-                    <span class="bigger-120">
-                        <span class="blue bolder">Ace</span>
-                        Application &copy; 2013-2014
-                    </span>
-
-                    &nbsp; &nbsp;
-                    <span class="action-buttons">
-                        <a href="#">
-                            <i class="ace-icon fa fa-twitter-square light-blue bigger-150"></i>
-                        </a>
-
-                        <a href="#">
-                            <i class="ace-icon fa fa-facebook-square text-primary bigger-150"></i>
-                        </a>
-
-                        <a href="#">
-                            <i class="ace-icon fa fa-rss-square orange bigger-150"></i>
-                        </a>
-                    </span>
-                </div>
-            </div>
-        </div>
-
-        <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
-            <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
-        </a>
-    </div>
-
-    <!-- list of script files -->
-    <!--[if !IE]><!-->
-    @Scripts.Render("~/Scripts/jquery-3.2.1.min.js")
-    <!--<![endif]-->
-    <!--[if IE 9]>
-        @Scripts.Render("~/Scripts/jquery-3.2.1.min.js")
-    <![endif]-->
-    <!--[if lte IE 8]>
-        @Scripts.Render("~/Scripts/jquery-1.12.4.min.js")
-    <![endif]-->
-
-    @Scripts.Render("~/Scripts/bootstrap.min.js")
-
-    <!-- page specific plugin scripts -->
-    @RenderSection("PagePluginScripts", required: false)
-
-    @Scripts.Render("~/Content/plugins/ace/js/ace-elements.min.js", "~/Content/plugins/ace/js/ace.min.js");
-
-    <!-- inline scripts related to this page -->
     @RenderSection("PageInlineScripts", required: false)
 </body>
 </html>
