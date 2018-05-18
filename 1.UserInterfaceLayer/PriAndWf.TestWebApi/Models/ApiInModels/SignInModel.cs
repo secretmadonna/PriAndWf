@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace MyTestWebApi.Models.ApiInModels
+namespace PriAndWf.TestWebApi.Models.ApiInModels
 {
     public class SignInModel
     {

@@ -1,10 +1,12 @@
-﻿using System;
+﻿using log4net;
+using log4net.Config;
+using System;
 using System.Reflection;
 using System.Web;
 using System.Web.Http;
 using System.Web.SessionState;
 
-[assembly: XmlConfigurator(ConfigFile = "log4net.config", Watch = true)]
+[assembly: XmlConfigurator(ConfigFile = "log4net", ConfigFileExtension = "config", Watch = true)]
 namespace PriAndWf.TestWebApi
 {
     public class WebApiApplication : System.Web.HttpApplication

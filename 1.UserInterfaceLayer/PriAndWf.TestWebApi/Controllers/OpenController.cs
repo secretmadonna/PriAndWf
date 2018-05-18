@@ -1,7 +1,7 @@
-﻿using MyTestWebApi.Models.ApiInModels;
+﻿using PriAndWf.TestWebApi.Models.ApiInModels;
 using System.Web.Http;
 
-namespace MyTestWebApi.Controllers
+namespace PriAndWf.TestWebApi.Controllers
 {
     public class OpenController : ApiController
     {
