@@ -1,6 +1,10 @@
-﻿
+﻿@using PriAndWf.AdminWeb.Services
+
 @{
     ViewBag.Title = "测试：CSS 预处理器技术";
+
+    ISignInService service = new SignInService();
+    //int list=service.GetCanSignList();
 }
 
 @section PagePluginStyles{
