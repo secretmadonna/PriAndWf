@@ -482,6 +482,16 @@
     <Content Include="Content\plugins\Nestable\jquery.nestable.js" />
     <Content Include="Content\plugins\response\response.js" />
     <Content Include="Content\plugins\response\response.min.js" />
+    <Content Include="Content\plugins\ZeroClipboard\2.0.2\ZeroClipboard.Core.js" />
+    <Content Include="Content\plugins\ZeroClipboard\2.0.2\ZeroClipboard.Core.min.js" />
+    <Content Include="Content\plugins\ZeroClipboard\2.0.2\ZeroClipboard.js" />
+    <Content Include="Content\plugins\ZeroClipboard\2.0.2\ZeroClipboard.min.js" />
+    <Content Include="Content\plugins\ZeroClipboard\2.0.2\ZeroClipboard.swf" />
+    <Content Include="Content\plugins\ZeroClipboard\ZeroClipboard.Core.js" />
+    <Content Include="Content\plugins\ZeroClipboard\ZeroClipboard.Core.min.js" />
+    <Content Include="Content\plugins\ZeroClipboard\ZeroClipboard.js" />
+    <Content Include="Content\plugins\ZeroClipboard\ZeroClipboard.min.js" />
+    <Content Include="Content\plugins\ZeroClipboard\ZeroClipboard.swf" />
     <Content Include="Content\scripts\JsHelper.js" />
     <Content Include="Content\scripts\workers\asyncSum.js" />
     <Content Include="Global.asax" />
@@ -763,6 +773,11 @@
     <Content Include="Content\plugins\font-awesome\scss\_screen-reader.scss" />
     <Content Include="Content\plugins\font-awesome\scss\_stacked.scss" />
     <Content Include="Content\plugins\font-awesome\scss\_variables.scss" />
+    <Content Include="Content\plugins\ZeroClipboard\ZeroClipboard.Core.min.map" />
+    <Content Include="Content\plugins\ZeroClipboard\ZeroClipboard.min.map" />
+    <Content Include="Views\Test\Test7.cshtml" />
+    <Content Include="Content\plugins\ZeroClipboard\2.0.2\ZeroClipboard.Core.min.map" />
+    <Content Include="Content\plugins\ZeroClipboard\2.0.2\ZeroClipboard.min.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

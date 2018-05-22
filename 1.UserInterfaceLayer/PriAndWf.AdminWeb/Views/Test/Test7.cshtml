@@ -1,0 +1,59 @@
+﻿@{
+    ViewBag.Title = "测试：ZeroClipboard";
+}
+
+@section PagePluginStyles{
+}
+@section PageInlineStyles{
+}
+
+
+<h5>ZeroClipboard</h5>
+
+<button class="Copy" data-cid="123456">复制</button>
+
+
+@section PagePluginScripts{
+}
+@section PageInlineScripts{
+    <script src="@Url.Content("~/Content/plugins/ZeroClipboard/2.0.2/ZeroClipboard.min.js")"></script>
+    <script>
+        $(function () {
+            var copying = false;
+            var jsonUrl = "@(Url.Content("~/Test/Test8"))";
+            var clip = new ZeroClipboard($(".Copy")).on("ready", function (e) {
+                clip.on("beforecopy ", function (event) {
+                    console.log("beforecopy");
+                    if (copying === true) {
+                        return false;
+                    }
+                    copying = true;
+                    $.ajax({
+                        type: "get",
+                        url: jsonUrl,
+                        async: false,//异步请求
+                        cache: false,
+                        data: { "CId": $(event.target).data("cid") },
+                        dataType: "json",
+                        beforeSend: function (jqXHR, settings) { },
+                        success: function (data, textStatus, jqXHR) {
+                            ZeroClipboard.setData("text/plain", data);
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) { },
+                        complete: function (jqXHR, textStatus) { }
+                    });
+                }).on("copy", function (event) {
+                    //console.log("copy");
+                }).on("aftercopy", function (event) {
+                    console.log("aftercopy");
+                    //alert("复制成功！");
+                    copying = false;
+                }).on("destroy", function (event) {
+                    //console.log("destroy");
+                });
+            }).on("error", function (e) {
+                alert("error！");
+            });
+        });
+    </script>
+}
