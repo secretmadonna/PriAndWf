@@ -23,7 +23,7 @@
             var jsonUrl = "@(Url.Content("~/Test/Test8"))";
             var clip = new ZeroClipboard($(".Copy")).on("ready", function (e) {
                 clip.on("beforecopy ", function (event) {
-                    console.log("beforecopy");
+                    //console.log("beforecopy");
                     if (copying === true) {
                         return false;
                     }
@@ -45,14 +45,14 @@
                 }).on("copy", function (event) {
                     //console.log("copy");
                 }).on("aftercopy", function (event) {
-                    console.log("aftercopy");
-                    //alert("复制成功！");
+                    //console.log("aftercopy");
+                    alert("复制成功！");
                     copying = false;
                 }).on("destroy", function (event) {
                     //console.log("destroy");
                 });
             }).on("error", function (e) {
-                alert("error！");
+                alert("请先解决 Flash 问题！");
             });
         });
     </script>

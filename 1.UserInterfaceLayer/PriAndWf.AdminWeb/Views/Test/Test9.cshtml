@@ -1,0 +1,108 @@
+﻿@{
+    ViewBag.Title = "测试：Bootstrap 标签页";
+}
+@section PagePluginStyles{
+}
+@section PageInlineStyles{
+}
+
+
+<h5>Bootstrap 标签页</h5>
+
+
+@using (Ajax.BeginForm("Setting", "OrgCoursewareTeacher", new AjaxOptions { HttpMethod = "POST", OnBegin = "MVC3AjaxHelper.ajaxSubmitBegin", OnSuccess = "ajaxSubmitResultCheck", OnFailure = "MVC3AjaxHelper.ajaxSubmitFailure", OnComplete = "MVC3AjaxHelper.ajaxSubmitComplete" }, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="tabbable">
+
+        <ul id="myTab" class="nav nav-tabs">
+            <li class="active">
+                <a href="#taborguser" data-toggle="tab">为教师设置设计课程</a>
+            </li>
+            <li>
+                <a href="#taborgcourseware" data-toggle="tab">为课程设置设计教师</a>
+            </li>
+        </ul>
+
+        <div class="tab-content">
+            <div class="tab-pane in active" id="taborguser">
+                <div class="form-group">
+                    <label class="col-xs-4 control-label no-padding-right right">
+                        <label class="control-label no-padding text-danger">*</label>
+                        <label class="control-label no-padding">教师</label>
+                        @*@Html.LabelFor(m => m.OrgUserIds, new { @class = "control-label no-padding", @for = "OrgUserIds" })：*@
+                    </label>
+                    <div class="col-xs-8">
+                        @Html.DropDownList("TOrgUser", ((null as List<SelectListItem>) ?? new List<SelectListItem>()))
+                        @*@Html.DropDownListFor(model => model.OrgUserIds, Model.OrgUserSelect)*@
+                    </div>
+                    <div class="help-block col-xs-12 col-sm-reset inline">
+                        @*@Html.ValidationMessageFor(m => m.OrgUserIds)*@
+                    </div>
+                </div>
+                <div class="space-4"></div>
+                <div class="form-group">
+                    <label class="col-xs-4 control-label no-padding-right right">
+                        <label class="control-label no-padding text-danger">*</label>
+                        <label class="control-label no-padding">课程</label>
+                        @*@Html.LabelFor(m => m.OrgCoursewareIds, new { @class = "control-label no-padding", @for = "OrgCoursewareIds" })：*@
+                    </label>
+                    <div class="col-xs-8">
+                        @Html.DropDownList("TOrgCourseware", ((null as List<SelectListItem>) ?? new List<SelectListItem>()))
+                        @*@Html.DropDownListFor(model => model.OrgCoursewareIds, Model.OrgCoursewareSelect)*@
+                    </div>
+                    <div class="help-block col-xs-12 col-sm-reset inline">
+                        @*@Html.ValidationMessageFor(m => m.OrgCoursewareIds)*@
+                    </div>
+                </div>
+                <div class="space-4"></div>
+            </div>
+            <div class="tab-pane" id="taborgcourseware">
+                <div class="form-group">
+                    <label class="col-xs-4 control-label no-padding-right right">
+                        <label class="control-label no-padding text-danger">*</label>
+                        <label class="control-label no-padding">课程</label>
+                        @*@Html.LabelFor(m => m.OrgCoursewareIds, new { @class = "control-label no-padding", @for = "OrgCoursewareIds" })：*@
+                    </label>
+                    <div class="col-xs-8">
+                        @Html.DropDownList("TOrgCourseware", ((null as List<SelectListItem>) ?? new List<SelectListItem>()))
+                        @*@Html.DropDownListFor(model => model.OrgCoursewareIds, Model.OrgCoursewareSelect)*@
+                    </div>
+                    <div class="help-block col-xs-12 col-sm-reset inline">
+                        @*@Html.ValidationMessageFor(m => m.OrgCoursewareIds)*@
+                    </div>
+                </div>
+                <div class="space-4"></div>
+                <div class="form-group">
+                    <label class="col-xs-4 control-label no-padding-right right">
+                        <label class="control-label no-padding text-danger">*</label>
+                        <label class="control-label no-padding">教师</label>
+                        @*@Html.LabelFor(m => m.OrgUserIds, new { @class = "control-label no-padding", @for = "OrgUserIds" })：*@
+                    </label>
+                    <div class="col-xs-8">
+                        @Html.DropDownList("TOrgUser", ((null as List<SelectListItem>) ?? new List<SelectListItem>()))
+                        @*@Html.DropDownListFor(model => model.OrgUserIds, Model.OrgUserSelect)*@
+                    </div>
+                    <div class="help-block col-xs-12 col-sm-reset inline">
+                        @*@Html.ValidationMessageFor(m => m.OrgUserIds)*@
+                    </div>
+                </div>
+                <div class="space-4"></div>
+            </div>
+        </div>
+    </div>
+
+    <input id="btn_submit" type="submit" style="display:none" />
+}
+
+
+@section PagePluginScripts{
+}
+@section PageInlineScripts{
+    <script>
+    $(function () {
+
+        });
+    </script>
+}

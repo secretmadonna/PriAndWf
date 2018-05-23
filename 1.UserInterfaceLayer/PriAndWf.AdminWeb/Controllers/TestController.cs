@@ -76,5 +76,10 @@ namespace PriAndWf.AdminWeb.Controllers
         {
             return Json(string.Format("{0}?CId={1}", "http://www.baidu.com", CId), JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult Test9()
+        {
+            return View();
+        }
     }
 }
