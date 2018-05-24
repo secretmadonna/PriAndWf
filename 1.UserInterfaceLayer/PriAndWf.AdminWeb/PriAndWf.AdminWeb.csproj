@@ -779,6 +779,7 @@
     <Content Include="Content\plugins\ZeroClipboard\2.0.2\ZeroClipboard.Core.min.map" />
     <Content Include="Content\plugins\ZeroClipboard\2.0.2\ZeroClipboard.min.map" />
     <Content Include="Views\Test\Test9.cshtml" />
+    <None Include="Properties\PublishProfiles\release.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
