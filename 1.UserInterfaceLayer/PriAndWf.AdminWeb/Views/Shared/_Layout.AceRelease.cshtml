@@ -28,6 +28,12 @@
     <![endif]-->
 
     <!-- inline styles related to this page -->
+    <style>
+        .btn-colorpicker {
+            width: 16px;
+            height: 16px;
+        }
+    </style>
     @RenderSection("PageInlineStyles", required: false)
 
     <!-- ace settings handler -->
@@ -114,7 +120,7 @@
     <!-- page specific plugin scripts -->
     @RenderSection("PagePluginScripts", required: false)
 
-    @Scripts.Render("~/Content/plugins/ace/js/ace-elements.min.js", "~/Content/plugins/ace/js/ace.min.js");
+    @Scripts.Render("~/Content/plugins/ace/js/ace-elements.min.js", "~/Content/plugins/ace/js/ace.min.js")
 
     <!-- inline scripts related to this page -->
     @RenderSection("PageInlineScripts", required: false)

@@ -37,6 +37,12 @@
         @Styles.Render("~/Content/plugins/assets/css/ace-ie.css")
     <![endif]-->
     <!-- 10.inline styles -->
+    <style>
+        .btn-colorpicker {
+            width: 16px;
+            height: 16px;
+        }
+    </style>
     @RenderSection("PageInlineStyles", required: false)
 
     <!-- list of script files -->
@@ -92,7 +98,7 @@
     <!-- 3.third party js files -->
     @RenderSection("PagePluginScripts", required: false)
     <!-- 4.ace-elements.js & ace.js -->
-    @Scripts.Render("~/Content/plugins/assets/js/ace-elements.js", "~/Content/plugins/assets/js/ace.js");
+    @Scripts.Render("~/Content/plugins/assets/js/ace-elements.js", "~/Content/plugins/assets/js/ace.js")
     <!-- 5.inline javascripts -->
     @RenderSection("PageInlineScripts", required: false)
 </body>

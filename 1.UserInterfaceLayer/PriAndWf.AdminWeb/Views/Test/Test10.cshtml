@@ -1,0 +1,84 @@
+﻿@{
+    ViewBag.Title = "测试：uploadify and uploadifive";
+}
+@section PagePluginStyles{
+    <link href="@Url.Content("~/Content/plugins/uploadify/uploadify.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/plugins/uploadifive/uploadifive.css")" rel="stylesheet" />
+    <style>
+        .uploadify-queue-item .cancel a {
+            background: url('@Url.Content("~/Content/plugins/uploadify/uploadify-cancel.png")') 0 0 no-repeat;
+        }
+
+        .uploadifive-queue-item .close {
+	        background: url(''@Url.Content("~/Content/plugins/uploadifive/uploadifive-cancel.png")'') 0 0 no-repeat;
+        }
+        .uploadifive-queue .error{
+            color: red;
+        }
+    </style>
+}
+@section PageInlineStyles{
+}
+
+
+<h5>uploadify and uploadifive</h5>
+
+<div class="row">
+    <input type="file" name="file_upload" id="file_upload" />
+    <input type="file" name="file_uploadfive" id="file_uploadfive" />
+</div>
+
+
+@section PagePluginScripts{
+    <script src="@Url.Content("~/Content/plugins/uploadify/jquery.uploadify.js")"></script>
+    @*<script src="@Url.Content("~/Content/plugins/uploadifive/jquery.uploadifive.min.js")"></script>*@
+    <script src="~/Content/plugins/uploadifive/jquery.uploadifive.js"></script>
+}
+@section PageInlineScripts{
+    <script>
+        $(function () {
+            $("#file_upload").uploadify({
+                swf: "@Url.Content("~/Content/plugins/uploadify/uploadify.swf")",
+                uploader: "@Url.Content("~/Handlers/UploadifyHandler.ashx")",
+
+                formData: {},
+                debug: true,
+                fileTypeDesc: "Image Files",
+                fileTypeExts: "*.gif; *.jpg; *.png",
+                fileSizeLimit: "1024KB",
+                onUploadSuccess: function (file, data, response) {//data : FF浏览器下，该数据始终为""（BUG？？？）
+                    console.log(file);
+                    console.log(data);
+                    console.log(response);
+                },
+                onUploadError: function (file, errorCode, errorMsg, errorString) {
+                    console.log(file);
+                    console.log(errorCode);
+                    console.log(errorMsg);
+                    console.log(errorString);
+                },
+                onUploadComplete: function (file) {
+                    console.log(file);
+                },
+                onFallback: function () {
+                    alert("未安装或未允许 Flash 插件！");
+                },
+                onUploadProgress: function (file, bytesUploaded, bytesTotal, totalBytesUploaded, totalBytesTotal) {
+                    $("#progress").html(totalBytesUploaded + ' bytes uploaded of ' + totalBytesTotal + ' bytes.');
+                }
+            });
+
+            $("#file_uploadfive").uploadifive({
+                uploadScript: '@Url.Content("~/Handlers/UploadifiveHandler.ashx")',
+                fileType: ["image/jpeg", "video/mp4"],//说明（这里分明就是逻辑错误！！！） : 字符串（文件.fileType.indexOf(配置.fileType)>-1）或数组(文件.file.fileType.indexOf(配置.fileType[i])>-1)
+                fileSizeLimit: "1024KB",
+                onAddQueueItem: function (file) {
+                    console.log(file);
+                }, onUploadComplete: function (file, data) {
+                    console.log(file);
+                    console.log(data);
+                }
+            });
+        });
+    </script>
+}

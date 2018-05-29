@@ -482,6 +482,15 @@
     <Content Include="Content\plugins\Nestable\jquery.nestable.js" />
     <Content Include="Content\plugins\response\response.js" />
     <Content Include="Content\plugins\response\response.min.js" />
+    <Content Include="Content\plugins\uploadifive\jquery.uploadifive.js" />
+    <Content Include="Content\plugins\uploadifive\jquery.uploadifive.min.js" />
+    <Content Include="Content\plugins\uploadifive\uploadifive-cancel.png" />
+    <Content Include="Content\plugins\uploadifive\uploadifive.css" />
+    <Content Include="Content\plugins\uploadify\jquery.uploadify.js" />
+    <Content Include="Content\plugins\uploadify\jquery.uploadify.min.js" />
+    <Content Include="Content\plugins\uploadify\uploadify-cancel.png" />
+    <Content Include="Content\plugins\uploadify\uploadify.css" />
+    <Content Include="Content\plugins\uploadify\uploadify.swf" />
     <Content Include="Content\plugins\ZeroClipboard\2.0.2\ZeroClipboard.Core.js" />
     <Content Include="Content\plugins\ZeroClipboard\2.0.2\ZeroClipboard.Core.min.js" />
     <Content Include="Content\plugins\ZeroClipboard\2.0.2\ZeroClipboard.js" />
@@ -508,6 +517,12 @@
     <Compile Include="Filters\UnifyHandleExceptionAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Handlers\UploadifiveHandler.ashx.cs">
+      <DependentUpon>UploadifiveHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Handlers\UploadifyHandler.ashx.cs">
+      <DependentUpon>UploadifyHandler.ashx</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\DataApiResult.cs" />
@@ -717,7 +732,9 @@
     <Content Include="Views\Shared\_PartialSidebar.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_LoginLayout.AceRelease.cshtml" />
-    <Content Include="log4net.config" />
+    <Content Include="log4net.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\SignIn\AutoSignIn.cshtml" />
@@ -779,7 +796,10 @@
     <Content Include="Content\plugins\ZeroClipboard\2.0.2\ZeroClipboard.Core.min.map" />
     <Content Include="Content\plugins\ZeroClipboard\2.0.2\ZeroClipboard.min.map" />
     <Content Include="Views\Test\Test9.cshtml" />
+    <Content Include="Handlers\UploadifyHandler.ashx" />
+    <Content Include="Handlers\UploadifiveHandler.ashx" />
     <None Include="Properties\PublishProfiles\release.pubxml" />
+    <Content Include="Views\Test\Test10.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

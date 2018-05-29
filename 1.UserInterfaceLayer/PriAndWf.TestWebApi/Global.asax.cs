@@ -6,17 +6,18 @@ using System.Web;
 using System.Web.Http;
 using System.Web.SessionState;
 
-[assembly: XmlConfigurator(ConfigFile = "log4net", ConfigFileExtension = "config", Watch = true)]
+//[assembly: XmlConfigurator(ConfigFile = "log4net", ConfigFileExtension = "config", Watch = true)]
+[assembly: XmlConfigurator(ConfigFile = "log4net.config", Watch = true)]
 namespace PriAndWf.TestWebApi
 {
     public class WebApiApplication : System.Web.HttpApplication
     {
-        private ILog logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        private ILog staticLogger = LogManager.GetLogger("staticLogger");
 
         public override void Init()
         {
             var info = string.Format("{0}()", MethodBase.GetCurrentMethod().Name);
-            logger.Info(info);
+            staticLogger.Info(info);
             this.PostAuthenticateRequest += (sender, e) =>//此事件之后才可访问Session
             {
                 HttpContext.Current.SetSessionStateBehavior(SessionStateBehavior.Required);
@@ -32,7 +33,7 @@ namespace PriAndWf.TestWebApi
         {
             var senderType = sender.GetType();
             var info = string.Format("{0}({1}[{3}],{2})", MethodBase.GetCurrentMethod().Name, senderType.FullName, e.GetType().FullName, senderType.BaseType.FullName);
-            logger.Info(info);
+            staticLogger.Info(info);
             //throw new Exception("手动抛出异常！");
             GlobalConfiguration.Configure(WebApiConfig.Register);
         }
@@ -45,7 +46,7 @@ namespace PriAndWf.TestWebApi
         {
             var senderType = sender.GetType();
             var info = string.Format("{0}({1}[{3}],{2})", MethodBase.GetCurrentMethod().Name, senderType.FullName, e.GetType().FullName, senderType.BaseType.FullName);
-            logger.Info(info);
+            staticLogger.Info(info);
         }
         /// <summary>
         /// Session_OnEnd
@@ -57,7 +58,7 @@ namespace PriAndWf.TestWebApi
             var senderType = sender.GetType();
             //var info = string.Format("{0}({1}[{3}],{2})", MethodBase.GetCurrentMethod().Name, senderType.FullName, e.GetType().FullName, senderType.BaseType.FullName);
             var info = string.Format("{0}({1}[{3}],{2})  {4}", MethodBase.GetCurrentMethod().Name, senderType.FullName, e.GetType().FullName, senderType.BaseType.FullName, Session.SessionID);
-            logger.Info(info);
+            staticLogger.Info(info);
         }
 
         /// <summary>
@@ -69,7 +70,7 @@ namespace PriAndWf.TestWebApi
         {
             var senderType = sender.GetType();
             var info = string.Format("{0}({1}[{3}],{2})", MethodBase.GetCurrentMethod().Name, senderType.FullName, e.GetType().FullName, senderType.BaseType.FullName);
-            logger.Info(info);
+            staticLogger.Info(info);
         }
         /// <summary>
         /// 哪儿被调用？
@@ -81,140 +82,140 @@ namespace PriAndWf.TestWebApi
             var senderType = sender.GetType();
             //var info = string.Format("{0}({1}[{3}],{2})", MethodBase.GetCurrentMethod().Name, senderType.FullName, e.GetType().FullName, senderType.BaseType.FullName);
             var info = string.Format("{0}({1}[{3}],{2})  {4}", MethodBase.GetCurrentMethod().Name, senderType.FullName, e.GetType().FullName, senderType.BaseType.FullName, Session.SessionID);
-            logger.Info(info);
+            staticLogger.Info(info);
         }
 
         protected void Application_BeginRequest(Object sender, EventArgs e)
         {
             var senderType = sender.GetType();
             var info = string.Format("{0}({1}[{3}],{2})  {4}", MethodBase.GetCurrentMethod().Name, senderType.FullName, e.GetType().FullName, senderType.BaseType.FullName, Request.RawUrl);
-            logger.Info(info);
+            staticLogger.Info(info);
         }
         protected void Application_AuthenticateRequest(Object sender, EventArgs e)
         {
             var senderType = sender.GetType();
             var info = string.Format("{0}({1}[{3}],{2})", MethodBase.GetCurrentMethod().Name, senderType.FullName, e.GetType().FullName, senderType.BaseType.FullName);
-            logger.Info(info);
+            staticLogger.Info(info);
         }
         protected void Application_PostAuthenticateRequest(Object sender, EventArgs e)
         {
             var senderType = sender.GetType();
             var info = string.Format("{0}({1}[{3}],{2})", MethodBase.GetCurrentMethod().Name, senderType.FullName, e.GetType().FullName, senderType.BaseType.FullName);
-            logger.Info(info);
+            staticLogger.Info(info);
         }
         protected void Application_AuthorizeRequest(Object sender, EventArgs e)
         {
             var senderType = sender.GetType();
             var info = string.Format("{0}({1}[{3}],{2})", MethodBase.GetCurrentMethod().Name, senderType.FullName, e.GetType().FullName, senderType.BaseType.FullName);
-            logger.Info(info);
+            staticLogger.Info(info);
         }
         protected void Application_PostAuthorizeRequest(Object sender, EventArgs e)
         {
             var senderType = sender.GetType();
             var info = string.Format("{0}({1}[{3}],{2})", MethodBase.GetCurrentMethod().Name, senderType.FullName, e.GetType().FullName, senderType.BaseType.FullName);
-            logger.Info(info);
+            staticLogger.Info(info);
         }
         protected void Application_ResolveRequestCache(Object sender, EventArgs e)
         {
             var senderType = sender.GetType();
             var info = string.Format("{0}({1}[{3}],{2})", MethodBase.GetCurrentMethod().Name, senderType.FullName, e.GetType().FullName, senderType.BaseType.FullName);
-            logger.Info(info);
+            staticLogger.Info(info);
         }
         protected void Application_PostResolveRequestCache(Object sender, EventArgs e)
         {
             var senderType = sender.GetType();
             var info = string.Format("{0}({1}[{3}],{2})", MethodBase.GetCurrentMethod().Name, senderType.FullName, e.GetType().FullName, senderType.BaseType.FullName);
-            logger.Info(info);
+            staticLogger.Info(info);
         }
         protected void Application_MapRequestHandler(Object sender, EventArgs e)
         {
             var senderType = sender.GetType();
             var info = string.Format("{0}({1}[{3}],{2})", MethodBase.GetCurrentMethod().Name, senderType.FullName, e.GetType().FullName, senderType.BaseType.FullName);
-            logger.Info(info);
+            staticLogger.Info(info);
         }
         protected void Application_PostMapRequestHandler(Object sender, EventArgs e)
         {
             var senderType = sender.GetType();
             var info = string.Format("{0}({1}[{3}],{2})", MethodBase.GetCurrentMethod().Name, senderType.FullName, e.GetType().FullName, senderType.BaseType.FullName);
-            logger.Info(info);
+            staticLogger.Info(info);
         }
         protected void Application_AcquireRequestState(Object sender, EventArgs e)
         {
             var senderType = sender.GetType();
             var info = string.Format("{0}({1}[{3}],{2})", MethodBase.GetCurrentMethod().Name, senderType.FullName, e.GetType().FullName, senderType.BaseType.FullName);
-            logger.Info(info);
+            staticLogger.Info(info);
         }
         protected void Application_PostAcquireRequestState(Object sender, EventArgs e)
         {
             var senderType = sender.GetType();
             var info = string.Format("{0}({1}[{3}],{2})", MethodBase.GetCurrentMethod().Name, senderType.FullName, e.GetType().FullName, senderType.BaseType.FullName);
-            logger.Info(info);
+            staticLogger.Info(info);
         }
         protected void Application_PreRequestHandlerExecute(Object sender, EventArgs e)
         {
             var senderType = sender.GetType();
             var info = string.Format("{0}({1}[{3}],{2})", MethodBase.GetCurrentMethod().Name, senderType.FullName, e.GetType().FullName, senderType.BaseType.FullName);
-            logger.Info(info);
+            staticLogger.Info(info);
         }
         protected void Application_PostRequestHandlerExecute(Object sender, EventArgs e)
         {
             var senderType = sender.GetType();
             var info = string.Format("{0}({1}[{3}],{2})", MethodBase.GetCurrentMethod().Name, senderType.FullName, e.GetType().FullName, senderType.BaseType.FullName);
-            logger.Info(info);
+            staticLogger.Info(info);
         }
         protected void Application_ReleaseRequestState(Object sender, EventArgs e)
         {
             var senderType = sender.GetType();
             var info = string.Format("{0}({1}[{3}],{2})", MethodBase.GetCurrentMethod().Name, senderType.FullName, e.GetType().FullName, senderType.BaseType.FullName);
-            logger.Info(info);
+            staticLogger.Info(info);
         }
         protected void Application_PostReleaseRequestState(Object sender, EventArgs e)
         {
             var senderType = sender.GetType();
             var info = string.Format("{0}({1}[{3}],{2})", MethodBase.GetCurrentMethod().Name, senderType.FullName, e.GetType().FullName, senderType.BaseType.FullName);
-            logger.Info(info);
+            staticLogger.Info(info);
         }
         protected void Application_UpdateRequestCache(Object sender, EventArgs e)
         {
             var senderType = sender.GetType();
             var info = string.Format("{0}({1}[{3}],{2})", MethodBase.GetCurrentMethod().Name, senderType.FullName, e.GetType().FullName, senderType.BaseType.FullName);
-            logger.Info(info);
+            staticLogger.Info(info);
         }
         protected void Application_PostUpdateRequestCache(Object sender, EventArgs e)
         {
             var senderType = sender.GetType();
             var info = string.Format("{0}({1}[{3}],{2})", MethodBase.GetCurrentMethod().Name, senderType.FullName, e.GetType().FullName, senderType.BaseType.FullName);
-            logger.Info(info);
+            staticLogger.Info(info);
         }
         protected void Application_LogRequest(Object sender, EventArgs e)
         {
             var senderType = sender.GetType();
             var info = string.Format("{0}({1}[{3}],{2})", MethodBase.GetCurrentMethod().Name, senderType.FullName, e.GetType().FullName, senderType.BaseType.FullName);
-            logger.Info(info);
+            staticLogger.Info(info);
         }
         protected void Application_PostLogRequest(Object sender, EventArgs e)
         {
             var senderType = sender.GetType();
             var info = string.Format("{0}({1}[{3}],{2})", MethodBase.GetCurrentMethod().Name, senderType.FullName, e.GetType().FullName, senderType.BaseType.FullName);
-            logger.Info(info);
+            staticLogger.Info(info);
         }
         protected void Application_EndRequest(Object sender, EventArgs e)
         {
             var senderType = sender.GetType();
             var info = string.Format("{0}({1}[{3}],{2})", MethodBase.GetCurrentMethod().Name, senderType.FullName, e.GetType().FullName, senderType.BaseType.FullName);
-            logger.Info(info);
+            staticLogger.Info(info);
         }
         protected void Application_PreSendRequestHeaders(Object sender, EventArgs e)
         {
             var senderType = sender.GetType();
             var info = string.Format("{0}({1}[{3}],{2})", MethodBase.GetCurrentMethod().Name, senderType.FullName, e.GetType().FullName, senderType.BaseType.FullName);
-            logger.Info(info);
+            staticLogger.Info(info);
         }
         protected void Application_PreSendRequestContent(Object sender, EventArgs e)
         {
             var senderType = sender.GetType();
             var info = string.Format("{0}({1}[{3}],{2})", MethodBase.GetCurrentMethod().Name, senderType.FullName, e.GetType().FullName, senderType.BaseType.FullName);
-            logger.Info(info);
+            staticLogger.Info(info);
         }
     }
 }

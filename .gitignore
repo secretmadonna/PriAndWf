@@ -243,3 +243,4 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+/1.UserInterfaceLayer/PriAndWf.AdminWeb/UploadFiles

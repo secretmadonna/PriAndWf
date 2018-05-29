@@ -5,18 +5,12 @@ using System.Reflection;
 using System.Web.Mvc;
 using System.Web.Routing;
 
-[assembly: XmlConfigurator(ConfigFile = "log4net", ConfigFileExtension = "config", Watch = true)]
+//[assembly: XmlConfigurator(ConfigFile = "log4net", ConfigFileExtension = "config", Watch = true)]
+[assembly: XmlConfigurator(ConfigFile = "log4net.config", Watch = true)]
 namespace PriAndWf.AdminWeb
 {
     public class MvcApplication : System.Web.HttpApplication
     {
-        protected void Application_Start()
-        {
-            AreaRegistration.RegisterAllAreas();
-            RouteConfig.RegisterRoutes(RouteTable.Routes);
-        }
-
-
         public ILog staticLogger = LogManager.GetLogger("staticLogger");
         public static int numberIndex = 0;
 
