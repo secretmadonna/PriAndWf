@@ -78,6 +78,17 @@ namespace PriAndWf.Infrastructure.Helper
         //static extern bool GetThreadTimes(IntPtr hThread, out long lpCreationTime, out long lpExitTime, out long lpKernelTime, out long lpUserTime);
         #endregion
 
+        #region GetTickCount
+        ///// <summary>
+        ///// 获取时钟的计数
+        ///// 原型 : DWORD GetTickCount();
+        ///// 备注 : Windows 2000 、 Windows Server 2000
+        ///// </summary>
+        ///// <returns></returns>
+        //[DllImport("kernel32.dll")]
+        //static extern long GetTickCount();
+        #endregion
+
 
         /// <summary>
         /// 获取“性能计数器”的计数（前提 : 假设线程不被抢占）
