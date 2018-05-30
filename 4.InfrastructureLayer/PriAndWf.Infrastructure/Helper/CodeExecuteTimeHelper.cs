@@ -155,6 +155,26 @@ namespace PriAndWf.Infrastructure.Helper
             public Dictionary<decimal, int> ExecuteTimes { get; private set; }
             public List<int> GcCollectionCounts { get; private set; }
 
+            public decimal GetExFirstLastAvg
+            {
+                get
+                {
+                    decimal sum = ExecuteTimes.Sum(m => m.Key * m.Value);
+                    int count = ExecuteTimes.Sum(m => m.Value);
+                    if (ExecuteTimes.Count >= 3)
+                    {
+                        var first = ExecuteTimes.First();
+                        sum -= first.Key * first.Value;
+                        count -= first.Value;
+                        var last = ExecuteTimes.Last();
+                        sum -= last.Key * last.Value;
+                        count -= last.Value;
+                    }
+                    var avg = sum / count;
+                    return avg;
+                }
+            }
+
             internal CodeExecuteTime(Dictionary<decimal, int> executeTimes, List<int> gcCollectionCounts)
             {
                 ExecuteTimes = executeTimes;

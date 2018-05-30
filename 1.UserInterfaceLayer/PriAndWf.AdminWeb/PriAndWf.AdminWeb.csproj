@@ -800,6 +800,7 @@
     <Content Include="Handlers\UploadifiveHandler.ashx" />
     <None Include="Properties\PublishProfiles\release.pubxml" />
     <Content Include="Views\Test\Test10.cshtml" />
+    <Content Include="Views\Test\Test11.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

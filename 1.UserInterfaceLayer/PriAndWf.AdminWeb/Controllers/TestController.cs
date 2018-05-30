@@ -1,4 +1,5 @@
 ﻿using PriAndWf.AdminWeb.Models;
+using PriAndWf.Infrastructure.Helper;
 using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
@@ -85,6 +86,16 @@ namespace PriAndWf.AdminWeb.Controllers
         public ActionResult Test10()
         {
             return View();
+        }
+
+        public ActionResult Test11()
+        {
+            var codeExecuteTime = CodeExecuteTimeHelper.Time(() =>
+            {
+                for (int i = 0; i < 1000000; i++) { }
+            });
+            log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType).Info(codeExecuteTime.GetExFirstLastAvg);
+            return View(codeExecuteTime);
         }
     }
 }
