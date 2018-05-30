@@ -44,6 +44,7 @@
     <Compile Include="Base\ServiceBase.cs" />
     <Compile Include="Extension\LockExtension.cs" />
     <Compile Include="Extension\ObjectExtension.cs" />
+    <Compile Include="Helper\CodeExecuteTimeHelper.cs" />
     <Compile Include="Helper\DateTimeHelper.cs" />
     <Compile Include="IUnitOfWork.cs" />
     <Compile Include="Log\ILogger.cs" />
