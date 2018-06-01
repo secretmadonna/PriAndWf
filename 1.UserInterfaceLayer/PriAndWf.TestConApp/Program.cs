@@ -119,18 +119,18 @@ namespace PriAndWf.TestConApp
         {
             var count = 10;
 
-            for (int i = 0; i < count; i++)
-            {
-                Console.WriteLine(string.Format("平均耗时(TimeByGetTickCount) : {0}", CodeExecuteTimeHelper.TimeByGetTickCount(() => { testm(); }).GetExFirstLastAvg));
-            }
-            for (int i = 0; i < count; i++)
-            {
-                Console.WriteLine(string.Format("平均耗时(TimeByGetThreadTimes) : {0}", CodeExecuteTimeHelper.TimeByGetThreadTimes(() => { testm(); }).GetExFirstLastAvg));
-            }
-            for (int i = 0; i < count; i++)
-            {
-                Console.WriteLine(string.Format("平均耗时(TimeByQueryThreadCycleTime) : {0}", CodeExecuteTimeHelper.TimeByQueryThreadCycleTime(() => { testm(); }).GetExFirstLastAvg));
-            }
+            //for (int i = 0; i < count; i++)
+            //{
+            //    Console.WriteLine(string.Format("平均耗时(TimeByGetTickCount) : {0}", CodeExecuteTimeHelper.TimeByGetTickCount(() => { testm(); }).GetExFirstLastAvg));
+            //}
+            //for (int i = 0; i < count; i++)
+            //{
+            //    Console.WriteLine(string.Format("平均耗时(TimeByGetThreadTimes) : {0}", CodeExecuteTimeHelper.TimeByGetThreadTimes(() => { testm(); }).GetExFirstLastAvg));
+            //}
+            //for (int i = 0; i < count; i++)
+            //{
+            //    Console.WriteLine(string.Format("平均耗时(TimeByQueryThreadCycleTime) : {0}", CodeExecuteTimeHelper.TimeByQueryThreadCycleTime(() => { testm(); }).GetExFirstLastAvg));
+            //}
             for (int i = 0; i < count; i++)
             {
                 Console.WriteLine(string.Format("平均耗时(TimeByQueryPerformanceCounter) : {0}", CodeExecuteTimeHelper.TimeByQueryPerformanceCounter(() => { testm(); }).GetExFirstLastAvg));
@@ -181,13 +181,11 @@ namespace PriAndWf.TestConApp
                 logger.Info(string.Format("GetTickCount : {0}", tickCount));
                 GetThreadTimes(hThread, out lpCreationTime, out lpExitTime, out lpKernelTime, out lpUserTime);
                 logger.Info(string.Format("GetThreadTimes : {0}+{1}={2}", lpKernelTime, lpUserTime, lpKernelTime + lpUserTime));
-                //QueryThreadCycleTime(hThread, ref cycleTime);
-                //logger.Info(string.Format("QueryThreadCycleTime : {0}", cycleTime));
-                //QueryPerformanceCounter(out lpPerformanceCount);
-                //logger.Info(string.Format("QueryPerformanceCounter : {0}", lpPerformanceCount));
+                QueryThreadCycleTime(hThread, ref cycleTime);
+                logger.Info(string.Format("QueryThreadCycleTime : {0}", cycleTime));
+                QueryPerformanceCounter(out lpPerformanceCount);
+                logger.Info(string.Format("QueryPerformanceCounter : {0}", lpPerformanceCount));
             }
-            //   665/3328123=1.9981232664778314984151727565357e-4 s -> 0.2 ms
-            //   666742/3328123=0.20033574480270110209268106978017 ms
             Console.WriteLine("完成！");
         }
 
