@@ -801,6 +801,8 @@
     <None Include="Properties\PublishProfiles\release.pubxml" />
     <Content Include="Views\Test\Test10.cshtml" />
     <Content Include="Views\Test\Test11.cshtml" />
+    <Content Include="Views\Test\Test12.cshtml" />
+    <Content Include="Views\Test\Test13.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

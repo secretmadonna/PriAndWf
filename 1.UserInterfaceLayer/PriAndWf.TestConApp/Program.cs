@@ -13,19 +13,28 @@ namespace PriAndWf.TestConApp
 {
     class Program
     {
+        static ILog staticLogger = LogManager.GetLogger("staticLogger");
+        static ILog logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
+        static void Main(string[] args)
+        {
+            //Test1();
+            //Test2();
+            Test3();
+
+            Console.ReadKey();
+        }
+
         [DllImport("kernel32.dll")]
         static extern bool QueryPerformanceFrequency(out long lpFrequency);
         [DllImport("kernel32.dll")]
         static extern bool QueryPerformanceCounter(out long lpPerformanceCount);
-
-        static ILog staticLogger = LogManager.GetLogger("staticLogger");
-
-        static long frequency;//3328123
-        static void Main(string[] args)
+        public static void Test1()
         {
             Process.GetCurrentProcess().PriorityClass = ProcessPriorityClass.RealTime;
             Thread.CurrentThread.Priority = ThreadPriority.Highest;
 
+            long frequency;//3328123
             if (QueryPerformanceFrequency(out frequency))
             {
                 staticLogger.Info("start1");
@@ -80,7 +89,7 @@ namespace PriAndWf.TestConApp
             int totalCount1 = 10000;
             int totalCount1Length = totalCount1.ToString().Length;
             string str1 = string.Empty.PadLeft(totalCount1Length, '0');
-            var codeExecuteTime = CodeExecuteTimeHelper.Time(() => { for (int j = 0; j < 10000; j++) { } }, totalCount1);
+            var codeExecuteTime = CodeExecuteTimeHelper.TimeByQueryPerformanceCounter(() => { for (int j = 0; j < 10000; j++) { } }, totalCount1);
             var list1 = codeExecuteTime.ExecuteTimes.OrderBy(m => m.Key).ToList();
             decimal su1 = 0;
             int c1 = totalCount1;
@@ -104,8 +113,88 @@ namespace PriAndWf.TestConApp
             {
                 Console.WriteLine(string.Format("Gen {0} : {1}", i, codeExecuteTime.GcCollectionCounts[i]));
             }
+        }
 
-            Console.ReadKey();
+        public static void Test2()
+        {
+            var count = 10;
+
+            for (int i = 0; i < count; i++)
+            {
+                Console.WriteLine(string.Format("平均耗时(TimeByGetTickCount) : {0}", CodeExecuteTimeHelper.TimeByGetTickCount(() => { testm(); }).GetExFirstLastAvg));
+            }
+            for (int i = 0; i < count; i++)
+            {
+                Console.WriteLine(string.Format("平均耗时(TimeByGetThreadTimes) : {0}", CodeExecuteTimeHelper.TimeByGetThreadTimes(() => { testm(); }).GetExFirstLastAvg));
+            }
+            for (int i = 0; i < count; i++)
+            {
+                Console.WriteLine(string.Format("平均耗时(TimeByQueryThreadCycleTime) : {0}", CodeExecuteTimeHelper.TimeByQueryThreadCycleTime(() => { testm(); }).GetExFirstLastAvg));
+            }
+            for (int i = 0; i < count; i++)
+            {
+                Console.WriteLine(string.Format("平均耗时(TimeByQueryPerformanceCounter) : {0}", CodeExecuteTimeHelper.TimeByQueryPerformanceCounter(() => { testm(); }).GetExFirstLastAvg));
+            }
+
+            Stopwatch sw = new Stopwatch();
+            for (int i = 0; i < count; i++)
+            {
+                sw.Start();
+                testm();
+                sw.Stop();
+                Console.WriteLine(string.Format("平均耗时(Stopwatch) : {0} ms", sw.ElapsedMilliseconds));
+            }
+
+            long s, e;
+            for (int i = 0; i < count; i++)
+            {
+                s = DateTime.Now.Ticks;
+                testm();
+                e = DateTime.Now.Ticks;
+                Console.WriteLine(string.Format("平均耗时(DateTime) : {0}", e - s));
+            }
+        }
+
+        [DllImport("kernel32.dll")]
+        static extern long GetTickCount();
+        [DllImport("kernel32.dll")]
+        static extern bool GetThreadTimes(IntPtr hThread, out long lpCreationTime, out long lpExitTime, out long lpKernelTime, out long lpUserTime);
+        [DllImport("kernel32.dll")]
+        static extern IntPtr GetCurrentThread();
+        [DllImport("kernel32.dll")]
+        static extern bool QueryThreadCycleTime(IntPtr threadHandle, ref ulong cycleTime);
+        public static void Test3()
+        {
+            Process.GetCurrentProcess().PriorityClass = ProcessPriorityClass.RealTime;
+            Thread.CurrentThread.Priority = ThreadPriority.Highest;
+
+            long tickCount;
+            IntPtr hThread = GetCurrentThread();
+            long lpCreationTime, lpExitTime, lpKernelTime, lpUserTime;
+            ulong cycleTime = 0;
+            long lpPerformanceCount;
+            for (int i = 0; i < 1000; i++)
+            {
+                testm();
+
+                tickCount = GetTickCount();
+                logger.Info(string.Format("GetTickCount : {0}", tickCount));
+                GetThreadTimes(hThread, out lpCreationTime, out lpExitTime, out lpKernelTime, out lpUserTime);
+                logger.Info(string.Format("GetThreadTimes : {0}+{1}={2}", lpKernelTime, lpUserTime, lpKernelTime + lpUserTime));
+                //QueryThreadCycleTime(hThread, ref cycleTime);
+                //logger.Info(string.Format("QueryThreadCycleTime : {0}", cycleTime));
+                //QueryPerformanceCounter(out lpPerformanceCount);
+                //logger.Info(string.Format("QueryPerformanceCounter : {0}", lpPerformanceCount));
+            }
+            //   665/3328123=1.9981232664778314984151727565357e-4 s -> 0.2 ms
+            //   666742/3328123=0.20033574480270110209268106978017 ms
+            Console.WriteLine("完成！");
+        }
+
+
+        public static void testm()
+        {
+            for (int i = 0; i < 100000; i++) { }
         }
     }
 }

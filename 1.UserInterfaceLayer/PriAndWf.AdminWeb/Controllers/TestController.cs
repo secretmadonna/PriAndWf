@@ -90,12 +90,21 @@ namespace PriAndWf.AdminWeb.Controllers
 
         public ActionResult Test11()
         {
-            var codeExecuteTime = CodeExecuteTimeHelper.Time(() =>
+            var codeExecuteTime = CodeExecuteTimeHelper.TimeByQueryPerformanceCounter(() =>
             {
                 for (int i = 0; i < 1000000; i++) { }
             });
             log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType).Info(codeExecuteTime.GetExFirstLastAvg);
             return View(codeExecuteTime);
+        }
+
+        public ActionResult Test12()
+        {
+            return View();
+        }
+        public ActionResult Test13(string keyWords)
+        {
+            return Content(keyWords);
         }
     }
 }
