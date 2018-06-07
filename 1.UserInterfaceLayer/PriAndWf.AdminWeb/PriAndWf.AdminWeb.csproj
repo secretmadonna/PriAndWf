@@ -482,6 +482,10 @@
     <Content Include="Content\plugins\Nestable\jquery.nestable.js" />
     <Content Include="Content\plugins\response\response.js" />
     <Content Include="Content\plugins\response\response.min.js" />
+    <Content Include="Content\plugins\uploadifive\1.2.2\jquery.uploadifive.js" />
+    <Content Include="Content\plugins\uploadifive\1.2.2\jquery.uploadifive.min.js" />
+    <Content Include="Content\plugins\uploadifive\1.2.2\uploadifive-cancel.png" />
+    <Content Include="Content\plugins\uploadifive\1.2.2\uploadifive.css" />
     <Content Include="Content\plugins\uploadifive\jquery.uploadifive.js" />
     <Content Include="Content\plugins\uploadifive\jquery.uploadifive.min.js" />
     <Content Include="Content\plugins\uploadifive\uploadifive-cancel.png" />

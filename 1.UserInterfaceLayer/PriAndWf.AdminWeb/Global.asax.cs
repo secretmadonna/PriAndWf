@@ -72,6 +72,8 @@ namespace PriAndWf.AdminWeb
 
         protected void Application_BeginRequest(Object sender, EventArgs e)
         {
+            var appUrl = string.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Request.ApplicationPath);
+            staticLogger.Info(appUrl);
             staticLogger.InfoFormat("{0:D3}.{1} {2}", ++numberIndex, MethodBase.GetCurrentMethod().Name, Request.RawUrl);
         }
         protected void Application_AuthenticateRequest(Object sender, EventArgs e)

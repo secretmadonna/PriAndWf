@@ -20,7 +20,8 @@ namespace PriAndWf.TestConApp
         {
             //Test1();
             //Test2();
-            Test3();
+            //Test3();
+            Test4();
 
             Console.ReadKey();
         }
@@ -77,7 +78,7 @@ namespace PriAndWf.TestConApp
                     c -= last.Value;
                 }
                 var argR = su / c;
-                staticLogger.Info(string.Format("平均耗时({0}/{1}) : {2} s", su, c, argR));
+                staticLogger.Info(string.Format("平均耗时({0}\n/{1}) : {2} s", su, c, argR));
             }
             else
             {
@@ -108,10 +109,10 @@ namespace PriAndWf.TestConApp
                 c1 -= last.Value;
             }
             var argR1 = su1 / c1;
-            staticLogger.Info(string.Format("平均耗时({0}/{1}) : {2} s", su1, c1, argR1));
+            staticLogger.Info(string.Format("平均耗时({0}\n/{1}) : {2} s", su1, c1, argR1));
             for (int i = 0; i < codeExecuteTime.GcCollectionCounts.Count; i++)
             {
-                Console.WriteLine(string.Format("Gen {0} : {1}", i, codeExecuteTime.GcCollectionCounts[i]));
+                Console.WriteLine(string.Format("Gen {0}\n : {1}", i, codeExecuteTime.GcCollectionCounts[i]));
             }
         }
 
@@ -121,19 +122,19 @@ namespace PriAndWf.TestConApp
 
             //for (int i = 0; i < count; i++)
             //{
-            //    Console.WriteLine(string.Format("平均耗时(TimeByGetTickCount) : {0}", CodeExecuteTimeHelper.TimeByGetTickCount(() => { testm(); }).GetExFirstLastAvg));
+            //    Console.WriteLine(string.Format("平均耗时(TimeByGetTickCount) : {0}\n", CodeExecuteTimeHelper.TimeByGetTickCount(() => { testm(); }).GetExFirstLastAvg));
             //}
             //for (int i = 0; i < count; i++)
             //{
-            //    Console.WriteLine(string.Format("平均耗时(TimeByGetThreadTimes) : {0}", CodeExecuteTimeHelper.TimeByGetThreadTimes(() => { testm(); }).GetExFirstLastAvg));
+            //    Console.WriteLine(string.Format("平均耗时(TimeByGetThreadTimes) : {0}\n", CodeExecuteTimeHelper.TimeByGetThreadTimes(() => { testm(); }).GetExFirstLastAvg));
             //}
             //for (int i = 0; i < count; i++)
             //{
-            //    Console.WriteLine(string.Format("平均耗时(TimeByQueryThreadCycleTime) : {0}", CodeExecuteTimeHelper.TimeByQueryThreadCycleTime(() => { testm(); }).GetExFirstLastAvg));
+            //    Console.WriteLine(string.Format("平均耗时(TimeByQueryThreadCycleTime) : {0}\n", CodeExecuteTimeHelper.TimeByQueryThreadCycleTime(() => { testm(); }).GetExFirstLastAvg));
             //}
             for (int i = 0; i < count; i++)
             {
-                Console.WriteLine(string.Format("平均耗时(TimeByQueryPerformanceCounter) : {0}", CodeExecuteTimeHelper.TimeByQueryPerformanceCounter(() => { testm(); }).GetExFirstLastAvg));
+                Console.WriteLine(string.Format("平均耗时(TimeByQueryPerformanceCounter) : {0}\n", CodeExecuteTimeHelper.TimeByQueryPerformanceCounter(() => { testm(); }).GetExFirstLastAvg));
             }
 
             Stopwatch sw = new Stopwatch();
@@ -142,7 +143,7 @@ namespace PriAndWf.TestConApp
                 sw.Start();
                 testm();
                 sw.Stop();
-                Console.WriteLine(string.Format("平均耗时(Stopwatch) : {0} ms", sw.ElapsedMilliseconds));
+                Console.WriteLine(string.Format("平均耗时(Stopwatch) : {0}\n ms", sw.ElapsedMilliseconds));
             }
 
             long s, e;
@@ -151,7 +152,7 @@ namespace PriAndWf.TestConApp
                 s = DateTime.Now.Ticks;
                 testm();
                 e = DateTime.Now.Ticks;
-                Console.WriteLine(string.Format("平均耗时(DateTime) : {0}", e - s));
+                Console.WriteLine(string.Format("平均耗时(DateTime) : {0}\n", e - s));
             }
         }
 
@@ -178,15 +179,32 @@ namespace PriAndWf.TestConApp
                 testm();
 
                 tickCount = GetTickCount();
-                logger.Info(string.Format("GetTickCount : {0}", tickCount));
+                logger.Info(string.Format("GetTickCount : {0}\n", tickCount));
                 GetThreadTimes(hThread, out lpCreationTime, out lpExitTime, out lpKernelTime, out lpUserTime);
-                logger.Info(string.Format("GetThreadTimes : {0}+{1}={2}", lpKernelTime, lpUserTime, lpKernelTime + lpUserTime));
+                logger.Info(string.Format("GetThreadTimes : {0}\n+{1}={2}", lpKernelTime, lpUserTime, lpKernelTime + lpUserTime));
                 QueryThreadCycleTime(hThread, ref cycleTime);
-                logger.Info(string.Format("QueryThreadCycleTime : {0}", cycleTime));
+                logger.Info(string.Format("QueryThreadCycleTime : {0}\n", cycleTime));
                 QueryPerformanceCounter(out lpPerformanceCount);
-                logger.Info(string.Format("QueryPerformanceCounter : {0}", lpPerformanceCount));
+                logger.Info(string.Format("QueryPerformanceCounter : {0}\n", lpPerformanceCount));
             }
             Console.WriteLine("完成！");
+        }
+
+        public static void Test4()
+        {
+            IEnumerable<int> set1 = new int[] { 0, 2, 0, 6, 8 };
+            IEnumerable<int> set2 = new int[] { 0, 3, 5, 7, 9 };
+            Console.WriteLine("集合1内容 : {0}\n", string.Join<int>(",", set1));
+            Console.WriteLine("集合2内容 : {0}\n", string.Join<int>(",", set2));
+            Console.WriteLine("\n");
+            Console.WriteLine("集合 Concat 内容 : {0}\n", string.Join<int>(",", set1.Concat(set2)));//连接不同集合，不会自动过滤相同项
+            Console.WriteLine("集合 Union(并集) 内容 : {0}\n", string.Join<int>(",", set1.Union(set2)));//连接不同集合，自动过滤相同项
+            Console.WriteLine("集合 Intersect(交集) 内容 : {0}\n", string.Join<int>(",", set1.Intersect(set2)));//取相交项
+            Console.WriteLine("集合 Intersect(对称差集) 内容 : {0}\n", string.Join<int>(",", set1.Except(set2)));//排除相交项
+            Console.WriteLine("\n");
+            Console.WriteLine("集合1 Cast 后的内容 : {0}\n", string.Join<int>(",", set1.Cast<int>()));
+            Console.WriteLine("集合1 OfType 后的内容 : {0}\n", string.Join<int>(",", set1.OfType<int>()));
+            Console.WriteLine("集合1 Reverse 后的内容 : {0}\n", string.Join<int>(",", set1.Reverse<int>()));
         }
 
 

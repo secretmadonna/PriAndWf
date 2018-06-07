@@ -4,7 +4,8 @@
 
 @section PagePluginStyles{
     <link href="@Url.Content("~/Content/plugins/uploadify/uploadify.css")" rel="stylesheet" />
-    <link href="@Url.Content("~/Content/plugins/uploadifive/uploadifive.css")" rel="stylesheet" />
+    @*<link href="@Url.Content("~/Content/plugins/uploadifive/uploadifive.css")" rel="stylesheet" />*@
+    <link href="@Url.Content("~/Content/plugins/uploadifive/1.2.2/uploadifive.css")" rel="stylesheet" />
     <style>
         .uploadify-queue-item .cancel a {
             background: url('@Url.Content("~/Content/plugins/uploadify/uploadify-cancel.png")') 0 0 no-repeat;
@@ -33,7 +34,8 @@
 @section PagePluginScripts{
     <script src="@Url.Content("~/Content/plugins/uploadify/jquery.uploadify.js")"></script>
     @*<script src="@Url.Content("~/Content/plugins/uploadifive/jquery.uploadifive.min.js")"></script>*@
-    <script src="~/Content/plugins/uploadifive/jquery.uploadifive.js"></script>
+    @*<script src="~/Content/plugins/uploadifive/jquery.uploadifive.js"></script>*@
+    <script src="@Url.Content("~/Content/plugins/uploadifive/1.2.2/jquery.uploadifive.js")"></script>
 }
 @section PageInlineScripts{
     <script>
@@ -71,11 +73,12 @@
 
             $("#file_uploadfive").uploadifive({
                 uploadScript: '@Url.Content("~/Handlers/UploadifiveHandler.ashx")',
-                fileType: ["image/jpeg", "video/mp4"],//说明（这里分明就是逻辑错误！！！） : 字符串（文件.fileType.indexOf(配置.fileType)>-1）或数组(文件.file.fileType.indexOf(配置.fileType[i])>-1)
+                fileType: "image/gif,image/jpeg",//"*.jpg|*.gif",//'image/gif, image/jpeg',//["image/jpeg", "video/mp4"],//说明（这里分明就是逻辑错误！！！） : 字符串（文件.fileType.indexOf(配置.fileType)>-1）或数组(文件.file.fileType.indexOf(配置.fileType[i])>-1)
                 fileSizeLimit: "1024KB",
                 onAddQueueItem: function (file) {
                     console.log(file);
-                }, onUploadComplete: function (file, data) {
+                },
+                onUploadComplete: function (file, data) {
                     console.log(file);
                     console.log(data);
                 }
