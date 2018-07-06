@@ -60,15 +60,15 @@ namespace PriAndWf.AdminWeb
         {
             staticLogger.InfoFormat("{0:D3}.{1:yyyy-MM-dd HH:mm:ss}  {2}", ++numberIndex, DateTime.Now, MethodBase.GetCurrentMethod().Name);
         }
-        /// <summary>
-        /// 哪儿被调用？
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        protected void Session_Start(Object sender, EventArgs e)
-        {
-            staticLogger.InfoFormat("{0:D3}.{1} {2}", ++numberIndex, MethodBase.GetCurrentMethod().Name, Session.SessionID);
-        }
+        ///// <summary>
+        ///// 哪儿被调用？
+        ///// </summary>
+        ///// <param name="sender"></param>
+        ///// <param name="e"></param>
+        //protected void Session_Start(Object sender, EventArgs e)
+        //{
+        //    staticLogger.InfoFormat("{0:D3}.{1} {2}", ++numberIndex, MethodBase.GetCurrentMethod().Name, Session.SessionID);
+        //}
 
         protected void Application_BeginRequest(Object sender, EventArgs e)
         {

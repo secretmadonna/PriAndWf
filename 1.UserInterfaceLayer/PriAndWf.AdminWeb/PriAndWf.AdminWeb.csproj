@@ -542,7 +542,9 @@
     <Compile Include="Services\SignInService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\web.config" />
+    <Content Include="Views\web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="packages.config" />
     <Content Include="Content\plugins\assets\css\less\ace-features.less" />
     <Content Include="Content\plugins\assets\css\less\ace-nav.less" />
@@ -807,6 +809,7 @@
     <Content Include="Views\Test\Test11.cshtml" />
     <Content Include="Views\Test\Test12.cshtml" />
     <Content Include="Views\Test\Test13.cshtml" />
+    <Content Include="Views\Test\Test14.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

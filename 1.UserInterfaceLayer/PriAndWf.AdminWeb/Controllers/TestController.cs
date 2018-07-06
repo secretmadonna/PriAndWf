@@ -106,5 +106,11 @@ namespace PriAndWf.AdminWeb.Controllers
         {
             return Content(keyWords);
         }
+
+        [AllowAnonymous]
+        public ActionResult Test14()
+        {
+            return View();
+        }
     }
 }
