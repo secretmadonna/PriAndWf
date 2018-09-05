@@ -8,7 +8,7 @@ using System.Threading;
 
 namespace PriAndWf.Infrastructure.Helper
 {
-    public static class CodeExecuteTimeHelper
+    public class CodeExecuteTimeHelper
     {
         #region 1.GetTickCount（前提 : 线程执行不被中断）
         /// <summary>

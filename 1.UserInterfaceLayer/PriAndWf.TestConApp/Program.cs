@@ -21,8 +21,12 @@ namespace PriAndWf.TestConApp
             //Test1();
             //Test2();
             //Test3();
-            Test4();
-
+            //Test4();
+            var originalStr = "abcd";
+            var base64Str = Base64Helper.UrlSafeEncode(originalStr);
+            Console.WriteLine(originalStr + "  ->  " + base64Str);
+            originalStr = Base64Helper.UrlSafeDecode(base64Str);
+            Console.WriteLine(base64Str + "  ->  " + originalStr);
             Console.ReadKey();
         }
 
