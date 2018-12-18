@@ -112,5 +112,17 @@ namespace PriAndWf.AdminWeb.Controllers
         {
             return View();
         }
+
+
+        public ActionResult Test15(string id = null)
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Test15(int length, string Base64Str = null)
+        {
+            var input = Request.Form["input" + length];
+            return Json(Base64Str);
+        }
     }
 }

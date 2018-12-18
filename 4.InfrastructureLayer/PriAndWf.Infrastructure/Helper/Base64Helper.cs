@@ -20,6 +20,7 @@ namespace PriAndWf.Infrastructure.Helper
             '8', '9', '+', '/'
         };
         private static readonly char _equal = '=';
+
         /// <summary>
         /// 编码
         /// </summary>

@@ -509,7 +509,9 @@
     <Content Include="Content\scripts\JsHelper.js" />
     <Content Include="Content\scripts\workers\asyncSum.js" />
     <Content Include="Global.asax" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -814,6 +816,7 @@
     <Content Include="Views\Test\Test13.cshtml" />
     <Content Include="Views\Test\Test14.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Test\Test15.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
