@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using PriAndWf.TestWebApi.Core;
 using System.Web.Http;
+using System.Web.Http.Cors;
+using System.Web.Http.ExceptionHandling;
 
 namespace PriAndWf.TestWebApi
 {
@@ -10,6 +10,14 @@ namespace PriAndWf.TestWebApi
         public static void Register(HttpConfiguration config)
         {
             // Web API 配置和服务
+            config.Services.Add(typeof(IExceptionLogger), new CustomExceptionLogger());
+            config.Services.Replace(typeof(IExceptionHandler), new CustomExceptionHandler());
+
+            config.Filters.Add(new CustomAuthorizationFilterAttribute());
+            config.Filters.Add(new CustomActionFilterAttribute());
+            config.Filters.Add(new CustomExceptionFilterAttribute());
+
+            config.EnableCors(new EnableCorsAttribute("*", "*", "*"));
 
             // Web API 路由
             config.MapHttpAttributeRoutes();

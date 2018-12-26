@@ -12,7 +12,8 @@ namespace PriAndWf.TestWebApi
 {
     public class WebApiApplication : System.Web.HttpApplication
     {
-        private ILog staticLogger = LogManager.GetLogger("staticLogger");
+        private ILog staticLogger = LogManager.GetLogger("StaticLogger");
+        private ILog exceptionLogger = LogManager.GetLogger("ExceptionLogger");
 
         public override void Init()
         {
@@ -31,6 +32,7 @@ namespace PriAndWf.TestWebApi
         /// <param name="e"></param>
         protected void Application_Start(Object sender, EventArgs e)
         {
+            //throw new Exception("手动抛出异常，用于测试。");
             var senderType = sender.GetType();
             var info = string.Format("{0}({1}[{3}],{2})", MethodBase.GetCurrentMethod().Name, senderType.FullName, e.GetType().FullName, senderType.BaseType.FullName);
             staticLogger.Info(info);
@@ -68,6 +70,7 @@ namespace PriAndWf.TestWebApi
         /// <param name="e"></param>
         protected void Application_OnError(Object sender, EventArgs e)
         {
+            exceptionLogger.Error("WebApiApplication.Application_OnError", ((WebApiApplication)sender).Context.Error);
             var senderType = sender.GetType();
             var info = string.Format("{0}({1}[{3}],{2})", MethodBase.GetCurrentMethod().Name, senderType.FullName, e.GetType().FullName, senderType.BaseType.FullName);
             staticLogger.Info(info);

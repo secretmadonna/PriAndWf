@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace PriAndWf.TestWebApi.Models
 {
@@ -11,5 +12,16 @@ namespace PriAndWf.TestWebApi.Models
         public string UserName { get; set; }
         public string PassWord { get; set; }
         public string NickName { get; set; }
+        public UserGender Gender { get; set; }
+        public DateTime Birthday { get; set; }
+        public decimal Balance { get; set; }
+        public DateTime CreateDateTime { get; set; }
+        public bool Active { get; set; }
+    }
+    public enum UserGender
+    {
+        Unknown = 0,
+        Male,
+        Female
     }
 }

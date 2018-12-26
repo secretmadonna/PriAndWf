@@ -47,6 +47,7 @@
     <Compile Include="Base\ExceptionBase.cs" />
     <Compile Include="Base\ServiceBase.cs" />
     <Compile Include="Helper\Base64Helper.cs" />
+    <Compile Include="Helper\RsaHelper.cs" />
     <Compile Include="Wait\DllInvoke.cs" />
     <Compile Include="Extension\LockExtension.cs" />
     <Compile Include="Extension\ObjectExtension.cs" />

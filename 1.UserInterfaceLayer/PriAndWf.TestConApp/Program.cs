@@ -5,28 +5,74 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Threading;
 
 [assembly: XmlConfigurator(ConfigFile = "log4net.config", Watch = true)]
 namespace PriAndWf.TestConApp
 {
+    public class tclass
+    {
+        public int tint { get; set; }
+    }
     class Program
     {
-        static ILog staticLogger = LogManager.GetLogger("staticLogger");
+        static ILog staticLogger = LogManager.GetLogger("StaticLogger");
         static ILog logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         static void Main(string[] args)
         {
+            GC.Collect(2, GCCollectionMode.Forced, true);
+            var class0 = new tclass() { tint = 1 };
+            do
+            {
+                var class1 = new tclass() { tint = 1 };
+                Console.WriteLine($"{class1} : {class1.GetHashCode()} , {RuntimeHelpers.GetHashCode(class1)}");
+                var class2 = class1;
+                Console.WriteLine($"{class2} : {class2.GetHashCode()} , {RuntimeHelpers.GetHashCode(class2)}");
+                var class3 = new tclass() { tint = 1 };
+                Console.WriteLine($"{class3} : {class3.GetHashCode()} , {RuntimeHelpers.GetHashCode(class3)}");
+                var class4 = new tclass() { tint = 2 };
+                Console.WriteLine($"{class4} : {class4.GetHashCode()} , {RuntimeHelpers.GetHashCode(class4)}");
+                var datetime1 = new DateTime(2018, 12, 26);
+                Console.WriteLine($"{datetime1} : {datetime1.GetHashCode()} , {RuntimeHelpers.GetHashCode(datetime1)}");
+                var datetime2 = new DateTime(2018, 12, 26);
+                Console.WriteLine($"{datetime2} : {datetime2.GetHashCode()} , {RuntimeHelpers.GetHashCode(datetime2)}");
+            } while (Console.Read() == 13);
+
+            //var str1 = "abcdefg";
+            //Console.WriteLine($"{str1} : {str1.GetHashCode()} , {RuntimeHelpers.GetHashCode(str1)}");
+            //var str2 = "abcdefg";
+            //Console.WriteLine($"{str2} : {str2.GetHashCode()} , {RuntimeHelpers.GetHashCode(str2)}");
+            //var int1 = 1;
+            //Console.WriteLine($"{int1} : {int1.GetHashCode()} , {RuntimeHelpers.GetHashCode(int1)}");
+            //var int2 = 1;
+            //Console.WriteLine($"{int2} : {int2.GetHashCode()} , {RuntimeHelpers.GetHashCode(int2)}");
+            //var class1 = new tclass() { tint = 1 };
+            //Console.WriteLine($"{class1} : {class1.GetHashCode()} , {RuntimeHelpers.GetHashCode(class1)}");
+            //var class2 = class1;
+            //Console.WriteLine($"{class2} : {class2.GetHashCode()} , {RuntimeHelpers.GetHashCode(class2)}");
+            //var class3 = new tclass() { tint = 1 };
+            //Console.WriteLine($"{class3} : {class3.GetHashCode()} , {RuntimeHelpers.GetHashCode(class3)}");
+            //var class4 = new tclass() { tint = 2 };
+            //Console.WriteLine($"{class4} : {class4.GetHashCode()} , {RuntimeHelpers.GetHashCode(class4)}");
+            //var datetime1 = new DateTime(2018, 12, 26);
+            //Console.WriteLine($"{datetime1} : {datetime1.GetHashCode()} , {RuntimeHelpers.GetHashCode(datetime1)}");
+            //var datetime2 = new DateTime(2018, 12, 26);
+            //Console.WriteLine($"{datetime2} : {datetime2.GetHashCode()} , {RuntimeHelpers.GetHashCode(datetime2)}");
+
             //Test1();
             //Test2();
             //Test3();
             //Test4();
-            var originalStr = "abcd";
-            var base64Str = Base64Helper.UrlSafeEncode(originalStr);
-            Console.WriteLine(originalStr + "  ->  " + base64Str);
-            originalStr = Base64Helper.UrlSafeDecode(base64Str);
-            Console.WriteLine(base64Str + "  ->  " + originalStr);
+
+            //var originalStr = "abcd";
+            //var base64Str = Base64Helper.UrlSafeEncode(originalStr);
+            //Console.WriteLine(originalStr + "  ->  " + base64Str);
+            //originalStr = Base64Helper.UrlSafeDecode(base64Str);
+            //Console.WriteLine(base64Str + "  ->  " + originalStr);
+
             Console.ReadKey();
         }
 

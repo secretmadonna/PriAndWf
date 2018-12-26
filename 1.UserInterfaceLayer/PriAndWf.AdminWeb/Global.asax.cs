@@ -11,7 +11,7 @@ namespace PriAndWf.AdminWeb
 {
     public class MvcApplication : System.Web.HttpApplication
     {
-        public ILog staticLogger = LogManager.GetLogger("staticLogger");
+        public ILog staticLogger = LogManager.GetLogger("StaticLogger");
         public static int numberIndex = 0;
 
         public override void Init()
