@@ -12,6 +12,7 @@ namespace PriAndWf.TestWebApi.Core
 
         public override void OnActionExecuted(HttpActionExecutedContext actionExecutedContext)
         {
+            //actionExecutedContext.Response.Content.
             exceptionLogger.Info("CustomActionFilterAttribute.OnActionExecuted");
             base.OnActionExecuted(actionExecutedContext);
         }

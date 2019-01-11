@@ -5,10 +5,13 @@ using System.Web;
 
 namespace PriAndWf.TestWebApi.Core
 {
-    public class CommonResponse<T>
+    public class CommonResponse
     {
         public int ret { get; set; }
         public string msg { get; set; }
+    }
+    public class CommonResponse<T> : CommonResponse
+    {
         public T data { get; set; }
     }
 }

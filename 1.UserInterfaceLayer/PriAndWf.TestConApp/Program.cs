@@ -23,6 +23,7 @@ namespace PriAndWf.TestConApp
 
         static void Main(string[] args)
         {
+            Console.WriteLine("56030219004WSD".Substring("560302".Length + 2, 3)); 
             GC.Collect(2, GCCollectionMode.Forced, true);
             var class0 = new tclass() { tint = 1 };
             do

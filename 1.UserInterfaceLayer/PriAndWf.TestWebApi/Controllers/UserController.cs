@@ -1,11 +1,10 @@
-﻿using PriAndWf.TestWebApi.Core;
+﻿using PriAndWf.Infrastructure.Extension;
+using PriAndWf.TestWebApi.Core;
 using PriAndWf.TestWebApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
-using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace PriAndWf.TestWebApi.Controllers
@@ -27,8 +26,8 @@ namespace PriAndWf.TestWebApi.Controllers
         {
             var r = new CommonResponse<List<UserModel>>()
             {
-                ret = (int)HttpStatusCode.OK,
-                msg = HttpStatusCode.OK.ToString(),
+                ret = (int)RetCode.OK,
+                msg = RetCode.OK.Description(),
                 data = users
             };
             return Ok(r);
@@ -39,8 +38,8 @@ namespace PriAndWf.TestWebApi.Controllers
             //throw new Exception("手动抛出异常，用于测试。");
             var r = new CommonResponse<UserModel>()
             {
-                ret = (int)HttpStatusCode.OK,
-                msg = HttpStatusCode.OK.ToString(),
+                ret = (int)RetCode.OK,
+                msg = RetCode.OK.Description(),
                 data = users.FirstOrDefault(m => m.UserID == id)
             };
             return Ok(r);
@@ -48,18 +47,35 @@ namespace PriAndWf.TestWebApi.Controllers
         [HttpPost]
         public HttpResponseMessage PostData(UserModel model)
         {
-            return Request.CreateResponse(model);
+            var r = new CommonResponse<UserModel>()
+            {
+                ret = (int)RetCode.OK,
+                msg = RetCode.OK.Description(),
+                data = model
+            };
+            return Request.CreateResponse(r);
         }
         [HttpPut]
         public HttpResponseMessage PutData(UserModel model)
         {
-            return Request.CreateResponse(model);
+            var r = new CommonResponse<UserModel>()
+            {
+                ret = (int)RetCode.OK,
+                msg = RetCode.OK.Description(),
+                data = model
+            };
+            return Request.CreateResponse(r);
         }
 
         [HttpDelete]
         public IHttpActionResult DeleteById(int id)
         {
-            return Ok();
+            var r = new CommonResponse()
+            {
+                ret = (int)RetCode.OK,
+                msg = RetCode.OK.Description()
+            };
+            return Ok(r);
         }
     }
 }

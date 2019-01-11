@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
@@ -50,5 +51,23 @@ namespace PriAndWf.Infrastructure.Extension
         {
             return list.Contains(item);
         }
+
+        #region Enum 扩展
+        private static Dictionary<string, string> enumKeyValues = new Dictionary<string, string>();
+        public static string Description(this Enum e)
+        {
+            var enumType = e.GetType();
+            var name = Enum.GetName(enumType, e);
+            var key = string.Format("{0}.{1}", enumType.FullName, name);
+            if (enumKeyValues.ContainsKey(key))
+            {
+                return enumKeyValues[key];
+            }
+            var fieldInfo = enumType.GetField(name);
+            var attr = Attribute.GetCustomAttribute(fieldInfo, typeof(DescriptionAttribute), false) as DescriptionAttribute;
+            enumKeyValues.Add(key, attr.Description);
+            return attr.Description;
+        }
+        #endregion
     }
 }

@@ -105,6 +105,7 @@
     <Compile Include="Core\CustomExceptionFilterAttribute.cs" />
     <Compile Include="Core\CustomExceptionHandler.cs" />
     <Compile Include="Core\CustomExceptionLogger.cs" />
+    <Compile Include="Core\Models\RetCode.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

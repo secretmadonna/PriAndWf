@@ -1,14 +1,15 @@
 ﻿using log4net;
-using System;
+using PriAndWf.Infrastructure.Extension;
+using System.Net;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Web.Http;
 using System.Web.Http.Controllers;
-using System.Web.Http.Filters;
 
 namespace PriAndWf.TestWebApi.Core
 {
-    public class CustomAuthorizationFilterAttribute : AuthorizationFilterAttribute
+    public class CustomAuthorizationFilterAttribute : AuthorizeAttribute
     {
         private ILog exceptionLogger = LogManager.GetLogger("ExceptionLogger");
 
@@ -21,6 +22,22 @@ namespace PriAndWf.TestWebApi.Core
         {
             exceptionLogger.Info("CustomAuthorizationFilterAttribute.OnAuthorizationAsync");
             return base.OnAuthorizationAsync(actionContext, cancellationToken);
+        }
+        protected override void HandleUnauthorizedRequest(HttpActionContext actionContext)
+        {
+            exceptionLogger.Info("CustomAuthorizationFilterAttribute.HandleUnauthorizedRequest");
+            base.HandleUnauthorizedRequest(actionContext);
+            actionContext.Response = actionContext.Request.CreateResponse(HttpStatusCode.Unauthorized, new CommonResponse()
+            {
+                ret = (int)RetCode.Unauthorized,
+                msg = RetCode.Unauthorized.Description()
+            });
+        }
+        protected override bool IsAuthorized(HttpActionContext actionContext)
+        {
+            exceptionLogger.Info("CustomAuthorizationFilterAttribute.IsAuthorized");
+            return true;
+            return base.IsAuthorized(actionContext);
         }
     }
 }

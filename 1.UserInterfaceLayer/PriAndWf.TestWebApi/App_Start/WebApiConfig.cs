@@ -19,6 +19,8 @@ namespace PriAndWf.TestWebApi
 
             config.EnableCors(new EnableCorsAttribute("*", "*", "*"));
 
+            //config.Formatters.Remove(config.Formatters.XmlFormatter);
+
             // Web API 路由
             config.MapHttpAttributeRoutes();
 
