@@ -101,10 +101,15 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Core\CustomActionFilterAttribute.cs" />
+    <Compile Include="Core\CustomAuthenticationFilterAttribute.cs" />
     <Compile Include="Core\CustomAuthorizationFilterAttribute.cs" />
     <Compile Include="Core\CustomExceptionFilterAttribute.cs" />
     <Compile Include="Core\CustomExceptionHandler.cs" />
     <Compile Include="Core\CustomExceptionLogger.cs" />
+    <Compile Include="Core\CustomOverrideActionFilterAttribute.cs" />
+    <Compile Include="Core\CustomOverrideExceptionFilterAttribute.cs" />
+    <Compile Include="Core\CustomOverrideAuthorizationFilterAttribute.cs" />
+    <Compile Include="Core\CustomOverrideAuthenticationFilterAttribute.cs" />
     <Compile Include="Core\Models\RetCode.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
