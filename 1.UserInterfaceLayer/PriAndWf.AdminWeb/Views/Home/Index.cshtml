@@ -10,6 +10,8 @@
 
 
 <h2>Index</h2>
+<p>Session.SessionID : @(Session?.SessionID)</p>
+<p>Session["LoginName"] : @(Session?["LoginName"]?.ToString())</p>
 
 
 @section PagePluginScripts{
@@ -17,33 +19,7 @@
 @section PageInlineScripts{
     <script>
         $(function () {
-            var targetUrl = "http://localhost:62640/api/user";
-            $.ajax({
-                type: "get",
-                url: targetUrl,
-                //async: true,//异步请求
-                cache: false,
-                data: { id: 1 },
-                dataType: "json",
-                beforeSend: function (jqXHR, settings) {
-                    console.log(jqXHR);
-                    console.log(settings);
-                },
-                success: function (data, textStatus, jqXHR) {
-                    console.log(data);
-                    console.log(textStatus);
-                    console.log(jqXHR);
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    console.log(jqXHR);
-                    console.log(textStatus);
-                    console.log(errorThrown);
-                },
-                complete: function (jqXHR, textStatus) {
-                    console.log(jqXHR);
-                    console.log(textStatus);
-                }
-            });
+            console.log(arguments);
         });
     </script>
 }

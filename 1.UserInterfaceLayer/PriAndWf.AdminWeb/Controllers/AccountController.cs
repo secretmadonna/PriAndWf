@@ -10,9 +10,14 @@ namespace PriAndWf.AdminWeb.Controllers
         {
             return View();
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="returnUrl">是否存在编码问题？？？</param>
+        /// <returns></returns>
 
         [HttpGet]
-        public ActionResult Login()
+        public ActionResult Login(string returnUrl)
         {
             LoginViewModel vm = new LoginViewModel()
             {
@@ -21,11 +26,26 @@ namespace PriAndWf.AdminWeb.Controllers
             };
             return View(vm);
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="vm"></param>
+        /// <param name="returnUrl">是否存在编码问题？？？</param>
+        /// <returns></returns>
         [HttpPost]
-        public ActionResult Login(LoginViewModel vm)
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(LoginViewModel vm, string returnUrl)
         {
-            FormsAuthentication.SetAuthCookie(vm.LoginName, vm.RememberMe);
-            return Redirect(FormsAuthentication.DefaultUrl);
+            FormsAuthentication.SetAuthCookie(vm.LoginName, true);
+            if (Session != null)
+            {
+                Session["LoginName"] = vm.LoginName;
+            }
+            if (string.IsNullOrEmpty(returnUrl))
+            {
+                return Redirect(FormsAuthentication.DefaultUrl);
+            }
+            return Redirect(returnUrl);
         }
 
         public ActionResult Logout()
