@@ -23,16 +23,32 @@ namespace PriAndWf.TestWebApi.Controllers
         };
         [HttpGet]
         //[AllowAnonymous]
-        public IHttpActionResult GetAll()
+        public HttpResponseMessage GetAll()
         {
+            var sessionID = System.Web.HttpContext.Current.Session?.SessionID;
             var r = new CommonResponse<List<UserModel>>()
             {
                 ret = (int)RetCode.OK,
                 msg = RetCode.OK.Description(),
                 data = users
             };
-            return Ok(r);
+            System.Web.Script.Serialization.JavaScriptSerializer serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+            return new HttpResponseMessage(System.Net.HttpStatusCode.OK)
+            {
+                Content = new StringContent($"jsonpCallback({serializer.Serialize(r)})")
+            };
         }
+        //[HttpGet]
+        //public IHttpActionResult GetAll()
+        //{
+        //    var r = new CommonResponse<List<UserModel>>()
+        //    {
+        //        ret = (int)RetCode.OK,
+        //        msg = RetCode.OK.Description(),
+        //        data = users
+        //    };
+        //    return Ok(r);
+        //}
         [HttpGet]
         public IHttpActionResult GetById(int id)
         {

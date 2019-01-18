@@ -110,6 +110,7 @@
     <Compile Include="Core\CustomOverrideExceptionFilterAttribute.cs" />
     <Compile Include="Core\CustomOverrideAuthorizationFilterAttribute.cs" />
     <Compile Include="Core\CustomOverrideAuthenticationFilterAttribute.cs" />
+    <Compile Include="Core\JsonpMediaTypeFormatter.cs" />
     <Compile Include="Core\Models\RetCode.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

@@ -1,4 +1,5 @@
 ﻿using PriAndWf.TestWebApi.Core;
+using System.Configuration;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using System.Web.Http.ExceptionHandling;
@@ -17,9 +18,19 @@ namespace PriAndWf.TestWebApi
             config.Filters.Add(new CustomActionFilterAttribute());
             config.Filters.Add(new CustomExceptionFilterAttribute());
 
-            config.EnableCors(new EnableCorsAttribute("*", "*", "*"));
-
+            #region cors
+            //var allowOrigins = ConfigurationManager.AppSettings["cors:allowOrigins"];
+            //var allowHeaders = ConfigurationManager.AppSettings["cors:allowHeaders"];
+            //var allowMethods = ConfigurationManager.AppSettings["cors:allowMethods"];
+            //var globalCors = new EnableCorsAttribute(allowOrigins, allowHeaders, allowMethods)
+            //{
+            //    SupportsCredentials = true
+            //};
+            //config.EnableCors(globalCors);
+            #endregion
+            
             //config.Formatters.Remove(config.Formatters.XmlFormatter);
+            //config.Formatters.Insert(0, new JsonpMediaTypeFormatter());
 
             // Web API 路由
             config.MapHttpAttributeRoutes();

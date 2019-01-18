@@ -18,8 +18,61 @@
 }
 @section PageInlineScripts{
     <script>
+        function jsonpCallback() {
+            console.log(arguments);
+        };
         $(function () {
             console.log(arguments);
+            //var settings = {
+            //    url: "http://localhost:62640/api/user",
+            //    type: "get",
+            //    cache: false,
+            //    async: true,//异步请求
+            //    dataType: "json",
+            //    //crossDomain: true,
+            //    xhrFields: {
+            //        withCredentials: true
+            //    },
+            //    beforeSend: function (jqXHR, settings) {
+            //        console.log(arguments);
+            //    },
+            //    success: function (data, textStatus, jqXHR) {
+            //        console.log(arguments);
+            //    },
+            //    error: function (jqXHR, textStatus, errorThrown) {
+            //        console.log(arguments);
+            //    },
+            //    complete: function (jqXHR, textStatus) {
+            //        console.log(arguments);
+            //    }
+            //};
+            //$.ajax(settings);
+            $.ajax({
+                url: "http://localhost:62640/api/user",
+                type: "get",
+                cache: false,
+                async: true,//异步请求
+                dataType: "jsonp",
+                jsonp: "callback",
+                jsonpCallback: "jsonpCallback",
+                //crossDomain: true,
+                //xhrFields: {
+                //    withCredentials: true
+                //},
+                beforeSend: function (jqXHR, settings) {
+                    console.log(arguments);
+                },
+                success: function (data, textStatus, jqXHR) {
+                    console.log(arguments);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log(arguments);
+                },
+                complete: function (jqXHR, textStatus) {
+                    console.log(arguments);
+                }
+            });
         });
     </script>
+    <script type="text/javascript" src="http://localhost:62640/api/user?callback=jsonpCallback"></script>
 }
