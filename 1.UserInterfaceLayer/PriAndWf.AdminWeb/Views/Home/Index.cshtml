@@ -12,13 +12,14 @@
 <h2>Index</h2>
 <p>Session.SessionID : @(Session?.SessionID)</p>
 <p>Session["LoginName"] : @(Session?["LoginName"]?.ToString())</p>
+<p>Session["RawUrl"] : @(Session?["RawUrl"]?.ToString())</p>
 
 
 @section PagePluginScripts{
 }
 @section PageInlineScripts{
     <script>
-        function jsonpCallback() {
+        function jsonpCallbackValue() {
             console.log(arguments);
         };
         $(function () {
@@ -48,13 +49,13 @@
             //};
             //$.ajax(settings);
             $.ajax({
-                url: "http://localhost:62640/api/user",
+                url: "http://www.dltest.com:8088/api/user",
                 type: "get",
                 cache: false,
                 async: true,//异步请求
                 dataType: "jsonp",
                 jsonp: "callback",
-                jsonpCallback: "jsonpCallback",
+                jsonpCallback: "jsonpCallbackValue",
                 //crossDomain: true,
                 //xhrFields: {
                 //    withCredentials: true
@@ -74,5 +75,5 @@
             });
         });
     </script>
-    <script type="text/javascript" src="http://localhost:62640/api/user?callback=jsonpCallback"></script>
+    <script type="text/javascript" src="http://www.dltest.com:8088/api/user?callback=jsonpCallbackValue"></script>
 }

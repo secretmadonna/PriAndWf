@@ -22,33 +22,16 @@ namespace PriAndWf.TestWebApi.Controllers
             new UserModel() { UserID = 3, UserName = "test3", PassWord = "123456", NickName = "test3", Gender = UserGender.Female, Birthday = new DateTime(2018, 1, 1), Balance = 123.123M, CreateDateTime = DateTime.Now, Active = true },
         };
         [HttpGet]
-        //[AllowAnonymous]
-        public HttpResponseMessage GetAll()
+        public IHttpActionResult GetAll()
         {
-            var sessionID = System.Web.HttpContext.Current.Session?.SessionID;
             var r = new CommonResponse<List<UserModel>>()
             {
                 ret = (int)RetCode.OK,
                 msg = RetCode.OK.Description(),
                 data = users
             };
-            System.Web.Script.Serialization.JavaScriptSerializer serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
-            return new HttpResponseMessage(System.Net.HttpStatusCode.OK)
-            {
-                Content = new StringContent($"jsonpCallback({serializer.Serialize(r)})")
-            };
+            return Ok(r);
         }
-        //[HttpGet]
-        //public IHttpActionResult GetAll()
-        //{
-        //    var r = new CommonResponse<List<UserModel>>()
-        //    {
-        //        ret = (int)RetCode.OK,
-        //        msg = RetCode.OK.Description(),
-        //        data = users
-        //    };
-        //    return Ok(r);
-        //}
         [HttpGet]
         public IHttpActionResult GetById(int id)
         {

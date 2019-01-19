@@ -6,6 +6,7 @@ namespace PriAndWf.AdminWeb.Controllers
     {
         public ActionResult Index()
         {
+            Session["RawUrl"] = Request.RawUrl;
             return View();
         }
     }

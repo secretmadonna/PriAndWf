@@ -30,7 +30,7 @@ namespace PriAndWf.TestWebApi
             #endregion
             
             //config.Formatters.Remove(config.Formatters.XmlFormatter);
-            //config.Formatters.Insert(0, new JsonpMediaTypeFormatter());
+            config.Formatters.Insert(0, new JsonpMediaTypeFormatter());
 
             // Web API 路由
             config.MapHttpAttributeRoutes();

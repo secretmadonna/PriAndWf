@@ -15,7 +15,6 @@ namespace PriAndWf.AdminWeb.Controllers
         /// </summary>
         /// <param name="returnUrl">是否存在编码问题？？？</param>
         /// <returns></returns>
-
         [HttpGet]
         public ActionResult Login(string returnUrl)
         {
@@ -36,7 +35,7 @@ namespace PriAndWf.AdminWeb.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(LoginViewModel vm, string returnUrl)
         {
-            FormsAuthentication.SetAuthCookie(vm.LoginName, true);
+            FormsAuthentication.SetAuthCookie(vm.LoginName, vm.RememberMe);
             if (Session != null)
             {
                 Session["LoginName"] = vm.LoginName;
