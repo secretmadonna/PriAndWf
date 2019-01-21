@@ -19,7 +19,7 @@ namespace PriAndWf.TestWebApi.Controllers
     /// HEAD : 安全、幂等。RESTFUL 框架中较少使用
     /// TEACE : 安全、幂等。RESTFUL 框架中较少使用
     /// </summary>
-    public class UserController : ApiController
+    public class UsersController : ApiController
     {
         //public UserController()
         //{
@@ -32,7 +32,7 @@ namespace PriAndWf.TestWebApi.Controllers
             new UserModel() { UserID = 3, UserName = "test3", PassWord = "123456", NickName = "test3", Gender = UserGender.Female, Birthday = new DateTime(2018, 1, 1), Balance = 123.123M, CreateDateTime = DateTime.Now, Active = true },
         };
         [HttpGet]
-        public IHttpActionResult GetAll()
+        public IHttpActionResult Get()
         {
             var r = new CommonResponse<List<UserModel>>()
             {
@@ -43,7 +43,7 @@ namespace PriAndWf.TestWebApi.Controllers
             return Ok(r);
         }
         [HttpGet]
-        public IHttpActionResult GetById(int id)
+        public IHttpActionResult Get(int id)
         {
             //throw new Exception("手动抛出异常，用于测试。");
             var r = new CommonResponse<UserModel>()
@@ -55,7 +55,7 @@ namespace PriAndWf.TestWebApi.Controllers
             return Ok(r);
         }
         [HttpPost]
-        public HttpResponseMessage PostData(UserModel model)
+        public HttpResponseMessage Post([FromBody]UserModel model)
         {
             var r = new CommonResponse<UserModel>()
             {
@@ -66,7 +66,7 @@ namespace PriAndWf.TestWebApi.Controllers
             return Request.CreateResponse(r);
         }
         [HttpPut]
-        public HttpResponseMessage PutData(UserModel model)
+        public HttpResponseMessage Put(int id, [FromBody]UserModel model)
         {
             var r = new CommonResponse<UserModel>()
             {
@@ -82,7 +82,7 @@ namespace PriAndWf.TestWebApi.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPatch]
-        public IHttpActionResult PatchData(UserModel model)
+        public IHttpActionResult Patch(int id, [FromBody]UserModel model)
         {
             var r = new CommonResponse()
             {
@@ -92,7 +92,7 @@ namespace PriAndWf.TestWebApi.Controllers
             return Ok(r);
         }
         [HttpDelete]
-        public IHttpActionResult DeleteById(int id)
+        public IHttpActionResult Delete(int id)
         {
             var r = new CommonResponse()
             {

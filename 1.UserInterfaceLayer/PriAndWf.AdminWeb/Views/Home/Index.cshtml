@@ -31,9 +31,10 @@
         };
         $(function () {
             console.log(arguments);
+            var users = requestDomain + "/api/users";
             $("#btnAjaxJsonp").on("click", function () {
                 var settings = {
-                    url: requestDomain + "/api/user",
+                    url: users,
                     type: "get",
                     //cache: false,
                     //async: true,//异步请求
@@ -64,7 +65,7 @@
             });
             $("#btnAjaxGet").on("click", function () {
                 var settings = {
-                    url: requestDomain + "/api/user/1",
+                    url: users + "/1",
                     type: "get",
                     //cache: false,
                     //async: true,//异步请求
@@ -93,7 +94,7 @@
             });
             $("#btnAjaxPost").on("click", function () {
                 var settings = {
-                    url: requestDomain + "/api/user",
+                    url: users,
                     type: "post",
                     //cache: false,
                     //async: true,//异步请求
@@ -122,7 +123,7 @@
             });
             $("#btnAjaxPut").on("click", function () {
                 var settings = {
-                    url: requestDomain + "/api/user",
+                    url: users + "/1",
                     type: "put",
                     //cache: false,
                     //async: true,//异步请求
@@ -151,7 +152,7 @@
             });
             $("#btnAjaxPatch").on("click", function () {
                 var settings = {
-                    url: requestDomain + "/api/user",
+                    url: users + "/1",
                     type: "patch",
                     //cache: false,
                     //async: true,//异步请求
@@ -180,7 +181,7 @@
             });
             $("#btnAjaxDelete").on("click", function () {
                 var settings = {
-                    url: requestDomain + "/api/user/1",
+                    url: users + "/1",
                     type: "delete",
                     //cache: false,
                     //async: true,//异步请求
@@ -209,5 +210,5 @@
             });
         });
     </script>
-    <script type="text/javascript" src="/api/user?callback=jsonpCallbackValue"></script>
+    <script type="text/javascript" src="http://www.dltest.com:8088/api/users?callback=jsonpCallbackValue"></script>
 }
