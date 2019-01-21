@@ -9,6 +9,16 @@ using System.Web.Http;
 
 namespace PriAndWf.TestWebApi.Controllers
 {
+    /// <summary>
+    /// （R）GET : 安全、幂等。用于获取资源
+    /// （C）POST : 非安全、非幂等。用于创建子资源
+    /// （U）PUT : 非安全、幂等。用于创建、更新资源
+    /// （D）DELETE : 非安全、幂等。用于删除资源
+    /// OPTIONS : 安全、幂等。用于接口验证
+    /// PATCH : 非安全、幂等。用于创建、更新资源（与 PUT 的区别 : PATCH 代表部分更新，只更新字段属性不为 NULL 的）
+    /// HEAD : 安全、幂等。RESTFUL 框架中较少使用
+    /// TEACE : 安全、幂等。RESTFUL 框架中较少使用
+    /// </summary>
     public class UserController : ApiController
     {
         //public UserController()
@@ -66,7 +76,21 @@ namespace PriAndWf.TestWebApi.Controllers
             };
             return Request.CreateResponse(r);
         }
-
+        /// <summary>
+        /// 更新不为 NULL 的数据
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPatch]
+        public IHttpActionResult PatchData(UserModel model)
+        {
+            var r = new CommonResponse()
+            {
+                ret = (int)RetCode.OK,
+                msg = RetCode.OK.Description()
+            };
+            return Ok(r);
+        }
         [HttpDelete]
         public IHttpActionResult DeleteById(int id)
         {
@@ -77,5 +101,6 @@ namespace PriAndWf.TestWebApi.Controllers
             };
             return Ok(r);
         }
+
     }
 }

@@ -13,7 +13,7 @@ namespace PriAndWf.TestWebApi.Models
         public string PassWord { get; set; }
         public string NickName { get; set; }
         public UserGender Gender { get; set; }
-        public DateTime Birthday { get; set; }
+        public DateTime? Birthday { get; set; }
         public decimal Balance { get; set; }
         public DateTime CreateDateTime { get; set; }
         public bool Active { get; set; }

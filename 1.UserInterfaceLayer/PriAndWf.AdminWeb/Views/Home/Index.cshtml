@@ -13,67 +13,201 @@
 <p>Session.SessionID : @(Session?.SessionID)</p>
 <p>Session["LoginName"] : @(Session?["LoginName"]?.ToString())</p>
 <p>Session["RawUrl"] : @(Session?["RawUrl"]?.ToString())</p>
+<button id="btnAjaxJsonp">ajax jsonp</button>
+<button id="btnAjaxGet">ajax get</button>
+<button id="btnAjaxPost">ajax post</button>
+<button id="btnAjaxPut">ajax put</button>
+<button id="btnAjaxPatch">ajax patch</button>
+<button id="btnAjaxDelete">ajax delete</button>
 
 
 @section PagePluginScripts{
 }
 @section PageInlineScripts{
     <script>
+        var requestDomain = "http://www.dltest.com:8088";
         function jsonpCallbackValue() {
             console.log(arguments);
         };
         $(function () {
             console.log(arguments);
-            //var settings = {
-            //    url: "http://localhost:62640/api/user",
-            //    type: "get",
-            //    cache: false,
-            //    async: true,//异步请求
-            //    dataType: "json",
-            //    //crossDomain: true,
-            //    xhrFields: {
-            //        withCredentials: true
-            //    },
-            //    beforeSend: function (jqXHR, settings) {
-            //        console.log(arguments);
-            //    },
-            //    success: function (data, textStatus, jqXHR) {
-            //        console.log(arguments);
-            //    },
-            //    error: function (jqXHR, textStatus, errorThrown) {
-            //        console.log(arguments);
-            //    },
-            //    complete: function (jqXHR, textStatus) {
-            //        console.log(arguments);
-            //    }
-            //};
-            //$.ajax(settings);
-            $.ajax({
-                url: "http://www.dltest.com:8088/api/user",
-                type: "get",
-                cache: false,
-                async: true,//异步请求
-                dataType: "jsonp",
-                jsonp: "callback",
-                jsonpCallback: "jsonpCallbackValue",
-                //crossDomain: true,
-                //xhrFields: {
-                //    withCredentials: true
-                //},
-                beforeSend: function (jqXHR, settings) {
-                    console.log(arguments);
-                },
-                success: function (data, textStatus, jqXHR) {
-                    console.log(arguments);
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    console.log(arguments);
-                },
-                complete: function (jqXHR, textStatus) {
-                    console.log(arguments);
-                }
+            $("#btnAjaxJsonp").on("click", function () {
+                var settings = {
+                    url: requestDomain + "/api/user",
+                    type: "get",
+                    //cache: false,
+                    //async: true,//异步请求
+                    //contentType: "application/json; charset=utf-8",//默认 : application/x-www-form-urlencoded; charset=utf-8
+                    //data: {},
+                    dataType: "jsonp",
+                    jsonp: "callback",
+                    jsonpCallback: "jsonpCallbackValue",
+                    //crossDomain: true,
+                    //xhrFields: {
+                    //    withCredentials: true
+                    //},
+                    beforeSend: function (jqXHR, settings) {
+                        console.log(arguments);
+                    },
+                    success: function (data, textStatus, jqXHR) {
+                        console.log(arguments);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        console.log(arguments);
+                    },
+                    complete: function (jqXHR, textStatus) {
+                        console.log(arguments);
+                    }
+                };
+                $.ajax(settings);
+                console.log(arguments);
+            });
+            $("#btnAjaxGet").on("click", function () {
+                var settings = {
+                    url: requestDomain + "/api/user/1",
+                    type: "get",
+                    //cache: false,
+                    //async: true,//异步请求
+                    //contentType: "application/json; charset=utf-8",//默认 : application/x-www-form-urlencoded; charset=utf-8
+                    //data: { id: 1 },
+                    dataType: "json",
+                    //crossDomain: true,
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    beforeSend: function (jqXHR, settings) {
+                        console.log(arguments);
+                    },
+                    success: function (data, textStatus, jqXHR) {
+                        console.log(arguments);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        console.log(arguments);
+                    },
+                    complete: function (jqXHR, textStatus) {
+                        console.log(arguments);
+                    }
+                };
+                $.ajax(settings);
+                console.log(arguments);
+            });
+            $("#btnAjaxPost").on("click", function () {
+                var settings = {
+                    url: requestDomain + "/api/user",
+                    type: "post",
+                    //cache: false,
+                    //async: true,//异步请求
+                    //contentType: "application/json; charset=utf-8",//默认 : application/x-www-form-urlencoded; charset=utf-8
+                    data: { UserID: 1, UserName: "duanf", PassWord: "", NickName: "duan", Gender: 1, Birthday: null, Balance: 10.234, CreateDateTime: new Date(), Active: false },
+                    dataType: "json",
+                    //crossDomain: true,
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    beforeSend: function (jqXHR, settings) {
+                        console.log(arguments);
+                    },
+                    success: function (data, textStatus, jqXHR) {
+                        console.log(arguments);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        console.log(arguments);
+                    },
+                    complete: function (jqXHR, textStatus) {
+                        console.log(arguments);
+                    }
+                };
+                $.ajax(settings);
+                console.log(arguments);
+            });
+            $("#btnAjaxPut").on("click", function () {
+                var settings = {
+                    url: requestDomain + "/api/user",
+                    type: "put",
+                    //cache: false,
+                    //async: true,//异步请求
+                    //contentType: "application/json; charset=utf-8",//默认 : application/x-www-form-urlencoded; charset=utf-8
+                    data: { UserID: 1, UserName: "duanf", PassWord: "123456", NickName: "duan", Gender: 1, Birthday: null, Balance: 10.234, CreateDateTime: new Date(), Active: false },
+                    dataType: "json",
+                    //crossDomain: true,
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    beforeSend: function (jqXHR, settings) {
+                        console.log(arguments);
+                    },
+                    success: function (data, textStatus, jqXHR) {
+                        console.log(arguments);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        console.log(arguments);
+                    },
+                    complete: function (jqXHR, textStatus) {
+                        console.log(arguments);
+                    }
+                };
+                $.ajax(settings);
+                console.log(arguments);
+            });
+            $("#btnAjaxPatch").on("click", function () {
+                var settings = {
+                    url: requestDomain + "/api/user",
+                    type: "patch",
+                    //cache: false,
+                    //async: true,//异步请求
+                    //contentType: "application/json; charset=utf-8",//默认 : application/x-www-form-urlencoded; charset=utf-8
+                    data: { UserID: 1, UserName: "duanf", PassWord: "", NickName: "duan", Gender: 1, Birthday: null, Balance: 10.234, CreateDateTime: new Date(), Active: false },
+                    dataType: "json",
+                    //crossDomain: true,
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    beforeSend: function (jqXHR, settings) {
+                        console.log(arguments);
+                    },
+                    success: function (data, textStatus, jqXHR) {
+                        console.log(arguments);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        console.log(arguments);
+                    },
+                    complete: function (jqXHR, textStatus) {
+                        console.log(arguments);
+                    }
+                };
+                $.ajax(settings);
+                console.log(arguments);
+            });
+            $("#btnAjaxDelete").on("click", function () {
+                var settings = {
+                    url: requestDomain + "/api/user/1",
+                    type: "delete",
+                    //cache: false,
+                    //async: true,//异步请求
+                    //contentType: "application/json; charset=utf-8",//默认 : application/x-www-form-urlencoded; charset=utf-8
+                    //data: { id: 1 },
+                    dataType: "json",
+                    //crossDomain: true,
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    beforeSend: function (jqXHR, settings) {
+                        console.log(arguments);
+                    },
+                    success: function (data, textStatus, jqXHR) {
+                        console.log(arguments);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        console.log(arguments);
+                    },
+                    complete: function (jqXHR, textStatus) {
+                        console.log(arguments);
+                    }
+                };
+                $.ajax(settings);
+                console.log(arguments);
             });
         });
     </script>
-    <script type="text/javascript" src="http://www.dltest.com:8088/api/user?callback=jsonpCallbackValue"></script>
+    <script type="text/javascript" src="/api/user?callback=jsonpCallbackValue"></script>
 }
