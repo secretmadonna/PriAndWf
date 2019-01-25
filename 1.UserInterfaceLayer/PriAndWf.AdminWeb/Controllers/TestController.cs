@@ -124,5 +124,10 @@ namespace PriAndWf.AdminWeb.Controllers
             var input = Request.Form["input" + length];
             return Json(Base64Str);
         }
+
+        public ActionResult TestUni()
+        {
+            return View();
+        }
     }
 }
