@@ -7,6 +7,6 @@ namespace PriAndWf.TestWebApi.Core
         [Description("处理成功")]
         OK = 0,
         [Description("未授权")]
-        Unauthorized = -401,
+        Unauthorized = 401,
     }
 }

@@ -20,6 +20,104 @@
     <script type="text/javascript" src="Content/plugins/bootstrap-3.3.7/js/bootstrap.js"></script>
     <script type="text/javascript">
         window.document.write(window.navigator.userAgent);
+        //$(function () {
+        //    //var xhr,
+        //        var retryAjax = function () {
+        //        //xhr = $.ajax(ajaxOptions);
+        //            $.ajax(ajaxOptions);
+        //    }, ajaxOptions = {
+        //        url: 'http://www.dltest.com:8088/api/test',
+        //        type: 'get',
+        //        cache: false,
+        //        async: true,
+        //        dataType: 'json',
+        //        timeout: 10000,
+        //        beforeSend: function (jqXHR, settings) {
+        //            console.log(arguments);
+        //        },
+        //        success: function (data, textStatus, jqXHR) {
+        //            console.log(arguments);
+        //        },
+        //        error: function (jqXHR, textStatus, errorThrown) {
+        //            console.log(arguments);
+        //            retryAjaxCount++;
+        //            if (retryAjaxCount <= retryAjaxAllowCount) {
+        //                //xhr.abort();
+        //                jqXHR.abort();
+        //                retryAjax();
+        //                return false;
+        //            }
+        //        },
+        //        complete: function (jqXHR, textStatus) {
+        //            console.log(arguments);
+        //        },
+        //    }, retryAjaxAllowCount = 3, retryAjaxCount = 0;
+
+        //    retryAjaxCount = 0;
+        //    retryAjax();
+        //});
+        $(function () {
+            var ajaxRetry = function (options) {
+                var beforeSend = options.beforeSend, success = options.success, error = options.error, complete = options.complete;
+                var totalAjaxRetryCount = 3, currentAjaxRetryCount = 0;
+                var realOptions = $.extend({}, options, {
+                    beforeSend: function (jqXHR, settings) {
+                        if (currentAjaxRetryCount === 0) {
+                            beforeSend(jqXHR, settings);
+                        }
+                    },
+                    success: function (data, textStatus, jqXHR) {
+                        success(data, textStatus, jqXHR);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        if (textStatus === "error" && jqXHR.status === 401) {
+                            currentAjaxRetryCount++
+                            if (currentAjaxRetryCount <= totalAjaxRetryCount) {
+                                doAjax();
+                            }
+                        } else {
+                            currentAjaxRetryCount = totalAjaxRetryCount + 2;
+                        }
+                        if (currentAjaxRetryCount > totalAjaxRetryCount) {
+                            error(jqXHR, textStatus, errorThrown);
+                        }
+                    },
+                    complete: function (jqXHR, textStatus) {
+                        if (currentAjaxRetryCount > totalAjaxRetryCount) {
+                            complete(jqXHR, textStatus);
+                        }
+                    }
+                });
+                var doAjax = function () {
+                    $.ajax(realOptions);
+                };
+
+                doAjax();
+            };
+
+            var ajaxOptions = {
+                async: true,
+                timeout: 10000,
+                url: 'http://www.dltest.com:8088/api/test',
+                type: 'get',
+                cache: false,
+                data: { 'id': 1 },
+                dataType: 'json',
+                beforeSend: function (jqXHR, settings) {
+                    console.log(arguments);
+                },
+                success: function (data, textStatus, jqXHR) {
+                    console.log(arguments);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log(arguments);
+                },
+                complete: function (jqXHR, textStatus) {
+                    console.log(arguments);
+                }
+            }
+            ajaxRetry(ajaxOptions);
+        });
     </script>
 </body>
 </html>

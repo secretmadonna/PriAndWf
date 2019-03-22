@@ -32,6 +32,7 @@ namespace PriAndWf.TestWebApi
         /// <param name="e"></param>
         protected void Application_Start(Object sender, EventArgs e)
         {
+            Application["DfTestRandom"] = new Random();
             //throw new Exception("手动抛出异常，用于测试。");
             var senderType = sender.GetType();
             var info = string.Format("{0}({1}[{3}],{2})", MethodBase.GetCurrentMethod().Name, senderType.FullName, e.GetType().FullName, senderType.BaseType.FullName);
