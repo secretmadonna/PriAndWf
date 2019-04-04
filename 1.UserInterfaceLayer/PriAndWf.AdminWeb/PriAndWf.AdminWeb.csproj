@@ -521,6 +521,8 @@
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Extension\ModelStateExtension.cs" />
     <Compile Include="Filters\ApiResultAttribute.cs" />
+    <Compile Include="Filters\CustomAuthenticationFilterAttribute.cs" />
+    <Compile Include="Filters\CustomAuthorizationFilterAttribute.cs" />
     <Compile Include="Filters\UnifyHandleExceptionAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

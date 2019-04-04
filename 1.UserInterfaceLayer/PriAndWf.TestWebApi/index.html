@@ -20,63 +20,30 @@
     <script type="text/javascript" src="Content/plugins/bootstrap-3.3.7/js/bootstrap.js"></script>
     <script type="text/javascript">
         window.document.write(window.navigator.userAgent);
-        //$(function () {
-        //    //var xhr,
-        //        var retryAjax = function () {
-        //        //xhr = $.ajax(ajaxOptions);
-        //            $.ajax(ajaxOptions);
-        //    }, ajaxOptions = {
-        //        url: 'http://www.dltest.com:8088/api/test',
-        //        type: 'get',
-        //        cache: false,
-        //        async: true,
-        //        dataType: 'json',
-        //        timeout: 10000,
-        //        beforeSend: function (jqXHR, settings) {
-        //            console.log(arguments);
-        //        },
-        //        success: function (data, textStatus, jqXHR) {
-        //            console.log(arguments);
-        //        },
-        //        error: function (jqXHR, textStatus, errorThrown) {
-        //            console.log(arguments);
-        //            retryAjaxCount++;
-        //            if (retryAjaxCount <= retryAjaxAllowCount) {
-        //                //xhr.abort();
-        //                jqXHR.abort();
-        //                retryAjax();
-        //                return false;
-        //            }
-        //        },
-        //        complete: function (jqXHR, textStatus) {
-        //            console.log(arguments);
-        //        },
-        //    }, retryAjaxAllowCount = 3, retryAjaxCount = 0;
 
-        //    retryAjaxCount = 0;
-        //    retryAjax();
-        //});
         $(function () {
-            var ajaxRetry = function (options) {
+            var ajaxRetryForTimeout = function (options) {
                 var beforeSend = options.beforeSend, success = options.success, error = options.error, complete = options.complete;
-                var totalAjaxRetryCount = 3, currentAjaxRetryCount = 0;
+                var totalAjaxRetryCount = (options.retryCount >= 0 ? options.retryCount : 3), currentAjaxRetryCount = 0;
                 var realOptions = $.extend({}, options, {
+                    async: true,//async=false时，timeout不生效
                     beforeSend: function (jqXHR, settings) {
                         if (currentAjaxRetryCount === 0) {
                             beforeSend(jqXHR, settings);
                         }
                     },
                     success: function (data, textStatus, jqXHR) {
+                        currentAjaxRetryCount = totalAjaxRetryCount + 1;//请执行【用户的 complete 方法】
                         success(data, textStatus, jqXHR);
                     },
                     error: function (jqXHR, textStatus, errorThrown) {
-                        if (textStatus === "error" && jqXHR.status === 401) {
+                        if (textStatus === "timeout") {
                             currentAjaxRetryCount++
                             if (currentAjaxRetryCount <= totalAjaxRetryCount) {
                                 doAjax();
                             }
                         } else {
-                            currentAjaxRetryCount = totalAjaxRetryCount + 2;
+                            currentAjaxRetryCount = totalAjaxRetryCount + 1;//请执行【用户的 error、complete 方法】
                         }
                         if (currentAjaxRetryCount > totalAjaxRetryCount) {
                             error(jqXHR, textStatus, errorThrown);
@@ -94,10 +61,71 @@
 
                 doAjax();
             };
+            var ajaxForError401 = function (options, optionsError401) {
+                var beforeSend = options.beforeSend, success = options.success, error = options.error, complete = options.complete;
+                var isError401 = 0;
+                var realOptions = $.extend({}, options, {
+                    beforeSend: function (jqXHR, settings) {
+                        if (isError401 === 0) {
+                            beforeSend(jqXHR, settings);
+                        }
+                    },
+                    success: function (data, textStatus, jqXHR) {
+                        isError401 = 2;//请执行【用户的 complete 方法】
+                        success(data, textStatus, jqXHR);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        if (textStatus === "error" && jqXHR.status === 401 && isError401 === 0) {
+                            isError401 = 1;
+                            var realOptionsError401 = $.extend({}, optionsError401, {
+                                beforeSend: function (jqXHR, settings) { },
+                                success: function (data, textStatus, jqXHR) {
+                                    if (data.ret === 0) {
+                                        $.extend(true, realOptions, {
+                                            headers: {
+                                                'Authorization': 'Bearer ' + data.data.AccessToken
+                                            }
+                                        });
+                                        doAjax();
+                                    } else {
+                                        //isError401 = 2//请执行【用户的 error、complete 方法】
+                                        //直接顺序执行？是否有问题？
+                                        error(jqXHR, textStatus, errorThrown);
+                                        complete(jqXHR, textStatus);
+                                    }
+                                },
+                                error: function () {//function (jqXHR, textStatus, errorThrown) {
+                                    //isError401 = 2//请执行【用户的 error、complete 方法】
+                                    //直接顺序执行？是否有问题？
+                                    error(jqXHR, textStatus, errorThrown);
+                                    complete(jqXHR, textStatus);
+                                },
+                                complete: function (jqXHR, textStatus) { }
+                            });
+                            $.ajax(realOptionsError401);
+                        } else {
+                            isError401 = 2;
+                        }
+                        if (isError401 === 0 || isError401 === 2) {
+                            error(jqXHR, textStatus, errorThrown);
+                        }
+                    },
+                    complete: function (jqXHR, textStatus) {
+                        if (isError401 === 0 || isError401 === 2) {
+                            complete(jqXHR, textStatus);
+                        }
+                    }
+                });
+                var doAjax = function () {
+                    $.ajax(realOptions);
+                };
+
+                doAjax();
+            };
 
             var ajaxOptions = {
-                async: true,
-                timeout: 10000,
+                retryCount: 2,
+                timeout: 5000,
                 url: 'http://www.dltest.com:8088/api/test',
                 type: 'get',
                 cache: false,
@@ -115,8 +143,17 @@
                 complete: function (jqXHR, textStatus) {
                     console.log(arguments);
                 }
-            }
-            ajaxRetry(ajaxOptions);
+            }, ajaxOptionsError401 = {
+                async: true,
+                timeout: 5000,
+                url: 'http://www.dltest.com:8088/api/account/refreshtoken',
+                type: 'get',
+                cache: false,
+                data: { 'refreshToken': '2' },
+                dataType: 'json'
+            };
+            //ajaxRetryForTimeout(ajaxOptions);
+            ajaxForError401(ajaxOptions, ajaxOptionsError401);
         });
     </script>
 </body>
