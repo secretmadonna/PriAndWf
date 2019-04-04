@@ -1,0 +1,7 @@
+﻿<#+
+	const string strNamespace="WpfAppCodeGenerator.Model";
+	const string strClassName="Customer";
+	const string strBaseClassName="ModelBase";
+	const string strT="int";
+	const string strPropertyName="Id";
+#>

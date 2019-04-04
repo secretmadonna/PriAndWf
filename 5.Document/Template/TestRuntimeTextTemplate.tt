@@ -1,0 +1,16 @@
+﻿<#@ template language="C#" debug="false" hostspecific="false" culture="zh-CN" #>
+<#@ output extension=".cs" encoding="utf-8" #>
+<#@ include file="Settings.ttinclude" #>
+using System;
+
+namespace <#= strNamespace #>
+{
+	public partial class <#= strClassName #> : <#= strBaseClassName #><<#= strT #>>
+	{
+		public override <#= strT #> <#= strPropertyName #>
+		{
+			get { return base.<#= strPropertyName #>; }
+			set { base.<#= strPropertyName #> = value; }
+		}
+	}
+}
