@@ -129,5 +129,10 @@ namespace PriAndWf.AdminWeb.Controllers
         {
             return View();
         }
+
+        public ActionResult Test16()
+        {
+            return View();
+        }
     }
 }

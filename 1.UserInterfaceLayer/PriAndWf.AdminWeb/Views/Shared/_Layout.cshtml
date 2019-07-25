@@ -25,10 +25,10 @@
     <!-- 4.third party css files -->
     @RenderSection("PagePluginStyles", required: false)<!-- page specific plugin styles -->
     <!-- 5.ace.css -->
-    @Styles.RenderFormat("<link href=\"{0}\" rel=\"stylesheet\" class=\"ace-main-stylesheet\" id=\"main-ace-style\"/>", "~/Content/plugins/assets/css/ace.css")
+    @Styles.RenderFormat("<link type=\"text/css\" rel=\"stylesheet\" href=\"{0}\" class=\"ace-main-stylesheet\" id=\"main-ace-style\" />", "~/Content/plugins/assets/css/ace.css")
     <!-- 6.ace-part2.css -->
     <!--[if lte IE 9]>
-        @Styles.RenderFormat("<link href=\"{0}\" rel=\"stylesheet\" class=\"ace-main-stylesheet\"/>", "~/Content/plugins/assets/css/ace-part2.css")
+        @Styles.RenderFormat("<link type=\"text/css\" rel=\"stylesheet\" href=\"{0}\" class=\"ace-main-stylesheet\"/>", "~/Content/plugins/assets/css/ace-part2.css")
     <![endif]-->
     <!-- 7.ace-skins.css -->
     @*@Styles.Render("~/Content/plugins/assets/css/ace-skins.css")<!-- only if needed -->*@
