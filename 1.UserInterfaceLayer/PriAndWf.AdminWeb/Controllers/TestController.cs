@@ -134,5 +134,11 @@ namespace PriAndWf.AdminWeb.Controllers
         {
             return View();
         }
+
+
+        public ActionResult TestDatatables()
+        {
+            return View();
+        }
     }
 }
