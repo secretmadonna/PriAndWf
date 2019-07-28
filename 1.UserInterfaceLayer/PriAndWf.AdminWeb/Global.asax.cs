@@ -1,5 +1,6 @@
 ﻿using log4net;
 using log4net.Config;
+using PriAndWf.AdminWeb.Filters;
 using System;
 using System.Reflection;
 using System.Web.Mvc;
@@ -31,6 +32,9 @@ namespace PriAndWf.AdminWeb
 
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            //GlobalFilters.Filters.Add(new CustomAuthenticationFilterAttribute());
+            //GlobalFilters.Filters.Add(new CustomAuthorizationFilterAttribute());
+            //GlobalFilters.Filters.Add(new UnifyHandleExceptionAttribute());
         }
         /// <summary>
         /// Application_OnEnd

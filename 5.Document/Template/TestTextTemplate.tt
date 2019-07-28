@@ -1,0 +1,41 @@
+﻿<#@ template language="C#" debug="false" hostspecific="false" culture="zh-CN" #>
+<#@ output extension=".cs" encoding="utf-8" #>
+using System;
+
+namespace WpfAppCodeGenerator.Model
+{
+	/// <summary>
+	/// Customer
+	/// </summary>
+	public class Customer
+	{
+		/// <summary>
+		/// CustomerID
+		/// </summary>
+		public int CustomerID { get; set; }
+		/// <summary>
+		/// NickName
+		/// </summary>
+		public string NickName { get; set; }
+		/// <summary>
+		/// Sex
+		/// </summary>
+		public byte Sex { get; set; }
+		/// <summary>
+		/// Avatar
+		/// </summary>
+		public string Avatar { get; set; }
+		/// <summary>
+		/// CreateDateTime
+		/// </summary>
+		public DateTime CreateDateTime { get; set; }
+		/// <summary>
+		/// Status
+		/// </summary>
+		public byte Status { get; set; }
+		/// <summary>
+		/// OpenID
+		/// </summary>
+		public string OpenID { get; set; }
+	}
+}

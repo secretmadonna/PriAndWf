@@ -58,26 +58,39 @@ namespace PriAndWf.TestWebApi.Controllers
                 msg = RetCode.OK.Description(),
                 data = i.ToString()
             };
-            if (i == 1)//异常
+            var authorization = Request.Headers.Contains("Authorization");
+            if (authorization)
             {
-                throw new Exception("测试异常！！！");
+                //Thread.Sleep(10000);
+                return Request.CreateResponse(HttpStatusCode.OK, r);
             }
-            else if (i == 2)//未授权
+            else
             {
                 r.ret = (int)RetCode.Unauthorized;
                 r.msg = RetCode.Unauthorized.Description();
                 r.data = null;
                 return Request.CreateResponse(HttpStatusCode.Unauthorized, r);
             }
-            else if (i == 3)
-            {
-                Thread.Sleep(10000);
-                return Request.CreateResponse(HttpStatusCode.OK, r);
-            }
-            else
-            {
-                return Request.CreateResponse(HttpStatusCode.OK, r);
-            }
+            //if (i == 1)//异常
+            //{
+            //    throw new Exception("测试异常！！！");
+            //}
+            //else if (i == 2)//未授权
+            //{
+            //    r.ret = (int)RetCode.Unauthorized;
+            //    r.msg = RetCode.Unauthorized.Description();
+            //    r.data = null;
+            //    return Request.CreateResponse(HttpStatusCode.Unauthorized, r);
+            //}
+            //else if (i == 3)
+            //{
+            //    Thread.Sleep(10000);
+            //    return Request.CreateResponse(HttpStatusCode.OK, r);
+            //}
+            //else
+            //{
+            //    return Request.CreateResponse(HttpStatusCode.OK, r);
+            //}
         }
     }
 }
