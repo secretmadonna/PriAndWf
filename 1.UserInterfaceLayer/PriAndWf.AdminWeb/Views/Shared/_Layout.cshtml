@@ -13,7 +13,7 @@
     <title> @ViewBag.Title -@ViewBag.SiteTitle </title>
     <meta name="description" content="@ViewBag.Description" />
 
-    <link rel="icon" type="image/png" href="data:;base64,=" />
+    <link rel="icon" type="image/png" href="@Url.Content("~/favicon.ico")" />@*href="data:;base64,="*@
 
     <!-- list of css files -->
     <!-- 1.bootstrap.css -->
@@ -39,12 +39,6 @@
         @Styles.Render("~/Content/plugins/assets/css/ace-ie.css")
     <![endif]-->
     <!-- 10.inline styles -->
-    <style>
-        .btn-colorpicker {
-            width: 16px;
-            height: 16px;
-        }
-    </style>
     @RenderSection("PageInlineStyles", required: false)
 
     <!-- list of script files -->
@@ -97,11 +91,15 @@
     <![endif]-->
     <!-- 2.bootstrap.js -->
     @Scripts.Render("~/Content/plugins/assets/js/bootstrap.js")
-    <!-- 3.third party js files -->
+    <!-- 3.ie8 canvas if required for plugins such as charts, etc -->
+    <!--[if lte IE 8]>
+        @Scripts.Render("~/Content/plugins/assets/js/excanvas.js")
+    <![endif]-->
+    <!-- 4.third party js files -->
     @RenderSection("PagePluginScripts", required: false)
-    <!-- 4.ace-elements.js & ace.js -->
+    <!-- 5.ace-elements.js & ace.js -->
     @Scripts.Render("~/Content/plugins/assets/js/ace-elements.js", "~/Content/plugins/assets/js/ace.js")
-    <!-- 5.inline javascripts -->
+    <!-- 6.inline javascripts -->
     @RenderSection("PageInlineScripts", required: false)
 </body>
 </html>
