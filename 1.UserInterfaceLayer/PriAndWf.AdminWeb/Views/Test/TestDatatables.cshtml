@@ -1,46 +1,42 @@
-﻿
-@{
-    Layout = null;
+﻿@{
+    ViewBag.Title = "测试：datatables";
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>TestDatatables</title>
-
+@section PagePluginStyles{
     <link href="~/Content/plugins/DataTables/css/jquery.dataTables.css" rel="stylesheet" />
-</head>
-<body>
-    <div class="container">
-        <table id="table_id_example" class="display">
-            <thead>
-                <tr>
-                    <th>Column 1</th>
-                    <th>Column 2</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Row 1 Data 1</td>
-                    <td>Row 1 Data 2</td>
-                </tr>
-                <tr>
-                    <td>Row 2 Data 1</td>
-                    <td>Row 2 Data 2</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <script src="~/Content/plugins/DataTables/js/jquery.js"></script>
+}
+@section PageInlineStyles{
+}
+
+<div class="container">
+    <table id="table_id_example" class="display">
+        <thead>
+            <tr>
+                <th>Column 1</th>
+                <th>Column 2</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Row 1 Data 1</td>
+                <td>Row 1 Data 2</td>
+            </tr>
+            <tr>
+                <td>Row 2 Data 1</td>
+                <td>Row 2 Data 2</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+@section PagePluginScripts{
     <script src="~/Content/plugins/DataTables/js/jquery.dataTables.js"></script>
+}
+@section PageInlineScripts{
     <script>
         $(document).ready(function () {
             $('#table_id_example').DataTable({
-                dom:'lfrtip'
+                dom: 'lfrtip'
             });
         });
     </script>
-</body>
-</html>
+}

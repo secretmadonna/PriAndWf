@@ -13,30 +13,29 @@
     <title> @ViewBag.Title -@ViewBag.SiteTitle </title>
     <meta name="description" content="@ViewBag.Description" />
 
-    <link rel="icon" type="image/png" href="data:;base64,=" />
+    <link rel="icon" type="image/png" href="@Url.Content("~/favicon.ico")" />@*href="data:;base64,="*@
 
-    <!-- bootstrap & fontawesome -->
-    @Styles.Render("~/Content/plugins/bootstrap/css/bootstrap.min.css", "~/Content/plugins/font-awesome/css/font-awesome.min.css")
-
-    <!-- page specific plugin styles -->
-    @RenderSection("PagePluginStyles", required: false)
-
-    <!-- ace styles -->
-    @Styles.RenderFormat("<link href=\"{0}\" rel=\"stylesheet\" class=\"ace-main-stylesheet\" id=\"main-ace-style\"/>", "~/Content/plugins/ace/css/ace.min.css")
-
+    <!-- list of css files -->
+    <!-- 1.bootstrap.css -->
+    @Styles.Render("~/Content/plugins/bootstrap/css/bootstrap.css")
+    <!-- 2.fontawesome.css -->
+    @Styles.Render("~/Content/plugins/font-awesome/css/font-awesome.css")<!-- only if needed -->
+    <!-- 3.third party css files -->
+    @RenderSection("PagePluginStyles", required: false)<!-- page specific plugin styles -->
+    <!-- 4.ace styles -->
+    @Styles.RenderFormat("<link href=\"{0}\" type=\"text/css\" rel=\"stylesheet\" class=\"ace-main-stylesheet\" id=\"main-ace-style\"/>", "~/Content/plugins/ace/css/ace.min.css")
+    <!-- 5.ace-part2.css、ace-ie.css -->
     <!--[if lte IE 9]>
-        @Styles.RenderFormat("<link href=\"{0}\" rel=\"stylesheet\" class=\"ace-main-stylesheet\"/>", "~/Content/plugins/ace/css/ace-part2.min.css")
+        @Styles.RenderFormat("<link href=\"{0}\" type=\"text/css\" rel=\"stylesheet\" class=\"ace-main-stylesheet\"/>", "~/Content/plugins/ace/css/ace-part2.min.css")
         @Styles.Render("~/Content/plugins/ace/css/ace-ie.min.css")
     <![endif]-->
-    <!-- inline styles related to this page -->
+    <!-- 6.inline styles related to this page -->
     @RenderSection("PageInlineStyles", required: false)
 
-    <!-- ace settings handler -->
-    @Scripts.Render("~/Content/plugins/ace/js/ace-extra.min.js")
-
+    <!-- 1.html5shiv.js & respond.js -->
     <!-- HTML5shiv and Respond.js for IE8 to support HTML5 elements and media queries -->
     <!--[if lte IE 8]>
-        @Scripts.Render("~/Content/plugins/html5shiv/html5shiv.min.js", "~/Content/plugins/response/response.min.js")
+        @Scripts.Render("~/Content/plugins/html5shiv/html5shiv.js", "~/Content/plugins/response/response.js")
     <![endif]-->
 </head>
 
@@ -54,16 +53,16 @@
     <!-- list of script files -->
     <!-- 1.jquery.js & jquery1x.js -->
     <!--[if !IE]><!-->
-        @Scripts.Render("~/Content/plugins/jquery/jquery.min.js")
+    @Scripts.Render("~/Content/plugins/jquery/jquery.js")
     <!--<![endif]-->
     <!--[if IE 9]>
-        @Scripts.Render("~/Content/plugins/jquery/jquery.min.js")
+        @Scripts.Render("~/Content/plugins/jquery/jquery.js")
     <![endif]-->
     <!--[if lte IE 8]>
-        @Scripts.Render("~/Content/plugins/jquery/jquery-1.12.4.min.js")
+        @Scripts.Render("~/Content/plugins/jquery/jquery-1.12.4.js")
     <![endif]-->
     <!-- 2.bootstrap.js -->
-    @Scripts.Render("~/Content/plugins/bootstrap/js/bootstrap.min.js")
+    @Scripts.Render("~/Content/plugins/bootstrap/js/bootstrap.js")
     <!-- 3.third party js files -->
     @RenderSection("PagePluginScripts", required: false)
     <!-- 4.inline javascripts -->

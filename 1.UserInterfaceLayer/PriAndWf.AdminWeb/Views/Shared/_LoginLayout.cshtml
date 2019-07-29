@@ -13,32 +13,23 @@
     <title> @ViewBag.Title -@ViewBag.SiteTitle </title>
     <meta name="description" content="@ViewBag.Description" />
 
-    <link rel="icon" type="image/png" href="data:;base64,=" />
+    <link rel="icon" type="image/png" href="@Url.Content("~/favicon.ico")" />@*href="data:;base64,="*@
 
     <!-- list of css files -->
     <!-- 1.bootstrap.css -->
     @Styles.Render("~/Content/plugins/assets/css/bootstrap.css")
     <!-- 2.fontawesome.css -->
     @Styles.Render("~/Content/plugins/assets/css/font-awesome.css")<!-- only if needed -->
-    <!-- 3.ace-fonts.css -->
-    @Styles.Render("~/Content/plugins/assets/css/ace-fonts.css")<!-- you can also use google hosted fonts -->
-    <!-- 4.third party css files -->
+    <!-- 3.third party css files -->
     @RenderSection("PagePluginStyles", required: false)<!-- page specific plugin styles -->
-    <!-- 5.ace.css -->
-    @Styles.RenderFormat("<link href=\"{0}\" rel=\"stylesheet\" class=\"ace-main-stylesheet\" id=\"main-ace-style\"/>", "~/Content/plugins/assets/css/ace.css")
-    <!-- 6.ace-part2.css -->
+    <!-- 4.ace.css -->
+    @Styles.RenderFormat("<link href=\"{0}\" type=\"text/css\" rel=\"stylesheet\" class=\"ace-main-stylesheet\" id=\"main-ace-style\" />", "~/Content/plugins/assets/css/ace.css")
+    <!-- 5.ace-part2.css、ace-ie.css -->
     <!--[if lte IE 9]>
-        @Styles.RenderFormat("<link href=\"{0}\" rel=\"stylesheet\" class=\"ace-main-stylesheet\"/>", "~/Content/plugins/assets/css/ace-part2.css")
-    <![endif]-->
-    <!-- 7.ace-skins.css -->
-    @*@Styles.Render("~/Content/plugins/assets/css/ace-skins.css")<!-- only if needed -->*@
-    <!-- 8.ace-rtl.css -->
-    @Styles.Render("~/Content/plugins/assets/css/ace-rtl.css")<!-- only if needed -->
-    <!-- 9.ace-ie.css -->
-    <!--[if lte IE 9]>
+        @Styles.RenderFormat("<link href=\"{0}\" type=\"text/css\" rel=\"stylesheet\" class=\"ace-main-stylesheet\"/>", "~/Content/plugins/assets/css/ace-part2.css")
         @Styles.Render("~/Content/plugins/assets/css/ace-ie.css")
     <![endif]-->
-    <!-- 10.inline styles -->
+    <!-- 6.inline styles related to this page -->
     @RenderSection("PageInlineStyles", required: false)
 
     <!-- list of script files -->

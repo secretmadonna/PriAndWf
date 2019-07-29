@@ -708,7 +708,7 @@
     <Content Include="Content\plugins\layui\font\iconfont.eot" />
     <Content Include="Content\plugins\layui\font\iconfont.ttf" />
     <Content Include="Content\plugins\layui\font\iconfont.woff" />
-    <Content Include="Views\Shared\_Layout.AceRelease.cshtml" />
+    <Content Include="Views\Shared\_Layout.1.4.0.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\_LoginLayout.cshtml" />
     <Content Include="Views\Shared\_PartialBreadcrumbs.cshtml" />
@@ -717,7 +717,7 @@
     <Content Include="Views\Shared\_PartialSetting.cshtml" />
     <Content Include="Views\Shared\_PartialSidebar.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\_LoginLayout.AceRelease.cshtml" />
+    <Content Include="Views\Shared\_LoginLayout.1.4.0.cshtml" />
     <Content Include="log4net.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
