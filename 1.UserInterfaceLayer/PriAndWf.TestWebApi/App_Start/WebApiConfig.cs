@@ -1,5 +1,6 @@
 ﻿using PriAndWf.TestWebApi.Core;
 using System.Configuration;
+using System.Linq;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using System.Web.Http.ExceptionHandling;
@@ -11,12 +12,17 @@ namespace PriAndWf.TestWebApi
         public static void Register(HttpConfiguration config)
         {
             // Web API 配置和服务
-            config.Services.Add(typeof(IExceptionLogger), new CustomExceptionLogger());
+            //config.Services.Add(typeof(IExceptionLogger), new CustomExceptionLogger());
             config.Services.Replace(typeof(IExceptionHandler), new CustomExceptionHandler());
+            //System.Web.Http.ExceptionHandling.ExceptionLogger
+            //System.Web.Http.ExceptionHandling.ExceptionHandler System.Web.Http.WebHost.WebHostExceptionHandler System.Web.Http.ExceptionHandling.DefaultExceptionHandler
+            //var services = config.Services.GetServices(typeof(IExceptionHandler));
+            //config.Services.Remove(typeof(IExceptionHandler), services);
 
-            config.Filters.Add(new CustomAuthorizationFilterAttribute());
-            config.Filters.Add(new CustomActionFilterAttribute());
-            config.Filters.Add(new CustomExceptionFilterAttribute());
+
+            //config.Filters.Add(new CustomAuthorizationFilterAttribute());
+            //config.Filters.Add(new CustomActionFilterAttribute());
+            //config.Filters.Add(new CustomExceptionFilterAttribute());
 
             config.Formatters.Insert(0, new JsonpMediaTypeFormatter());
 

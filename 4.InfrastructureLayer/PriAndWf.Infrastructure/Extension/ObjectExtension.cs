@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
+using System.Reflection;
+using System.Text;
 
 namespace PriAndWf.Infrastructure.Extension
 {
@@ -67,6 +70,51 @@ namespace PriAndWf.Infrastructure.Extension
             var attr = Attribute.GetCustomAttribute(fieldInfo, typeof(DescriptionAttribute), false) as DescriptionAttribute;
             enumKeyValues.Add(key, attr.Description);
             return attr.Description;
+        }
+        #endregion
+
+        #region MethodInfo 扩展
+        public static string DescInfo(this MethodInfo method, string preMsg = null)
+        {
+            var sb = new StringBuilder();
+            var parameterStrs = new List<string>();
+            var parameters = method.GetParameters();
+            if (parameters != null)
+            {
+                foreach (var p in parameters)
+                {
+                    parameterStrs.Add(p.ToString());
+                }
+            }
+            sb.Append(preMsg ?? string.Empty);
+            sb.AppendFormat("{0} {1}.{2}({3})", method.ReturnType.FullName, method.ReflectedType.FullName, method.Name, string.Join(", ", parameterStrs));
+            return sb.ToString();
+        }
+        #endregion
+
+        #region StackTrace 扩展
+        public static string DescInfo(this StackTrace stackTrace, string preMsg = null)
+        {
+            var sb = new StringBuilder();
+            sb.AppendLine(preMsg ?? string.Empty);
+            var sfs = stackTrace?.GetFrames();
+            if (sfs != null)
+            {
+                foreach (var sf in sfs)
+                {
+                    var method = (MethodInfo)sf.GetMethod();
+                    var fileName = sf.GetFileName();
+                    if (string.IsNullOrWhiteSpace(fileName))
+                    {
+                        sb.AppendLine(string.Format("{0}", method.DescInfo(), sf.GetILOffset(), sf.GetNativeOffset()));
+                    }
+                    else
+                    {
+                        sb.AppendLine(string.Format("{0} in file:line:column {3}:{4}:{5}", method.DescInfo(), sf.GetILOffset(), sf.GetNativeOffset(), sf.GetFileName(), sf.GetFileLineNumber(), sf.GetFileColumnNumber()));
+                    }
+                }
+            }
+            return sb.ToString();
         }
         #endregion
     }
