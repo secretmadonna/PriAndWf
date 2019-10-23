@@ -1,6 +1,6 @@
 ﻿using log4net;
 using PriAndWf.Infrastructure.Extension;
-using System.Diagnostics;
+using System;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
@@ -14,28 +14,18 @@ namespace PriAndWf.TestWebApi.Core
 
         public override void Handle(ExceptionHandlerContext context)
         {
-            //var method = (MethodInfo)MethodBase.GetCurrentMethod();
-            //logger.Error(method.DescInfo(), context.Exception);
-            var stackTrace = new StackTrace(true);
-            logger.Error(stackTrace.DescInfo(), context.Exception);
+            var method = (MethodInfo)MethodBase.GetCurrentMethod();
+            logger.ErrorFormat("{0}{1}{2}{3}", method.DescInfo(), Environment.NewLine, context.Exception.ToString(), Environment.NewLine);
 
-            //base.Handle(context);
+            base.Handle(context);
         }
         public override Task HandleAsync(ExceptionHandlerContext context, CancellationToken cancellationToken)
         {
-            var method = (MethodInfo)MethodBase.GetCurrentMethod();
-            logger.Error(method.DescInfo()); //logger.Error(method.DescInfo(), context.Exception);
-
-            //return base.HandleAsync(context, cancellationToken);
-            return null;
+            return base.HandleAsync(context, cancellationToken);
         }
         public override bool ShouldHandle(ExceptionHandlerContext context)
         {
-            var method = (MethodInfo)MethodBase.GetCurrentMethod();
-            logger.Error(method.DescInfo()); //logger.Error(method.DescInfo(), context.Exception);
-
-            //return base.ShouldHandle(context);
-            return false;
+            return base.ShouldHandle(context);
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using log4net;
 using PriAndWf.Infrastructure.Extension;
-using System.Net;
-using System.Net.Http;
+using System;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
@@ -17,15 +16,12 @@ namespace PriAndWf.TestWebApi.Core
         public override void OnAuthorization(HttpActionContext actionContext)
         {
             var method = (MethodInfo)MethodBase.GetCurrentMethod();
-            logger.Info(method.DescInfo());
+            logger.Info(method.DescInfo() + Environment.NewLine);
 
             base.OnAuthorization(actionContext);
         }
         public override Task OnAuthorizationAsync(HttpActionContext actionContext, CancellationToken cancellationToken)
         {
-            var method = (MethodInfo)MethodBase.GetCurrentMethod();
-            logger.Info(method.DescInfo());
-
             return base.OnAuthorizationAsync(actionContext, cancellationToken);
         }
     }

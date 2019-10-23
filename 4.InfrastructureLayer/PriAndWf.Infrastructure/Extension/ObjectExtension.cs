@@ -74,7 +74,7 @@ namespace PriAndWf.Infrastructure.Extension
         #endregion
 
         #region MethodInfo 扩展
-        public static string DescInfo(this MethodInfo method, string preMsg = null)
+        public static string DescInfo(this MethodInfo method)
         {
             var sb = new StringBuilder();
             var parameterStrs = new List<string>();
@@ -86,17 +86,15 @@ namespace PriAndWf.Infrastructure.Extension
                     parameterStrs.Add(p.ToString());
                 }
             }
-            sb.Append(preMsg ?? string.Empty);
             sb.AppendFormat("{0} {1}.{2}({3})", method.ReturnType.FullName, method.ReflectedType.FullName, method.Name, string.Join(", ", parameterStrs));
             return sb.ToString();
         }
         #endregion
 
         #region StackTrace 扩展
-        public static string DescInfo(this StackTrace stackTrace, string preMsg = null)
+        public static string DescInfo(this StackTrace stackTrace)
         {
             var sb = new StringBuilder();
-            sb.AppendLine(preMsg ?? string.Empty);
             var sfs = stackTrace?.GetFrames();
             if (sfs != null)
             {
@@ -106,15 +104,15 @@ namespace PriAndWf.Infrastructure.Extension
                     var fileName = sf.GetFileName();
                     if (string.IsNullOrWhiteSpace(fileName))
                     {
-                        sb.AppendLine(string.Format("{0}", method.DescInfo(), sf.GetILOffset(), sf.GetNativeOffset()));
+                        sb.AppendFormat("{0}{1}", method.DescInfo(), Environment.NewLine);
                     }
                     else
                     {
-                        sb.AppendLine(string.Format("{0} in file:line:column {3}:{4}:{5}", method.DescInfo(), sf.GetILOffset(), sf.GetNativeOffset(), sf.GetFileName(), sf.GetFileLineNumber(), sf.GetFileColumnNumber()));
+                        sb.AppendFormat("{0} in file:line:column {1}:{2}:{3}{4}", method.DescInfo(), sf.GetFileName(), sf.GetFileLineNumber(), sf.GetFileColumnNumber(), Environment.NewLine);
                     }
                 }
             }
-            return sb.ToString();
+            return sb.ToString().TrimEnd(Environment.NewLine.ToArray());
         }
         #endregion
     }

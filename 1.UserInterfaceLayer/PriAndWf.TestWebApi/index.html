@@ -22,6 +22,8 @@
         window.document.write(window.navigator.userAgent);
 
         $(function () {
+            var baseUrl = "http://localhost:63152/api/";
+
             var ajaxRetryForTimeout = function (options) {
                 var beforeSend = options.beforeSend, success = options.success, error = options.error, complete = options.complete;
                 var totalAjaxRetryCount = (options.retryCount >= 0 ? options.retryCount : 3), currentAjaxRetryCount = 0;
@@ -83,7 +85,7 @@
                                     if (data.ret === 0) {
                                         $.extend(true, realOptions, {
                                             headers: {
-                                                'Authorization': 'Bearer ' + data.data.AccessToken
+                                                "Authorization": "Bearer " + data.data.AccessToken
                                             }
                                         });
                                         doAjax();
@@ -126,11 +128,11 @@
             var ajaxOptions = {
                 retryCount: 2,
                 timeout: 5000,
-                url: 'http://www.dltest.com:8088/api/test',
-                type: 'get',
+                url: baseUrl+"test",
+                type: "get",
                 cache: false,
-                data: { 'id': 1 },
-                dataType: 'json',
+                data: { "id": 1 },
+                dataType: "json",
                 beforeSend: function (jqXHR, settings) {
                     console.log(arguments);
                 },
@@ -146,11 +148,11 @@
             }, ajaxOptionsError401 = {
                 async: true,
                 timeout: 5000,
-                url: 'http://www.dltest.com:8088/api/account/refreshtoken',
-                type: 'get',
+                url: "http://www.dltest.com:8088/api/account/refreshtoken",
+                type: "get",
                 cache: false,
-                data: { 'refreshToken': '2' },
-                dataType: 'json'
+                data: { "refreshToken": "2" },
+                dataType: "json"
             };
             //ajaxRetryForTimeout(ajaxOptions);
             ajaxForError401(ajaxOptions, ajaxOptionsError401);

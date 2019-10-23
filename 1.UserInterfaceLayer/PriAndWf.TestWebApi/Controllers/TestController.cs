@@ -14,7 +14,21 @@ namespace PriAndWf.TestWebApi.Controllers
         [HttpGet]
         public IHttpActionResult Get()
         {
-            throw new Exception("测试异常！！！");
+            return Ok(new
+            {
+                User.Identity.AuthenticationType,
+                User.Identity.IsAuthenticated,
+                User.Identity.Name
+            });
+
+
+
+
+
+
+
+
+
             var context = (HttpContextBase)Request.Properties["MS_HttpContext"];
             var random = context.Application["DfTestRandom"] as Random;
             var i = random.Next(1, 5);//1.2.3.4
@@ -38,7 +52,7 @@ namespace PriAndWf.TestWebApi.Controllers
             }
             else if (i == 3)
             {
-                Thread.Sleep(5000);
+                Thread.Sleep(6000);
                 return Ok(r);
             }
             else

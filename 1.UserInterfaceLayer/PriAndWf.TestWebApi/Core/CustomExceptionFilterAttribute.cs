@@ -1,6 +1,6 @@
 ﻿using log4net;
 using PriAndWf.Infrastructure.Extension;
-using System.Diagnostics;
+using System;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
@@ -14,18 +14,13 @@ namespace PriAndWf.TestWebApi.Core
 
         public override void OnException(HttpActionExecutedContext actionExecutedContext)
         {
-            //var method = (MethodInfo)MethodBase.GetCurrentMethod();
-            //logger.Error(method.DescInfo(), actionExecutedContext.Exception);
-            var stackTrace = new StackTrace(true);
-            logger.Error(stackTrace.DescInfo(), actionExecutedContext.Exception);
+            var method = (MethodInfo)MethodBase.GetCurrentMethod();
+            logger.ErrorFormat("{0}{1}{2}{3}", method.DescInfo(), Environment.NewLine, actionExecutedContext.Exception.ToString(), Environment.NewLine);
 
             base.OnException(actionExecutedContext);
         }
         public override Task OnExceptionAsync(HttpActionExecutedContext actionExecutedContext, CancellationToken cancellationToken)
         {
-            var method = (MethodInfo)MethodBase.GetCurrentMethod();
-            logger.Error(method.DescInfo()); //logger.Error(method.DescInfo(), actionExecutedContext.Exception);
-
             return base.OnExceptionAsync(actionExecutedContext, cancellationToken);
         }
     }

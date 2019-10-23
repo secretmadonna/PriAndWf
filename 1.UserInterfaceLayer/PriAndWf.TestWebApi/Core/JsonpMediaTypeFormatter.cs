@@ -56,7 +56,7 @@ namespace PriAndWf.TestWebApi.Core
                     base.WriteToStreamAsync(type, value, writeStream, content, transportContext).ContinueWith(t =>
                     {
                         streamWriter.Write($")");//)
-                            streamWriter.Flush();
+                        streamWriter.Flush();
                         streamWriter.Close();
                         streamWriter.Dispose();
                     });

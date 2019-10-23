@@ -16,16 +16,15 @@ namespace PriAndWf.TestWebApi.Core
         public Task AuthenticateAsync(HttpAuthenticationContext context, CancellationToken cancellationToken)
         {
             var method = (MethodInfo)MethodBase.GetCurrentMethod();
-            logger.Info(method.DescInfo());
-
+            logger.Info(method.DescInfo() + Environment.NewLine);
             throw new NotImplementedException();
         }
         public Task ChallengeAsync(HttpAuthenticationChallengeContext context, CancellationToken cancellationToken)
         {
             var method = (MethodInfo)MethodBase.GetCurrentMethod();
-            logger.Info(method.DescInfo());
+            logger.Info(method.DescInfo() + Environment.NewLine);
 
-            throw new NotImplementedException();
+            return Task.FromResult(0);
         }
     }
 }

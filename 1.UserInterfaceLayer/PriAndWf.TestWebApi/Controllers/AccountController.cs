@@ -8,16 +8,16 @@ using System.Web.Http;
 
 namespace PriAndWf.TestWebApi.Controllers
 {
-    [RoutePrefix("api")]
+    [RoutePrefix("api/account")]
     public class AccountController : ApiController
     {
-        [HttpGet, HttpPost, Route("account/gettoken")]
-        public IHttpActionResult Login(string username, string password)
+        [HttpGet, HttpPost, Route("gettoken")]
+        public IHttpActionResult GetToken(string username, string password)
         {
             return Ok();
         }
 
-        [HttpGet, HttpPost, Route("account/refreshtoken")]
+        [HttpGet, HttpPost, Route("refreshtoken")]
         public IHttpActionResult RefreshToken(string refreshToken)
         {
             var context = (HttpContextBase)Request.Properties["MS_HttpContext"];
