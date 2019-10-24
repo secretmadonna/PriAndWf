@@ -14,11 +14,27 @@ namespace PriAndWf.TestWebApi.Controllers
         [HttpGet]
         public IHttpActionResult Get()
         {
+            //WebClient;
+            //WebUtility;
+            //WebRequest;
+            //HttpWebRequest;
+            //HttpContextBase;
+            //HttpContext;
+            //HttpRequestBase;
+            //HttpRequest;
+            var ctx = (HttpContextBase)Request.Properties["MS_HttpContext"];
+            var str = "`-=  []\\;',./ ~!@#$%^&*()_+{}|:\"<>?";
+            // UrlEncode : "%60-%3D+++%5B%5D%5C%3B+%27%2C.%2F+%7E!%40%23%24%25%5E%26*()_%2B%7B%7D%7C%3A%22%3C%3E%3F"
+            // HtmlEncode : "`-=   []\\; &#39;,./ ~!@#$%^&amp;*()_+{}|:&quot;&lt;&gt;?"
+            var str1 = HttpUtility.UrlEncode(str);
+            var str2 = HttpUtility.HtmlEncode(str);
             return Ok(new
             {
                 User.Identity.AuthenticationType,
                 User.Identity.IsAuthenticated,
-                User.Identity.Name
+                User.Identity.Name,
+                str1,
+                str2
             });
 
 

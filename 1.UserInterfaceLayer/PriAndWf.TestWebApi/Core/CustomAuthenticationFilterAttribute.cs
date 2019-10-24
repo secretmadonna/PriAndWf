@@ -17,6 +17,10 @@ namespace PriAndWf.TestWebApi.Core
         {
             var method = (MethodInfo)MethodBase.GetCurrentMethod();
             logger.Info(method.DescInfo() + Environment.NewLine);
+
+            var request = context.Request;
+            var authorization = request.Headers.Authorization;
+
             throw new NotImplementedException();
         }
         public Task ChallengeAsync(HttpAuthenticationChallengeContext context, CancellationToken cancellationToken)

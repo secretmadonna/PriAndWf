@@ -17,9 +17,10 @@ namespace PriAndWf.TestWebApi
             //config.Services.Add(typeof(IExceptionLogger), new CustomExceptionLogger());
             config.Services.Replace(typeof(IExceptionHandler), new CustomExceptionHandler());
 
+            config.Filters.Add(new CustomAuthenticationFilterAttribute());
             config.Filters.Add(new CustomAuthorizationFilterAttribute());
             config.Filters.Add(new CustomActionFilterAttribute());
-            //config.Filters.Add(new CustomExceptionFilterAttribute());
+            config.Filters.Add(new CustomExceptionFilterAttribute());
 
             config.Formatters.Insert(0, new JsonpMediaTypeFormatter());
 
