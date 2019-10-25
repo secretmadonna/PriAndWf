@@ -6,7 +6,7 @@ using System.Text;
 namespace PriAndWf.Infrastructure.Helper
 {
     /// <summary>
-    /// 注意：1、KEY 必须是XML的行式，返回的是字符串；2、该加密方式有长度限制的。
+    /// 注意：1、KEY 必须是XML的形式，返回的是字符串；2、该加密方式有长度限制的。
     /// </summary>
     public class RsaHelper
     {
@@ -18,7 +18,7 @@ namespace PriAndWf.Infrastructure.Helper
         /// </summary>
         /// <param name="xmlPrivateKey">私钥</param>
         /// <param name="xmlPublicKey">公钥</param>
-        public void GenerateKey(out string xmlPrivateKey, out string xmlPublicKey)
+        public static void GenerateKey(out string xmlPrivateKey, out string xmlPublicKey)
         {
             var rsaCsp = new RSACryptoServiceProvider();
             xmlPrivateKey = rsaCsp.ToXmlString(true);
@@ -27,7 +27,7 @@ namespace PriAndWf.Infrastructure.Helper
         #endregion
 
         #region RSA 加密
-        public string Encrypt(string plaintext, string xmlPublicKey)
+        public static string Encrypt(string plaintext, string xmlPublicKey)
         {
             RSACryptoServiceProvider rsaCsp = new RSACryptoServiceProvider();
             rsaCsp.FromXmlString(xmlPublicKey);
@@ -36,7 +36,7 @@ namespace PriAndWf.Infrastructure.Helper
             var ciphertext = Convert.ToBase64String(ciphertextBa);//Encoding.Default.GetString(ciphertextBa);
             return ciphertext;
         }
-        public string Encrypt(byte[] plaintextBa, string xmlPublicKey)
+        public static string Encrypt(byte[] plaintextBa, string xmlPublicKey)
         {
             RSACryptoServiceProvider rsaCsp = new RSACryptoServiceProvider();
             rsaCsp.FromXmlString(xmlPublicKey);
@@ -47,7 +47,7 @@ namespace PriAndWf.Infrastructure.Helper
         #endregion
 
         #region RSA 解密
-        public string Decrypt(string ciphertext, string xmlPrivateKey)
+        public static string Decrypt(string ciphertext, string xmlPrivateKey)
         {
             RSACryptoServiceProvider rsaCsp = new RSACryptoServiceProvider();
             rsaCsp.FromXmlString(xmlPrivateKey);
@@ -56,7 +56,7 @@ namespace PriAndWf.Infrastructure.Helper
             var plaintext = Encoding.Default.GetString(ciphertextBa);
             return plaintext;
         }
-        public string Decrypt(byte[] ciphertextBa, string xmlPrivateKey)
+        public static string Decrypt(byte[] ciphertextBa, string xmlPrivateKey)
         {
             RSACryptoServiceProvider rsaCsp = new RSACryptoServiceProvider();
             rsaCsp.FromXmlString(xmlPrivateKey);
@@ -71,27 +71,27 @@ namespace PriAndWf.Infrastructure.Helper
         #region RSA 签名 验签
 
         #region 生成摘要
-        public byte[] GetByteDigest(string plaintext)
+        public static byte[] GetByteDigest(string plaintext)
         {
             var md5 = HashAlgorithm.Create("MD5");
             var plaintextBa = Encoding.Default.GetBytes(plaintext);
             var plaintextDigestBa = md5.ComputeHash(plaintextBa);
             return plaintextDigestBa;
         }
-        public string GetStringDigest(string plaintext)
+        public static string GetStringDigest(string plaintext)
         {
             var plaintextDigestBa = GetByteDigest(plaintext);
             var plaintextDigest = Convert.ToBase64String(plaintextDigestBa);
             return plaintextDigest;
         }
-        public byte[] GetByteDigest(Stream stream)
+        public static byte[] GetByteDigest(Stream stream)
         {
             var md5 = HashAlgorithm.Create("MD5");
             var plaintextDigestBa = md5.ComputeHash(stream);
             stream.Close();
             return plaintextDigestBa;
         }
-        public string GetStringDigest(Stream stream)
+        public static string GetStringDigest(Stream stream)
         {
             var plaintextDigestBa = GetByteDigest(stream);
             var plaintextDigest = Convert.ToBase64String(plaintextDigestBa);
@@ -100,7 +100,7 @@ namespace PriAndWf.Infrastructure.Helper
         #endregion
 
         #region RSA 签名
-        public byte[] SignToByte(byte[] digest, string xmlPrivateKey)
+        public static byte[] SignToByte(byte[] digest, string xmlPrivateKey)
         {
             var rsaCsp = new RSACryptoServiceProvider();
             rsaCsp.FromXmlString(xmlPrivateKey);
@@ -109,19 +109,19 @@ namespace PriAndWf.Infrastructure.Helper
             var signatureBa = rsaPsf.CreateSignature(digest);
             return signatureBa;
         }
-        public string SignToString(byte[] digest, string xmlPrivateKey)
+        public static string SignToString(byte[] digest, string xmlPrivateKey)
         {
             var signatureBa = SignToByte(digest, xmlPrivateKey);
             var signature = Convert.ToBase64String(signatureBa);
             return signature;
         }
-        public byte[] SignToByte(string digest, string xmlPrivateKey)
+        public static byte[] SignToByte(string digest, string xmlPrivateKey)
         {
             var digestBa = Convert.FromBase64String(digest);
             var signatureBa = SignToByte(digestBa, xmlPrivateKey);
             return signatureBa;
         }
-        public string SignToString(string digest, string xmlPrivateKey)
+        public static string SignToString(string digest, string xmlPrivateKey)
         {
             var digestBa = Convert.FromBase64String(digest);
             var signatureBa = SignToByte(digestBa, xmlPrivateKey);
@@ -131,7 +131,7 @@ namespace PriAndWf.Infrastructure.Helper
         #endregion
 
         #region RSA 验签
-        public bool ValidSignature(byte[] digest, byte[] signature, string xmlPublicKey)
+        public static bool ValidSignature(byte[] digest, byte[] signature, string xmlPublicKey)
         {
             var rsaCsp = new RSACryptoServiceProvider();
             rsaCsp.FromXmlString(xmlPublicKey);
@@ -140,17 +140,17 @@ namespace PriAndWf.Infrastructure.Helper
             var isValid = rsaPsd.VerifySignature(digest, signature);
             return isValid;
         }
-        public bool ValidSignature(byte[] digest, string signature, string xmlPublicKey)
+        public static bool ValidSignature(byte[] digest, string signature, string xmlPublicKey)
         {
             var signatureBa = Convert.FromBase64String(signature);
             return ValidSignature(digest, signatureBa, xmlPublicKey);
         }
-        public bool ValidSignature(string digest, byte[] signature, string xmlPublicKey)
+        public static bool ValidSignature(string digest, byte[] signature, string xmlPublicKey)
         {
             var digestBa = Convert.FromBase64String(digest);
             return ValidSignature(digestBa, signature, xmlPublicKey);
         }
-        public bool ValidSignature(string digest, string signature, string xmlPublicKey)
+        public static bool ValidSignature(string digest, string signature, string xmlPublicKey)
         {
             var digestBa = Convert.FromBase64String(digest);
             var signatureBa = Convert.FromBase64String(signature);

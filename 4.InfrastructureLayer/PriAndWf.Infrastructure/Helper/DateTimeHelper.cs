@@ -11,8 +11,8 @@ namespace PriAndWf.Infrastructure.Helper
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="startTime"></param>
-        /// <param name="endTime"></param>
+        /// <param name="startTime">起始时间</param>
+        /// <param name="endTime">截止时间</param>
         /// <returns></returns>
         public static DateTime GetRandomTime(DateTime startTime, DateTime endTime)
         {
@@ -24,9 +24,8 @@ namespace PriAndWf.Infrastructure.Helper
                 throw new ArgumentException(eMsg);
             }
             var r = new Random();
-            r.NextDouble();
-            //var dt = startTime.AddSeconds();
-            return startTime;
+            var dt = startTime.AddSeconds(r.NextDouble() * totalSeconds);
+            return dt;
         }
     }
 }

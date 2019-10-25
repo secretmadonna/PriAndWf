@@ -105,8 +105,9 @@
     <Compile Include="Controllers\DatatablesController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Core\DigestAuthenticationFilterAttribute.cs" />
     <Compile Include="Core\CustomActionFilterAttribute.cs" />
-    <Compile Include="Core\CustomAuthenticationFilterAttribute.cs" />
+    <Compile Include="Core\BasicAuthenticationFilterAttribute.cs" />
     <Compile Include="Core\CustomAuthorizationFilterAttribute.cs" />
     <Compile Include="Core\CustomExceptionFilterAttribute.cs" />
     <Compile Include="Core\CustomExceptionHandler.cs" />
@@ -142,6 +143,10 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\2.ApplicationLayer\PriAndWf.Application\PriAndWf.Application.csproj">
+      <Project>{857F75EE-D2CD-4A36-904A-C4A6BA86AC7C}</Project>
+      <Name>PriAndWf.Application</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\4.InfrastructureLayer\PriAndWf.Infrastructure\PriAndWf.Infrastructure.csproj">
       <Project>{c1caf585-bcd5-4b7e-99c0-ff2f2b8a732f}</Project>
       <Name>PriAndWf.Infrastructure</Name>

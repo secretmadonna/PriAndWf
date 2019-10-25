@@ -128,7 +128,7 @@
             var ajaxOptions = {
                 retryCount: 2,
                 timeout: 5000,
-                url: baseUrl+"test",
+                url: baseUrl + "test",
                 type: "get",
                 cache: false,
                 data: { "id": 1 },
@@ -155,7 +155,82 @@
                 dataType: "json"
             };
             //ajaxRetryForTimeout(ajaxOptions);
-            ajaxForError401(ajaxOptions, ajaxOptionsError401);
+            //ajaxForError401(ajaxOptions, ajaxOptionsError401);
+
+            var xhrDfd = jQuery.ajax({
+                //timeout: 5000,
+                url: baseUrl + "test",
+                type: "get",
+                cache: false,
+                data: { "id": 1 },
+                dataType: "json",
+                beforeSend: function (jqXHR, settings) {
+                    console.log("beforeSend : %o %o", jqXHR, settings);
+                    //jqXHR.setRequestHeader("Authorization", "Basic dGVzdDoxMjM0NTY=");
+                },
+                success: function (data, textStatus, jqXHR) {
+                    console.log("success : %o %s %o", data, textStatus, jqXHR);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log("error : %o %s %s", jqXHR, textStatus, errorThrown);
+                },
+                complete: function (jqXHR, textStatus) {
+                    console.log("complete : %o %s", jqXHR, textStatus);
+                }
+            }).done(function () {
+                console.log("done : %o", arguments);
+            }).fail(function () {//error
+                console.log("fail : %o", arguments);
+            }).always(function () {
+                console.log("always : %o", arguments);
+            }).done(function () {
+                console.log("done2 : %o", arguments);
+            }).fail(function () {
+                console.log("fail2 : %o", arguments);
+            }).always(function () {
+                console.log("always2 : %o", arguments);
+            });
+            //console.log(xhrDfd);
+
+            var thenXhrDfd = xhrDfd.then(function () {//then之后，返回的对象发生了改变
+                console.log("then done : %o", arguments);
+            }, function () {
+                console.log("then fail : %o", arguments);
+            });
+            //console.log(thenXhrDfd);//不是标准的 Deferred
+
+
+
+
+
+
+
+            //function beforeStart() {
+            //    console.log("beforeStart : %o", arguments);
+            //};
+            //// "pending" : Deferred 对象是尚未完成状态
+            //// "resolved" : Deferred 对象是在解决状态。这意味着对象的 deferred.resolve() 或者 deferred.resolveWith() 已被调用并且 doneCallbacks 已被调用（或在被调用的过程中）
+            //// "rejected" : Deferred 对象是在被拒绝状态。这意味着对象的 deferred.reject() 或者 deferred.rejectWith() 已被调用并且 failCallbacks 已被调用（或在被调用的过程中）
+            //var dfd = $.Deferred(beforeStart);
+            //dfd.then(function () {
+            //    console.log("then done : %o", arguments);
+            //}, function () {
+            //    console.log("then fail : %o", arguments);
+            //}, function () {
+            //    console.log("then progress : %o", arguments);
+            //}).done(function () {
+            //    console.log("done : %o", arguments);
+            //}).fail(function () {
+            //    console.log("fail : %o", arguments);
+            //}).progress(function () {
+            //    console.log("progress : %o", arguments);
+            //}).always(function () {
+            //    console.log("always : %o", arguments);
+            //});
+            //console.log(dfd);//标准的 Deferred
+            //dfd.notify("notify1").notify("notify2").notify("notify3").resolve("resolve");
+            ////dfd.resolve("resolve");
+            ////dfd.reject("reject");
         });
     </script>
 </body>

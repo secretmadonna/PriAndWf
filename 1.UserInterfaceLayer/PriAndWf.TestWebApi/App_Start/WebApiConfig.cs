@@ -11,13 +11,15 @@ namespace PriAndWf.TestWebApi
     {
         public static void Register(HttpConfiguration config)
         {
+            //config.SuppressHostPrincipal();
+
             // Web API 配置和服务
             //System.Web.Http.ExceptionHandling.ExceptionLogger
             //System.Web.Http.ExceptionHandling.ExceptionHandler System.Web.Http.WebHost.WebHostExceptionHandler System.Web.Http.ExceptionHandling.DefaultExceptionHandler
             //config.Services.Add(typeof(IExceptionLogger), new CustomExceptionLogger());
             config.Services.Replace(typeof(IExceptionHandler), new CustomExceptionHandler());
 
-            config.Filters.Add(new CustomAuthenticationFilterAttribute());
+            config.Filters.Add(new DigestAuthenticationFilterAttribute());
             config.Filters.Add(new CustomAuthorizationFilterAttribute());
             config.Filters.Add(new CustomActionFilterAttribute());
             config.Filters.Add(new CustomExceptionFilterAttribute());
