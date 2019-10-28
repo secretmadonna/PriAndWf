@@ -34,8 +34,13 @@
       <HintPath>..\..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="StackExchange.Redis, Version=1.2.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\StackExchange.Redis.1.2.6\lib\net45\StackExchange.Redis.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -47,6 +52,7 @@
     <Compile Include="Base\ExceptionBase.cs" />
     <Compile Include="Base\ServiceBase.cs" />
     <Compile Include="Helper\Base64Helper.cs" />
+    <Compile Include="Helper\RedisHelper.cs" />
     <Compile Include="Helper\RsaHelper.cs" />
     <Compile Include="Wait\DllInvoke.cs" />
     <Compile Include="Extension\LockExtension.cs" />
