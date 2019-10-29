@@ -40,18 +40,18 @@ namespace PriAndWf.TestWebApi.Core
                 var authorization = request.Headers.Authorization;
                 if (authorization != null)
                 {
-                    if (authorization.Scheme == authenticationScheme)
+                    if (authorization.Scheme.Equals(authenticationScheme))
                     {
-                        //WWW-Authenticate:Basic 【Base64(loginName:password)】"（备注：【】中是伪代码）
+                        //WWW-Authenticate:Basic 【Base64(userid:password)】"（备注：【】中是伪代码。userid 不能包含冒号（:））
                         var authorizationParameter = authorization.Parameter;
-                        var loginNameAndPasswordStr = Encoding.Default.GetString(Convert.FromBase64String(authorizationParameter));
-                        var loginNameAndPasswordArray = loginNameAndPasswordStr.Split(new char[] { ':' }, 2, StringSplitOptions.RemoveEmptyEntries);
-                        if (loginNameAndPasswordArray.Length == 2)
+                        var useridAndPasswordStr = Encoding.Default.GetString(Convert.FromBase64String(authorizationParameter));
+                        var useridAndPasswordArray = useridAndPasswordStr.Split(new char[] { ':' }, 2, StringSplitOptions.RemoveEmptyEntries);
+                        if (useridAndPasswordArray.Length == 2)
                         {
                             //登录名和密码：区分大小写？？？
-                            var loginName = loginNameAndPasswordArray[0];
-                            var password = loginNameAndPasswordArray[1];
-                            var user = userApplicationService.GetByLoginName(loginName);
+                            var userid = useridAndPasswordArray[0];
+                            var password = useridAndPasswordArray[1];
+                            var user = userApplicationService.GetByLoginName(userid);
                             if (user != null && user.Password.Equals(password))
                             {
                                 var principal = new GenericPrincipal(new GenericIdentity(user.UserName, authenticationScheme), null);

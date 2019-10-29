@@ -15,8 +15,12 @@
 
         <script type="text/javascript" src="/assets/global/plugins/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>*@
 
+    <link href="~/Content/plugins/assets/css/bootstrap-datepicker3.css" rel="stylesheet" />
+
+    <link href="~/Content/plugins/assets/css/daterangepicker.css" rel="stylesheet" />
 
     <link href="~/Content/plugins/assets/css/bootstrap-timepicker.css" rel="stylesheet" />
+
     <link href="~/Content/plugins/assets/css/bootstrap-datetimepicker.css" rel="stylesheet" />
 }
 
@@ -511,12 +515,12 @@
 </table>
 
 
-<div class="col-md-4" style="display: -webkit-inline-box;padding-left:0px">
+<div class="col-md-4">
     <div class="input-group">
         <input type="text" id="startTime" name="startTime"
                4 readonly="readonly" class="form-control timepicker timepicker-default" placeholder="从">
         <span class="input-group-btn">
-            <button class="btn default" type="button">
+            <button class="btn default btn-sm" type="button">
                 <i class="fa fa-clock-o"></i>
 
             </button>
@@ -528,7 +532,7 @@
         <input type="text" id="endTime" name="endTime"
                16 readonly="readonly" class="form-control timepicker timepicker-default" placeholder="到">
         <span class="input-group-btn">
-            <button class="btn default" type="button">
+            <button class="btn default btn-sm" type="button">
                 <i class="fa fa-clock-o"></i>
 
             </button>
@@ -536,12 +540,21 @@
     </div>
 </div>
 
+<input type="text" class="acespinner" name="my-spinner" id="my-spinner" />
+<input type="text" class="acespinner" name="my-spinner2" id="my-spinner2" />
 
 
 
 
-
-
+<input type="date" id="mydate" />
+<div class="input-daterange input-group">
+    <input type="text" name="start" />
+    -
+    <input type="text" name="end" />
+</div>
+@*<input type="date" id="mydate" />
+<input type="date" id="mydate" />
+<input type="date" id="mydate" />*@
 
 
 
@@ -549,8 +562,16 @@
 
 @section PagePluginScripts{
     @Scripts.RenderFormat("<script type='text/javascript' src='{0}'></script>", "~/Content/plugins/assets/js/dataTables/jquery.dataTables.js")
+
+    <script src="~/Content/plugins/assets/js/fuelux/fuelux.spinner.js"></script>
+
+    <script src="~/Content/plugins/assets/js/date-time/bootstrap-datepicker.js"></script>
+
     <script src="~/Content/plugins/assets/js/date-time/moment.js"></script>
+    <script src="~/Content/plugins/assets/js/date-time/daterangepicker.js"></script>
+
     <script src="~/Content/plugins/assets/js/date-time/bootstrap-timepicker.js"></script>
+
     <script src="~/Content/plugins/assets/js/date-time/bootstrap-datetimepicker.js"></script>
 }
 @section PageInlineScripts{
@@ -560,6 +581,29 @@
 
             var nowTime = '@(DateTime.Now.ToString("HH:mm"))';
             $("#startTime").val(nowTime).timepicker('setTime', nowTime);
+
+
+
+            $('.acespinner').ace_spinner({
+                min: 0,
+                max: 100,
+                step: 1
+            });
+            $('#my-spinner').closest('.ace-spinner').on('changed.fu.spinbox', function (e) {
+                //do something
+                console.log(e);
+            })
+
+
+            var mydate = $('#mydate')[0];
+            if (mydate.type !== 'date') {//if browser doesn't support "date" input
+                $(mydate).datepicker({
+                    //options
+                    autoclose: true,
+                    todayHighlight: true
+                });
+            }
+            $('.input-daterange').datepicker({ autoclose: true });
         });
     </script>
 }

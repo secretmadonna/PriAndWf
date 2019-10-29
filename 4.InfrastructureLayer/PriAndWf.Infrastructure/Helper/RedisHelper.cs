@@ -90,7 +90,7 @@ namespace PriAndWf.Infrastructure.Helper
         private readonly ConnectionMultiplexer _connection;
         private IDatabase _db;
 
-        public RedisHelper(int db = -1) : this(ConfigurationManager.ConnectionStrings["RedisDefaultConnectionString"].ConnectionString, db)
+        public RedisHelper(int db = 0) : this(ConfigurationManager.ConnectionStrings["RedisDefaultConnectionString"].ConnectionString, db)
         {
         }
         public RedisHelper(string connectionString, int db = -1)
@@ -118,6 +118,10 @@ namespace PriAndWf.Infrastructure.Helper
         {
             return _db.StringSet(key, value, expiry);
         }
+        public long StringIncrement(string key, long value = 1)
+        {
+            return _db.StringIncrement(key, value);
+        }
         public RedisValue StringGet(string key)
         {
             return _db.StringGet(key);
@@ -125,25 +129,27 @@ namespace PriAndWf.Infrastructure.Helper
         #endregion
 
         #region Hash（哈希）
-        //public void HashSet(string key, string hashField, object value)
-        //{
-        //    value
-        //    _db.HashSet(key, hashField, value);
-        //}
-        //public void HashSet(string key, string hashField, byte[] value)
-        //{
-        //    _db.HashSet(key, hashField, value);
-        //}
-        //public void HashSet(string key, string hashField, string value, TimeSpan expiry)
-        //{
-        //    _db.HashSet(key, hashField, value);
-        //    _db.KeyExpire(key, expiry);
-        //}
-        //public void HashSet(RedisKey key, RedisValue hashField, RedisValue value, DateTime expiry)
-        //{
-        //    _db.HashSet(key, hashField, value);
-        //    _db.KeyExpire(key, expiry);
-        //}
+        public void HashSet<T>(string key, string hashField, T value)
+        {
+            var realValue = BinarySerialize(value);
+            _db.HashSet(key, hashField, realValue);
+        }
+        public void HashSet<T>(string key, string hashField, T value, TimeSpan expiry)
+        {
+            var realValue = BinarySerialize(value);
+            _db.HashSet(key, hashField, realValue);
+            _db.KeyExpire(key, expiry);
+        }
+        public void HashSet<T>(string key, string hashField, T value, DateTime expiry)
+        {
+            var realValue = BinarySerialize(value);
+            _db.HashSet(key, hashField, realValue);
+            _db.KeyExpire(key, expiry);
+        }
+        public long HashIncrement(string key, string hashField, long value = 1)
+        {
+            return _db.HashIncrement(key, hashField, value);
+        }
         public RedisValue HashGet(RedisKey key, RedisValue hashField)
         {
             return _db.HashGet(key, hashField);
