@@ -23,24 +23,66 @@ namespace PriAndWf.TestConApp
 
         static void Main(string[] args)
         {
-            Console.WriteLine("56030219004WSD".Substring("560302".Length + 2, 3)); 
-            GC.Collect(2, GCCollectionMode.Forced, true);
-            var class0 = new tclass() { tint = 1 };
-            do
+            string captchaType1 = "BindCaptcha";
+            string captchaType2 = "1";
+            string captchaType3 = null;
+            string captchaType4 = "";
+            string captchaType5 = "123";
+            //Console.WriteLine(Enum.GetName(typeof(CaptchaType), captchaType1));
+            //Console.WriteLine(Enum.GetName(typeof(CaptchaType), captchaType2));
+            //Console.WriteLine(Enum.GetName(typeof(CaptchaType), captchaType3));
+            //Console.WriteLine(Enum.GetName(typeof(CaptchaType), captchaType4));
+            Console.WriteLine(Enum.GetName(typeof(CaptchaType), CaptchaType.BindCaptcha));
+            foreach (var item in Enum.GetValues(typeof(CaptchaType)))
             {
-                var class1 = new tclass() { tint = 1 };
-                Console.WriteLine($"{class1} : {class1.GetHashCode()} , {RuntimeHelpers.GetHashCode(class1)}");
-                var class2 = class1;
-                Console.WriteLine($"{class2} : {class2.GetHashCode()} , {RuntimeHelpers.GetHashCode(class2)}");
-                var class3 = new tclass() { tint = 1 };
-                Console.WriteLine($"{class3} : {class3.GetHashCode()} , {RuntimeHelpers.GetHashCode(class3)}");
-                var class4 = new tclass() { tint = 2 };
-                Console.WriteLine($"{class4} : {class4.GetHashCode()} , {RuntimeHelpers.GetHashCode(class4)}");
-                var datetime1 = new DateTime(2018, 12, 26);
-                Console.WriteLine($"{datetime1} : {datetime1.GetHashCode()} , {RuntimeHelpers.GetHashCode(datetime1)}");
-                var datetime2 = new DateTime(2018, 12, 26);
-                Console.WriteLine($"{datetime2} : {datetime2.GetHashCode()} , {RuntimeHelpers.GetHashCode(datetime2)}");
-            } while (Console.Read() == 13);
+                Console.WriteLine($"{item}   {item.ToString()}");
+            }
+            Console.WriteLine(Enum.IsDefined(typeof(CaptchaType), "bindcaptcha"));
+
+            Console.WriteLine(Enum.IsDefined(typeof(CaptchaType), captchaType1));
+            Console.WriteLine(Enum.IsDefined(typeof(CaptchaType), captchaType2));
+            //Console.WriteLine(Enum.IsDefined(typeof(CaptchaType), captchaType3));
+            Console.WriteLine(Enum.IsDefined(typeof(CaptchaType), captchaType4));
+            Console.WriteLine(Enum.IsDefined(typeof(CaptchaType), captchaType5));
+            if (Enum.TryParse(captchaType1, false, out CaptchaType captchaType1Enum))
+            {
+                Console.WriteLine($"{captchaType1} : {captchaType1Enum}");
+            }
+            if (Enum.TryParse(captchaType2, false, out CaptchaType captchaType2Enum))
+            {
+                Console.WriteLine($"{captchaType2} : {captchaType2Enum}");
+            }
+            if (Enum.TryParse(captchaType3, false, out CaptchaType captchaType3Enum))
+            {
+                Console.WriteLine($"{captchaType3} : {captchaType3Enum}");
+            }
+            if (Enum.TryParse(captchaType4, false, out CaptchaType captchaType4Enum))
+            {
+                Console.WriteLine($"{captchaType4} : {captchaType4Enum}");
+            }
+            if (Enum.TryParse(captchaType5, false, out CaptchaType captchaType5Enum))
+            {
+                Console.WriteLine($"{captchaType5} : {captchaType5Enum}");
+            }
+
+            //Console.WriteLine("56030219004WSD".Substring("560302".Length + 2, 3)); 
+            //GC.Collect(2, GCCollectionMode.Forced, true);
+            //var class0 = new tclass() { tint = 1 };
+            //do
+            //{
+            //    var class1 = new tclass() { tint = 1 };
+            //    Console.WriteLine($"{class1} : {class1.GetHashCode()} , {RuntimeHelpers.GetHashCode(class1)}");
+            //    var class2 = class1;
+            //    Console.WriteLine($"{class2} : {class2.GetHashCode()} , {RuntimeHelpers.GetHashCode(class2)}");
+            //    var class3 = new tclass() { tint = 1 };
+            //    Console.WriteLine($"{class3} : {class3.GetHashCode()} , {RuntimeHelpers.GetHashCode(class3)}");
+            //    var class4 = new tclass() { tint = 2 };
+            //    Console.WriteLine($"{class4} : {class4.GetHashCode()} , {RuntimeHelpers.GetHashCode(class4)}");
+            //    var datetime1 = new DateTime(2018, 12, 26);
+            //    Console.WriteLine($"{datetime1} : {datetime1.GetHashCode()} , {RuntimeHelpers.GetHashCode(datetime1)}");
+            //    var datetime2 = new DateTime(2018, 12, 26);
+            //    Console.WriteLine($"{datetime2} : {datetime2.GetHashCode()} , {RuntimeHelpers.GetHashCode(datetime2)}");
+            //} while (Console.Read() == 13);
 
             //var str1 = "abcdefg";
             //Console.WriteLine($"{str1} : {str1.GetHashCode()} , {RuntimeHelpers.GetHashCode(str1)}");
@@ -263,5 +305,17 @@ namespace PriAndWf.TestConApp
         {
             for (int i = 0; i < 100000; i++) { }
         }
+    }
+
+    public enum CaptchaType
+    {
+        /// <summary>
+        /// 微信端，账号绑定时的验证码类型
+        /// </summary>
+        BindCaptcha = 1,
+        /// <summary>
+        /// 微信端，修改手机号时的验证码类型
+        /// </summary>
+        ModifyMobilePhoneCaptcha
     }
 }
