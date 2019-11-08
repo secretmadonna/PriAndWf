@@ -87,8 +87,8 @@ namespace PriAndWf.Infrastructure.Helper
     }
     public class RedisHelper
     {
-        private readonly ConnectionMultiplexer _connection;
-        private IDatabase _db;
+        public readonly ConnectionMultiplexer _connection;
+        public readonly IDatabase _db;
 
         public RedisHelper(int db = 0) : this(ConfigurationManager.ConnectionStrings["RedisDefaultConnectionString"].ConnectionString, db)
         {
