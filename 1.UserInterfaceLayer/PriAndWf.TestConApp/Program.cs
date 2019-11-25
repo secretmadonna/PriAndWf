@@ -23,33 +23,38 @@ namespace PriAndWf.TestConApp
 
         static void Main(string[] args)
         {
-            var db = 0;//2;
-            var redisHelper = new RedisHelper("10.52.27.59,password=123456", db);//new RedisHelper("192.168.42.101,password=123456", db);//
-            var server = redisHelper._connection.GetServer(redisHelper._connection.GetEndPoints()[0]);
-            //var keys = server.Keys(db, "test*", 1000);
+            Console.WriteLine((0.4).ToString("#0.#"));
+            Console.WriteLine((0.41).ToString("#0.#"));
+            Console.WriteLine((100.41).ToString("#0.#"));
+            Console.WriteLine((0.5).ToString("#0.#"));
+            Console.WriteLine(string.Join("1",null));
+            //var db = 0;//2;
+            //var redisHelper = new RedisHelper("10.52.27.59,password=123456", db);//new RedisHelper("192.168.42.101,password=123456", db);//
+            //var server = redisHelper._connection.GetServer(redisHelper._connection.GetEndPoints()[0]);
+            ////var keys = server.Keys(db, "test*", 1000);
+            ////var keysStr = string.Join(", ", Array.ConvertAll<StackExchange.Redis.RedisKey, string>(keys.ToArray(), m => { return m.ToString(); }));
+            ////logger.Info(keysStr);
+            ////redisHelper.GetDatabase(db).KeyDelete(keys.ToArray());
+            //var keys = server.Keys(db, "ExamBatchStudyCenterSpot_*", 1000);
             //var keysStr = string.Join(", ", Array.ConvertAll<StackExchange.Redis.RedisKey, string>(keys.ToArray(), m => { return m.ToString(); }));
             //logger.Info(keysStr);
             //redisHelper.GetDatabase(db).KeyDelete(keys.ToArray());
-            var keys = server.Keys(db, "ExamBatchStudyCenterSpot_*", 1000);
-            var keysStr = string.Join(", ", Array.ConvertAll<StackExchange.Redis.RedisKey, string>(keys.ToArray(), m => { return m.ToString(); }));
-            logger.Info(keysStr);
-            redisHelper.GetDatabase(db).KeyDelete(keys.ToArray());
-            keys = server.Keys(db, "ExamBatchStudyCenterSpotRoom_*", 1000);
-            keysStr = string.Join(", ", Array.ConvertAll<StackExchange.Redis.RedisKey, string>(keys.ToArray(), m => { return m.ToString(); }));
-            logger.Info(keysStr);
-            redisHelper.GetDatabase(db).KeyDelete(keys.ToArray());
-            keys = server.Keys(db, "ExamTeacherSign_*", 1000);
-            keysStr = string.Join(", ", Array.ConvertAll<StackExchange.Redis.RedisKey, string>(keys.ToArray(), m => { return m.ToString(); }));
-            logger.Info(keysStr);
-            redisHelper.GetDatabase(db).KeyDelete(keys.ToArray());
-            keys = server.Keys(db, "StudentSignIn_*", 1000);
-            keysStr = string.Join(", ", Array.ConvertAll<StackExchange.Redis.RedisKey, string>(keys.ToArray(), m => { return m.ToString(); }));
-            logger.Info(keysStr);
-            redisHelper.GetDatabase(db).KeyDelete(keys.ToArray());
-            keys = server.Keys(db, "ExamBatchSpotSession_*", 1000);
-            keysStr = string.Join(", ", Array.ConvertAll<StackExchange.Redis.RedisKey, string>(keys.ToArray(), m => { return m.ToString(); }));
-            logger.Info(keysStr);
-            redisHelper.GetDatabase(db).KeyDelete(keys.ToArray());
+            //keys = server.Keys(db, "ExamBatchStudyCenterSpotRoom_*", 1000);
+            //keysStr = string.Join(", ", Array.ConvertAll<StackExchange.Redis.RedisKey, string>(keys.ToArray(), m => { return m.ToString(); }));
+            //logger.Info(keysStr);
+            //redisHelper.GetDatabase(db).KeyDelete(keys.ToArray());
+            //keys = server.Keys(db, "ExamTeacherSign_*", 1000);
+            //keysStr = string.Join(", ", Array.ConvertAll<StackExchange.Redis.RedisKey, string>(keys.ToArray(), m => { return m.ToString(); }));
+            //logger.Info(keysStr);
+            //redisHelper.GetDatabase(db).KeyDelete(keys.ToArray());
+            //keys = server.Keys(db, "StudentSignIn_*", 1000);
+            //keysStr = string.Join(", ", Array.ConvertAll<StackExchange.Redis.RedisKey, string>(keys.ToArray(), m => { return m.ToString(); }));
+            //logger.Info(keysStr);
+            //redisHelper.GetDatabase(db).KeyDelete(keys.ToArray());
+            //keys = server.Keys(db, "ExamBatchSpotSession_*", 1000);
+            //keysStr = string.Join(", ", Array.ConvertAll<StackExchange.Redis.RedisKey, string>(keys.ToArray(), m => { return m.ToString(); }));
+            //logger.Info(keysStr);
+            //redisHelper.GetDatabase(db).KeyDelete(keys.ToArray());
             //redisHelper.GetDatabase(db).KeyDelete(keys.ToArray());
             //Console.WriteLine("".Equals(null)); ;
             //string captchaType1 = "BindCaptcha";
