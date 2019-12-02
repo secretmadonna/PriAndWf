@@ -1,0 +1,154 @@
+﻿@model Senparc.Weixin.MP.Helpers.JsSdkUiPackage
+
+@{
+    ViewBag.Title = "JsSDK";
+}
+
+@section script{
+    @Html.Partial("_PartialWxJsSDK", Model)
+    <script>
+        $(function () {
+            var loading = layerHelper.openWeuiLoading();
+            wx.customInitWxJsSDK({
+                jsApiList: ["getLocation", "chooseImage", "uploadImage", "downloadImage", "previewImage", "getLocalImgData"],
+                success: function (res) {
+                    layerHelper.closeWeuiDialog(loading);
+                    //wx.getLocation({
+                    //    type: "wgs84", // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
+                    //    success: function (res) {
+                    //        layerHelper.closeWeuiDialog(loading, function () {
+                    //            layerHelper.openWeuiAlert(JSON.stringify(res));
+                    //        });
+                    //    },
+                    //    fail: function (res) {
+                    //        layerHelper.closeWeuiDialog(loading, function () {
+                    //            layerHelper.openWeuiAlert(res.errMsg, { title: "调用 JsSDK 发生错误" });
+                    //        });
+                    //    },
+                    //    cancel: function (res) {
+                    //        layerHelper.closeWeuiDialog(loading, function () {
+                    //            layerHelper.openWeuiAlert(JSON.stringify(res));
+                    //        });
+                    //    }
+                    //});
+                },
+                fail: function (res) {
+                    layerHelper.closeWeuiDialog(loading, function () {
+                        layerHelper.openWeuiAlert(res.errMsg, { title: "调用 JsSDK 发生错误" });
+                    });
+                }
+            });
+
+            var localIdsAndSrcs = { localIds: [], srcs: [] };
+            $("#chooseImage").on("click", function (e) {
+                wx.customSelectImages({
+                    count: 3, // 默认9
+                    sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+                    sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+                    success: function (res) {
+                        layerHelper.openWeuiAlert("wx.customSelectImages.success : " + JSON.stringify(res.data.localIds));
+                        for (var i = 0; i < res.data.srcs.length; i++) {
+                            var src = res.data.srcs[i];
+                            var $img = $("<img />").attr("src", src).attr("width", "100px").attr("height", "100px");
+                            $(".container").append($img);
+                        }
+                    },
+                    fail: function (res) {
+                        layerHelper.openWeuiAlert("wx.customSelectImages.fail : " + JSON.stringify(res));
+                    },
+                    cancel: function (res) {
+                        layerHelper.openWeuiAlert("wx.customSelectImages.cancel : " + JSON.stringify(res));
+                    },
+                    complete: function (res) {
+                        localIdsAndSrcs = (res ? res.data : {});
+                    }
+                });
+            });
+
+            var localIdsAndServerIds = { localIds: [], serverIds: [] };
+            $("#uploadImage").on("click", function (e) {
+                if (localIdsAndSrcs && localIdsAndSrcs.localIds.length > 0) {
+                    wx.customUploadImages({
+                        localIds: localIdsAndSrcs.localIds,
+                        isShowProgressTips: 1,
+                        success: function (res) {
+                            layerHelper.openWeuiAlert("wx.customUploadImages.success : " + JSON.stringify(res));
+                        },
+                        fail: function (res) {
+                            layerHelper.openWeuiAlert("wx.customUploadImages.fail : " + JSON.stringify(res));
+                        },
+                        complete: function (res) {
+                            localIdsAndSrcs = undefined;
+                            localIdsAndServerIds = (res ? res.data : {});
+                        }
+                    });
+                } else {
+                    layerHelper.openWeuiAlert("请先选择需要上传的图片。");
+                }
+            });
+
+            $("#downloadImage").on("click", function (e) {
+                if (localIdsAndServerIds && localIdsAndServerIds.serverIds.length > 0) {
+                    wx.customDownloadImages({
+                        serverIds: localIdsAndServerIds.serverIds,
+                        isShowProgressTips: 1,
+                        success: function (res) {
+                            layerHelper.openWeuiAlert("wx.customDownloadImages.success : " + JSON.stringify(res));
+                        },
+                        fail: function (res) {
+                            layerHelper.openWeuiAlert("wx.customDownloadImages.fail : " + JSON.stringify(res));
+                        },
+                        complete: function (res) {
+                            localIdsAndServerIds = undefined;
+                        }
+                    });
+                } else {
+                    layerHelper.openWeuiAlert("对不起，没有图片供您下载哟！");
+                }
+            });
+
+            var urls = ["@(string.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Url.Content("~/Content/images/qq/Connect_logo_1.png")))",
+                "@(string.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Url.Content("~/Content/images/qq/Connect_logo_2.png")))",
+                "@(string.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Url.Content("~/Content/images/qq/Connect_logo_3.png")))"];
+            $("#previewImage").on("click", function (e) {
+                if (urls.length > 0) {
+                    wx.previewImage({
+                        current: urls[0], // 当前显示图片的http链接
+                        urls: urls // 需要预览的图片http链接列表
+                    });
+                } else {
+                    layerHelper.openWeuiAlert("请先选择需要预览的图片。");
+                }
+            });
+
+            var url = "@(Url.Content("~/WeiXin/SaveImageToServer"))";
+            $("#saveImageToServer").on("click", function (e) {
+                if (localIdsAndServerIds && localIdsAndServerIds.serverIds.length > 0) {
+                    $.post(url, { mediaIds: localIdsAndServerIds.serverIds }, function (data, textStatus, jqXHR) {
+                        layerHelper.openWeuiAlert(textStatus, function () {
+                            wx.previewImage({
+                                current: data.urls[0], // 当前显示图片的http链接
+                                urls: data.urls // 需要预览的图片http链接列表
+                            });
+                        });
+                    })
+                        .always(function (jqXHR, textStatus) {
+                            layerHelper.openWeuiAlert(textStatus);
+                        });
+                } else {
+                    layerHelper.openWeuiAlert("请先上传您的图片至微信。");
+                }
+            });
+        });
+    </script>
+}
+
+<h2>JsSDK</h2>
+
+<div class="container">
+    <button class="weui-btn weui-btn_primary" id="chooseImage">chooseImage</button>
+    <button class="weui-btn weui-btn_primary" id="uploadImage">uploadImage</button>
+    <button class="weui-btn weui-btn_primary" id="saveImageToServer">saveImageToServer</button>
+    <button class="weui-btn weui-btn_primary" id="downloadImage">downloadImage</button>
+    <button class="weui-btn weui-btn_primary" id="previewImage">previewImage</button>
+</div>

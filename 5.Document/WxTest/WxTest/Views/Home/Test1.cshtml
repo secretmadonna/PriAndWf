@@ -1,0 +1,321 @@
+﻿@using WxTest.Controllers
+
+@model WxTest.Controllers.Travel
+
+@{
+    Layout = null;
+    ViewBag.Title = "Test1";
+
+    var pickerItems = ViewBag.PickerItems as List<PickerItem> ?? new List<PickerItem>();
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <title>@ViewBag.Title - WxTest</title>
+    <link href="@Url.Content("~/favicon.ico")" rel="shortcut icon" />@*<link href="javascript:void(0);" rel="shortcut icon" />*@
+
+    <link href="~/Content/plugins/weui/weui.css" rel="stylesheet" />
+    <style>
+        .page {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            overflow: hidden scroll;
+        }
+    </style>
+</head>
+<body ontouchstart="">
+    <div class="container">
+        <div class="page">
+            <div class="weui-form">
+                @*<div class="weui-form__text-area">
+                        <h2 class="weui-form__title">表单结构</h2>
+                        <div class="weui-form__desc">展示表单页面的信息结构样式, 分别由头部区域/控件区域/提示区域/操作区域和底部信息区域组成。</div>
+                    </div>*@
+                <div class="weui-form__control-area">
+                    <div class="weui-cells__group weui-cells__group_form">
+                        <div class="weui-cells__title">地点</div>
+                        <div class="weui-cells weui-cells_form">
+                            <div class="weui-cell">
+                                <div class="weui-cell__hd">@Html.LabelFor(m => m.DCityName, new { @class = "weui-label" })</div>
+                                <div class="weui-cell__bd">
+                                    @Html.HiddenFor(m => m.DCityId)
+                                    @Html.TextBoxFor(m => m.DCityName, "abc", new { @class = "weui-input", @readonly = "readonly", @placeholder = "选择出发地" })
+                                </div>
+                            </div>
+                            <div class="weui-cell">
+                                <div class="weui-cell__hd">@Html.LabelFor(m => m.ACityName, new { @class = "weui-label" })</div>
+                                <div class="weui-cell__bd">
+                                    @Html.HiddenFor(m => m.ACityId)
+                                    @Html.TextBoxFor(m => m.ACityName, null, new { @class = "weui-input", @readonly = "readonly", @placeholder = "选择目的地" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="weui-cells__group weui-cells__group_form">
+                        <div class="weui-cells__title">子行程</div>
+                        <div class="weui-cells weui-cells_form">
+                            <div class="weui-form-preview">
+                                <div class="weui-form-preview__ft">
+                                    <a class="weui-form-preview__btn weui-form-preview__btn_default" href="javascript:void(0);">新增</a>
+                                </div>
+                            </div>
+                            @if (Model != null && Model.TravelDetails != null)
+                            {
+                                foreach (var item in Model.TravelDetails)
+                                {
+                                    <div class="weui-cell">
+                                        <div class="weui-form-preview">
+                                            <div class="weui-form-preview__item">
+                                                <label class="weui-form-preview__label">出发地</label>
+                                                <span class="weui-form-preview__value"><input type="text" value="重庆" /></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                            <div class="weui-form-preview">
+                                <div class="weui-form-preview__hd">
+                                    <div class="weui-form-preview__item">
+                                        <label class="weui-form-preview__label"><strong style="color:black;">行程1</strong></label>
+                                        <em class="weui-form-preview__value">飞机</em>
+                                    </div>
+                                </div>
+                                <div class="weui-form-preview__bd">
+                                    <div class="weui-form-preview__item">
+                                        <label class="weui-form-preview__label">航班</label>
+                                        <span class="weui-form-preview__value">南方航空 , NFHK001</span>
+                                    </div>
+                                    <div class="weui-form-preview__item">
+                                        <label class="weui-form-preview__label">出发地</label>
+                                        <span class="weui-form-preview__value">重庆 , 江北机场T3航站楼</span>
+                                    </div>
+                                    <div class="weui-form-preview__item">
+                                        <label class="weui-form-preview__label">目的地</label>
+                                        <span class="weui-form-preview__value">重庆 , 长水机场</span>
+                                    </div>
+                                    <div class="weui-form-preview__item">
+                                        <label class="weui-form-preview__label">预计出发时间</label>
+                                        <span class="weui-form-preview__value">2019/01/01 23:00</span>
+                                    </div>
+                                    <div class="weui-form-preview__item">
+                                        <label class="weui-form-preview__label">预计抵达时间</label>
+                                        <span class="weui-form-preview__value">2019/01/02 01:00</span>
+                                    </div>
+                                </div>
+                                <div class="weui-form-preview__ft">
+                                    <a class="weui-form-preview__btn weui-form-preview__btn_default" href="javascript:void(0);">新增</a>
+                                    <a class="weui-form-preview__btn weui-form-preview__btn_primary" href="javascript:void(0);">删除</a>
+                                </div>
+                            </div>
+                            <div class="weui-form-preview">
+                                <div class="weui-form-preview__hd">
+                                    <div class="weui-form-preview__item">
+                                        <label class="weui-form-preview__label"><strong style="color:black;">行程2</strong></label>
+                                        <em class="weui-form-preview__value">火车</em>
+                                    </div>
+                                </div>
+                                <div class="weui-form-preview__bd">
+                                    <div class="weui-form-preview__item">
+                                        <label class="weui-form-preview__label">车次</label>
+                                        <span class="weui-form-preview__value">G001</span>
+                                    </div>
+                                    <div class="weui-form-preview__item">
+                                        <label class="weui-form-preview__label">出发地</label>
+                                        <span class="weui-form-preview__value">重庆 , 重庆北站南广场</span>
+                                    </div>
+                                    <div class="weui-form-preview__item">
+                                        <label class="weui-form-preview__label">目的地</label>
+                                        <span class="weui-form-preview__value">昆明 , 昆明站</span>
+                                    </div>
+                                    <div class="weui-form-preview__item">
+                                        <label class="weui-form-preview__label">预计出发时间</label>
+                                        <span class="weui-form-preview__value">2019/01/01 23:00</span>
+                                    </div>
+                                    <div class="weui-form-preview__item">
+                                        <label class="weui-form-preview__label">预计抵达时间</label>
+                                        <span class="weui-form-preview__value">2019/01/02 01:00</span>
+                                    </div>
+                                </div>
+                                <div class="weui-form-preview__ft">
+                                    <a class="weui-form-preview__btn weui-form-preview__btn_default" href="javascript:void(0);">新增</a>
+                                    <a class="weui-form-preview__btn weui-form-preview__btn_primary" href="javascript:void(0);">删除</a>
+                                </div>
+                            </div>
+                            <div class="weui-form-preview">
+                                <div class="weui-form-preview__hd">
+                                    <div class="weui-form-preview__item">
+                                        <label class="weui-form-preview__label"><strong style="color:black;">行程2</strong></label>
+                                        <em class="weui-form-preview__value">轮船</em>
+                                    </div>
+                                </div>
+                                <div class="weui-form-preview__bd">
+                                    <div class="weui-form-preview__item">
+                                        <label class="weui-form-preview__label">车次</label>
+                                        <span class="weui-form-preview__value">G001</span>
+                                    </div>
+                                    <div class="weui-form-preview__item">
+                                        <label class="weui-form-preview__label">出发地</label>
+                                        <span class="weui-form-preview__value">重庆 , 重庆北站南广场</span>
+                                    </div>
+                                    <div class="weui-form-preview__item">
+                                        <label class="weui-form-preview__label">目的地</label>
+                                        <span class="weui-form-preview__value">昆明 , 昆明站</span>
+                                    </div>
+                                    <div class="weui-form-preview__item">
+                                        <label class="weui-form-preview__label">预计出发时间</label>
+                                        <span class="weui-form-preview__value">2019/01/01 23:00</span>
+                                    </div>
+                                    <div class="weui-form-preview__item">
+                                        <label class="weui-form-preview__label">预计抵达时间</label>
+                                        <span class="weui-form-preview__value">2019/01/02 01:00</span>
+                                    </div>
+                                </div>
+                                <div class="weui-form-preview__ft">
+                                    <a class="weui-form-preview__btn weui-form-preview__btn_default" href="javascript:void(0);">新增</a>
+                                    <a class="weui-form-preview__btn weui-form-preview__btn_primary" href="javascript:void(0);">删除</a>
+                                </div>
+                            </div>
+                            <div class="weui-form-preview">
+                                <div class="weui-form-preview__hd">
+                                    <div class="weui-form-preview__item">
+                                        <label class="weui-form-preview__label"><strong style="color:black;">行程2</strong></label>
+                                        <em class="weui-form-preview__value">汽车</em>
+                                    </div>
+                                </div>
+                                <div class="weui-form-preview__bd">
+                                    <div class="weui-form-preview__item">
+                                        <label class="weui-form-preview__label">车次</label>
+                                        <span class="weui-form-preview__value">G001</span>
+                                    </div>
+                                    <div class="weui-form-preview__item">
+                                        <label class="weui-form-preview__label">出发地</label>
+                                        <span class="weui-form-preview__value">重庆 , 重庆北站南广场</span>
+                                    </div>
+                                    <div class="weui-form-preview__item">
+                                        <label class="weui-form-preview__label">目的地</label>
+                                        <span class="weui-form-preview__value">昆明 , 昆明站</span>
+                                    </div>
+                                    <div class="weui-form-preview__item">
+                                        <label class="weui-form-preview__label">预计出发时间</label>
+                                        <span class="weui-form-preview__value">2019/01/01 23:00</span>
+                                    </div>
+                                    <div class="weui-form-preview__item">
+                                        <label class="weui-form-preview__label">预计抵达时间</label>
+                                        <span class="weui-form-preview__value">2019/01/02 01:00</span>
+                                    </div>
+                                </div>
+                                <div class="weui-form-preview__ft">
+                                    <a class="weui-form-preview__btn weui-form-preview__btn_default" href="javascript:void(0);">新增</a>
+                                    <a class="weui-form-preview__btn weui-form-preview__btn_primary" href="javascript:void(0);">删除</a>
+                                </div>
+                            </div>
+                            <div class="weui-form-preview">
+                                <div class="weui-form-preview__hd">
+                                    <div class="weui-form-preview__item">
+                                        <label class="weui-form-preview__label"><strong style="color:black;">行程2</strong></label>
+                                        <em class="weui-form-preview__value">其他</em>
+                                    </div>
+                                </div>
+                                <div class="weui-form-preview__bd">
+                                    <div class="weui-form-preview__item">
+                                        <label class="weui-form-preview__label">出发地</label>
+                                        <span class="weui-form-preview__value">重庆 , 重庆北站南广场</span>
+                                    </div>
+                                    <div class="weui-form-preview__item">
+                                        <label class="weui-form-preview__label">目的地</label>
+                                        <span class="weui-form-preview__value">昆明 , 昆明站</span>
+                                    </div>
+                                    <div class="weui-form-preview__item">
+                                        <label class="weui-form-preview__label">预计出发时间</label>
+                                        <span class="weui-form-preview__value">2019/01/01 23:00</span>
+                                    </div>
+                                    <div class="weui-form-preview__item">
+                                        <label class="weui-form-preview__label">预计抵达时间</label>
+                                        <span class="weui-form-preview__value">2019/01/02 01:00</span>
+                                    </div>
+                                    <div class="weui-form-preview__item">
+                                        <label class="weui-form-preview__label">备注</label>
+                                        <span class="weui-form-preview__value">2019/01/02 01:00</span>
+                                    </div>
+                                </div>
+                                <div class="weui-form-preview__ft">
+                                    <a class="weui-form-preview__btn weui-form-preview__btn_default" href="javascript:void(0);">新增</a>
+                                    <a class="weui-form-preview__btn weui-form-preview__btn_primary" href="javascript:void(0);">删除</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/Content/plugins/jquery/jquery-2.2.4.js"></script>
+    <script src="~/Content/plugins/weui/weui.js"></script>
+
+    <script>
+        $(function () {
+            $("#DCityName").on("click", function (e) {
+                weui.picker(@(Html.Raw(Json.Encode(pickerItems))), {
+                    depth: 3,
+                    id: "DCityId",
+                    className: "DCityId",
+                    container: "body",
+                    defaultValue: ["120000", "120102"],
+                    onChange: function (e) {
+                        //console.log("%s %o", "onChange", arguments);
+                    },
+                    onConfirm: function (e) {
+                        //console.log("%s %o", "onConfirm", arguments);
+                        var display = "";
+                        for (var i = 0; i < e.length; i++) {
+                            var item = e[i];
+                            display += item.label;
+                            if (i == e.length - 1) {
+                                $("#DCityId").val(item.value);
+                                $("#DCityName").val(display);
+                            }
+                        }
+                    },
+                    onClose: function (e) {
+                        //console.log("%s %o", "onClose", arguments);
+                    }
+                });
+            });
+            $("#ACityName").on("click", function (e) {
+                weui.picker(@(Html.Raw(Json.Encode(pickerItems))), {
+                    depth: 3,
+                    id: "ACityId",
+                    className: "ACityId",
+                    container: "body",
+                    defaultValue: ["130000", "130100", "130103"],
+                    onChange: function (e) {
+                        //console.log("%s %o", "onChange", arguments);
+                    },
+                    onConfirm: function (e) {
+                        //console.log("%s %o", "onConfirm", arguments);
+                        var display = "";
+                        for (var i = 0; i < e.length; i++) {
+                            var item = e[i];
+                            display += item.label;
+                            if (i == e.length - 1) {
+                                $("#ACityId").val(item.value);
+                                $("#ACityName").val(display);
+                            }
+                        }
+                    },
+                    onClose: function (e) {
+                        //console.log("%s %o", "onClose", arguments);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

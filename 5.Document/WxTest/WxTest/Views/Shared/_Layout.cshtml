@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <title>@ViewBag.Title - WxTest</title>
+    @*<link href="javascript:void(0);" rel="shortcut icon" />*@
+    <link href="@Url.Content("~/favicon.ico")" rel="shortcut icon" />
+
+    <link href="~/Content/plugins/weui/weui.min.css" rel="stylesheet" />
+    <link href="~/Content/plugins/jquery-weui/jquery-weui.min.css" rel="stylesheet" />
+    <link href="~/Content/csses/site.css" rel="stylesheet" />
+
+    @RenderSection("css", false)
+</head>
+<body>
+    @RenderBody()
+
+    @*<script src="~/Content/plugins/zepto/zepto.min.js"></script>*@
+    <script src="~/Content/plugins/jquery/jquery-2.2.4.min.js"></script>
+    <script src="~/Content/plugins/weui/weui.min.js"></script>
+    <script src="~/Content/plugins/jquery-weui/jquery-weui.min.js"></script>
+    <script src="~/Content/javascripts/site.js"></script>
+
+    @RenderSection("script", false)
+</body>
+</html>

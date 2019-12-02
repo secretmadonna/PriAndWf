@@ -1,0 +1,275 @@
+﻿@model Senparc.Weixin.MP.Helpers.JsSdkUiPackage
+
+@{
+    Layout = null;
+}
+
+@*<script src="http://res.wx.qq.com/open/js/jweixin-1.4.0.js"></script>*@
+<script src="@Url.Content("~/Content/plugins/jweixin/jweixin-1.4.0-debug.js")"></script>
+<script>
+    wx.customConfig = { appId: "@Model.AppId", timestamp: @Model.Timestamp, nonceStr: "@Model.NonceStr", signature: "@Model.Signature" };
+    wx.customInitWxJsSDK = function (options) {
+        if (options && commonHelper.isArray(options.jsApiList)) {
+            if (options.jsApiList.indexOf("checkJsApi") === -1) {
+                options.jsApiList.unshift("checkJsApi"); // 向数组的开头添加一个或更多元素，并返回新的长度
+            }
+            var tempRes;
+            wx.config({
+                debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+                appId: wx.customConfig.appId, // 必填，公众号的唯一标识
+                timestamp: wx.customConfig.timestamp, // 必填，生成签名的时间戳
+                nonceStr: wx.customConfig.nonceStr, // 必填，生成签名的随机串
+                signature: wx.customConfig.signature, // 必填，签名
+                jsApiList: options.jsApiList // 必填，需要使用的JS接口列表，所有JS接口列表见附录2。详见：http://mp.weixin.qq.com/wiki/7/aaa137b55fb2e0456bf8dd9148dd613f.html
+            });
+            wx.ready(function () {
+                // config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后，config是一个客户端的异步操作，所以如果需要在页面加载时就调用相关接口，则须把相关接口放在ready函数中调用来确保正确执行。对于用户触发时才调用的接口，则可以直接调用，不需要放在ready函数中。
+                //alert("window.wxjs_is_wkwebview is : " + window.wxjs_is_wkwebview);
+
+                //layerHelper.openWeuiAlert("wx.ready");
+                var successCallback = function (res) {
+                    if (commonHelper.isFunction(options.success)) {
+                        options.success(res);//成功回调
+                    }
+                    if (commonHelper.isFunction(options.complete)) {
+                        options.complete(res);//完成回调
+                    }
+                };
+                var failCallback = function (res) {
+                    if (commonHelper.isFunction(options.fail)) {
+                        options.fail(res);//成功回调
+                    }
+                    if (commonHelper.isFunction(options.complete)) {
+                        options.complete(res);//完成回调
+                    }
+                };
+
+                if (tempRes) {
+                    failCallback(tempRes);//失败回调
+                } else {
+                    wx.checkJsApi({
+                        jsApiList: options.jsApiList, // 需要检测的JS接口列表，所有JS接口列表见附录2,
+                        success: function (res) {
+                            // 以键值对的形式返回，可用的api值true，不可用为false
+                            // 如：{"checkResult":{"chooseImage":true},"errMsg":"checkJsApi:ok"}
+                            tempRes = true;
+                        },
+                        fail: function (res) {
+                            tempRes = false;
+                        },
+                        complete: function (res) {
+                            var isSuccess = true;
+                            if (tempRes === true) {
+                                for (var i = 0; i < options.jsApiList.length; ++i) {
+                                    if (res.checkResult[options.jsApiList[i]] === false) {
+                                        isSuccess = false;
+                                        res.errMsg = "wx.checkJsApi:checkResult." + options.jsApiList[i] + " is false";
+                                        break;
+                                    }
+                                }
+                            } else {
+                                isSuccess = false;
+                            }
+                            if (isSuccess) {
+                                successCallback(res);//成功回调
+                            } else {
+                                failCallback(res);//失败回调
+                            }
+                        }
+                    });
+                }
+            });
+            wx.error(function (res) {
+                //layerHelper.openWeuiAlert("wx.error : " + JSON.stringify(res));
+                // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
+                tempRes = res;
+            });
+        }
+    };
+
+    wx.customSelectImages = function (options) {
+        var tempImages = { localIds: [], srcs: [] }, tempRes = "";
+        wx.chooseImage({
+            count: options.count, // 默认9
+            sizeType: options.sizeType, // 可以指定是原图还是压缩图，默认二者都有
+            sourceType: options.sourceType, // 可以指定来源是相册还是相机，默认二者都有
+            success: function (res) {
+                //layerHelper.openWeuiAlert("wx.chooseImage.success : " + JSON.stringify(res));
+                //var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
+                tempRes = "success";
+            },
+            fail: function (res) {
+                //layerHelper.openWeuiAlert("wx.chooseImage.fail : " + JSON.stringify(res));
+                tempRes = "fail";
+            },
+            cancel: function (res) {
+                //layerHelper.openWeuiAlert("wx.chooseImage.cancel : " + JSON.stringify(res));
+                tempRes = "cancel";
+            },
+            complete: function (res) {
+                //layerHelper.openWeuiAlert("wx.chooseImage.complete : " + JSON.stringify(res));
+                var customSelectImagesSuccessCallback = function (res) {
+                    if (commonHelper.isFunction(options.success)) {
+                        options.success(res);//成功回调
+                    }
+                    if (commonHelper.isFunction(options.complete)) {
+                        options.complete(res);//完成回调
+                    }
+                };
+                var customSelectImagesFailCallback = function (res) {
+                    if (commonHelper.isFunction(options.fail)) {
+                        options.fail(res);//成功回调
+                    }
+                    if (commonHelper.isFunction(options.complete)) {
+                        options.complete(res);//完成回调
+                    }
+                };
+                var customSelectImagesCancelCallback = function (res) {
+                    if (commonHelper.isFunction(options.cancel)) {
+                        options.cancel(res);//成功回调
+                    }
+                    if (commonHelper.isFunction(options.complete)) {
+                        options.complete(res);//完成回调
+                    }
+                };
+                if (tempRes === "success") {
+                    tempImages.localIds = res.localIds;
+                    if (window.wxjs_is_wkwebview) {
+                        var getLocalImgDatas = function (localIds) {
+                            var localId = localIds.shift();
+                            wx.getLocalImgData({
+                                localId: localId, // 图片的localID
+                                success: function (res) {
+                                    //layerHelper.openWeuiAlert("wx.getLocalImgData.success : " + JSON.stringify(res));
+                                    var localData = res.localData; // localData是图片的base64数据，可以用img标签显示
+                                    if (localData.indexOf("data:image") !== 0) {
+                                        localData = "data:image/jpeg;base64," + localData;
+                                    }
+                                    localData = localData.replace(/(\r|\n)/g, "").replace("data:image/jgp", "data:image/jpeg");
+                                    tempImages.srcs.push(localData);
+                                    if (localIds.length > 0) {
+                                        getLocalImgDatas(localIds);
+                                    } else {
+                                        //递归截止
+                                        var r = { errMsg: "customSelectImages:ok", data: tempImages };
+                                        customSelectImagesSuccessCallback(r);//成功回调
+                                    }
+                                },
+                                fail: function (res) {
+                                    //layerHelper.openWeuiAlert("wx.getLocalImgData.fail : " + JSON.stringify(res));
+                                    //递归途中出错
+                                    customSelectImagesFailCallback(res);//失败回调
+                                }
+                            });
+                        };
+                        var localIds = tempImages.localIds.slice();
+                        getLocalImgDatas(localIds);
+                    } else {
+                        tempImages.srcs = tempImages.localIds.slice();
+                        var r = { errMsg: "customSelectImages:ok", data: tempImages };
+                        customSelectImagesSuccessCallback(r);//成功回调
+                    }
+                } else if (tempRes === "fail") {
+                    customSelectImagesFailCallback(res);//失败回调
+                } else if (tempRes === "cancel") {
+                    customSelectImagesCancelCallback(res);//取消回调
+                }
+            }
+        });
+    };
+
+    wx.customUploadImages = function (options) {
+        var tempImages = { localIds: options.localIds.slice(), serverIds: [] };
+
+        var customUploadImagesSuccessCallback = function (res) {
+            if (commonHelper.isFunction(options.success)) {
+                options.success(res);//成功回调
+            }
+            if (commonHelper.isFunction(options.complete)) {
+                options.complete(res);//完成回调
+            }
+        };
+        var customUploadImagesFailCallback = function (res) {
+            if (commonHelper.isFunction(options.fail)) {
+                options.fail(res);//成功回调
+            }
+            if (commonHelper.isFunction(options.complete)) {
+                options.complete(res);//完成回调
+            }
+        };
+
+        var uploadImages = function (localIds) {
+            var localId = localIds.shift();
+            wx.uploadImage({
+                localId: localId, // 需要上传的图片的本地ID，由chooseImage接口获得
+                isShowProgressTips: options.isShowProgressTips, // 默认为1，显示进度提示
+                success: function (res) {
+                    //layerHelper.openWeuiAlert("wx.uploadImage.success : " + JSON.stringify(res));
+                    var serverId = res.serverId; // 返回图片的服务器端ID
+                    tempImages.serverIds.push(serverId);
+                    if (localIds.length > 0) {
+                        uploadImages(localIds);
+                    } else {
+                        //递归截止
+                        var r = { errMsg: "customUploadImages:ok", data: tempImages };
+                        customUploadImagesSuccessCallback(r);//成功回调
+                    }
+                },
+                fail: function (res) {
+                    //layerHelper.openWeuiAlert("wx.uploadImage.fail : " + JSON.stringify(res));
+                    //递归途中出错
+                    customUploadImagesFailCallback(res);//失败回调
+                }
+            });
+        };
+        var localIds = options.localIds.slice();
+        uploadImages(localIds);
+    };
+    wx.customDownloadImages = function (options) {
+        var tempImages = { serverIds: options.serverIds.slice(), localIds: [] };
+
+        var customDownloadImagesSuccessCallback = function (res) {
+            if (commonHelper.isFunction(options.success)) {
+                options.success(res);//成功回调
+            }
+            if (commonHelper.isFunction(options.complete)) {
+                options.complete(res);//完成回调
+            }
+        };
+        var customDownloadImagesFailCallback = function (res) {
+            if (commonHelper.isFunction(options.fail)) {
+                options.fail(res);//成功回调
+            }
+            if (commonHelper.isFunction(options.complete)) {
+                options.complete(res);//完成回调
+            }
+        };
+
+        var downloadImages = function (serverIds) {
+            var serverId = serverIds.shift();
+            wx.downloadImage({
+                serverId: serverId, // 需要下载的图片的服务器端ID，由uploadImage接口获得
+                isShowProgressTips: options.isShowProgressTips, // 默认为1，显示进度提示
+                success: function (res) {
+                    //layerHelper.openWeuiAlert("wx.downloadImage.success : " + JSON.stringify(res));
+                    var localId = res.localId; // 返回图片下载后的本地ID
+                    tempImages.localIds.push(localId);
+                    if (serverIds.length > 0) {
+                        downloadImages(serverIds);
+                    } else {
+                        //递归截止
+                        var r = { errMsg: "customDownloadImages:ok", data: tempImages };
+                        customDownloadImagesSuccessCallback(r);//成功回调
+                    }
+                },
+                fail: function (res) {
+                    //layerHelper.openWeuiAlert("wx.downloadImage.fail : " + JSON.stringify(res));
+                    //递归途中出错
+                    customDownloadImagesFailCallback(res);//失败回调
+                }
+            });
+        };
+        var serverIds = options.serverIds.slice();
+        downloadImages(serverIds);
+    };
+</script>

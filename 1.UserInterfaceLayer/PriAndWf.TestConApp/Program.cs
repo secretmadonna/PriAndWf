@@ -23,11 +23,22 @@ namespace PriAndWf.TestConApp
 
         static void Main(string[] args)
         {
-            Console.WriteLine((0.4).ToString("#0.#"));
-            Console.WriteLine((0.41).ToString("#0.#"));
-            Console.WriteLine((100.41).ToString("#0.#"));
-            Console.WriteLine((0.5).ToString("#0.#"));
-            Console.WriteLine(string.Join("1",null));
+            var dt1 = DateTime.Parse("Mon, 02 Dec 2019 04:46:27 GMT");
+            var dt2 = DateTime.Parse("Mon, 02 Dec 2019 06:11:12 GMT");
+            var ts = (dt2 - dt1);
+            Console.WriteLine(ts);
+            Console.WriteLine(ts.TotalMilliseconds);
+            Console.WriteLine(ts.TotalSeconds);
+            Console.WriteLine(ts.TotalMinutes);
+            Console.WriteLine(ts.TotalHours);
+            Console.WriteLine(ts.TotalDays);
+            var d = TimeSpan.FromMilliseconds(ts.TotalMilliseconds*0.1);//ts.Days,ts.Hours,ts.Minutes,ts.Seconds,ts.Milliseconds
+            Console.WriteLine(d);
+            //Console.WriteLine((0.4).ToString("#0.#"));
+            //Console.WriteLine((0.41).ToString("#0.#"));
+            //Console.WriteLine((100.41).ToString("#0.#"));
+            //Console.WriteLine((0.5).ToString("#0.#"));
+            //Console.WriteLine(string.Join("1",null));
             //var db = 0;//2;
             //var redisHelper = new RedisHelper("10.52.27.59,password=123456", db);//new RedisHelper("192.168.42.101,password=123456", db);//
             //var server = redisHelper._connection.GetServer(redisHelper._connection.GetEndPoints()[0]);
